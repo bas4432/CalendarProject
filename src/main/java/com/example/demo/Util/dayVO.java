@@ -2,21 +2,28 @@ package com.example.demo.Util;
 
 public class dayVO {
 	
-	public String StartDate;
-	public String EndDate;
+	String startDay;
+	String endDay;
 	
-	public String getStartDate() {
-		return StartDate;
+	
+	public String getStartDay() {
+		return startDay;
 	}
-	public void setStartDate(String startDate) {
-		StartDate = startDate;
+	public void setStartDay(String startDay) {
+		this.startDay = startDay;
 	}
-	public String getEndDate() {
-		return EndDate;
+	public String getEndDay() {
+		return endDay;
 	}
-	public void setEndDate(String endDate) {
-		EndDate = endDate;
+	public void setEndDay(String endDay) {
+		this.endDay = endDay;
 	}
+	
+	@Override
+	public String toString() {
+		return "dayVO [startDay=" + startDay + ", endDay=" + endDay + "]";
+	}
+	
 	
 	
 	

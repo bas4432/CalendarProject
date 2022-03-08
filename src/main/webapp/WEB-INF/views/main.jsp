@@ -350,8 +350,8 @@ A:hover {
 		        ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
 		    });                    
 		    
-		    //초기값을 오늘 날짜로 설정해줘야 합니다.
-		   /*  $('#datepicker1').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)    */
+		   //초기값을 오늘 날짜로 설정해줘야 합니다.
+		   $('#datepicker1').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)    
 		    
 		 
 		 
@@ -361,6 +361,7 @@ A:hover {
 		 	 
 		 }) */
 		 
+		 
 		 $("#btndatefilter").click(function(){
 			#("myform").submit();
 			 
@@ -368,6 +369,8 @@ A:hover {
 		 
 	 }
  
+	 
+	
 	
 	
 
@@ -387,7 +390,7 @@ A:hover {
 <div class="dat_div">
       
       
-      <form id="myform" action="/index" method="get">
+      <form id="myform" action="/index2" method="get">
 		
 		<button id="select_date_btn">
 			<span id="select_date_star">*</span> 기간
@@ -453,7 +456,7 @@ A:hover {
 			</thead>
 
 			<tbody style="backgroundcolor:black; border:1px solid black">
-				<tr>
+				 <tr>
 					<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
 						<c:choose>
 							<c:when test="${dateList.value=='today'}">
@@ -484,6 +487,10 @@ A:hover {
 					    </c:otherwise>
 					  </c:choose>
 				   </c:forEach>
+				   
+				
+				   
+				   
 			</tbody>
 
 
@@ -495,6 +502,17 @@ A:hover {
             <div id="arrow_left"></div>
             <div id="arrow_right"></div>
         </div>
+        
+        
+        <div style="float:left; margin-left:30%">
+        <c:forEach var="dateList" items="${dates}" varStatus="date_status">
+				     
+				     <td>${dateList}</td></br>
+				     
+	    </c:forEach>
+									
+        </div>
+       
 
 </div>
 

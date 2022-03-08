@@ -16,6 +16,7 @@ public class DataVO {
 	String startDay;
 	String endDay;
 	
+	
 	public String getStartDay() {
 		return startDay;
 	}

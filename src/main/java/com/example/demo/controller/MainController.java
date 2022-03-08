@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import java.net.http.HttpRequest;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,11 +25,39 @@ public class MainController {
 	
 	
 	@GetMapping(value="/index")
-	public String calendar(Model model, HttpServletRequest reqeust, DataVO datavo){ 
+	public String calendar(Model model, HttpServletRequest reqeust, DataVO datavo) throws Exception{ 
 		
-		System.out.println(datavo.getStartDay());
-		System.out.println(datavo.getEndDay());
+		/*
+		 * System.out.println(datavo.getStartDay().replaceAll("-", ""));
+		 * System.out.println(datavo.getEndDay());
+		 */
 		
+		final String DATE_PATTERN = "yyyy-MM-dd";
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+		Date startDate = sdf.parse(datavo.getStartDay());
+		Date endDate = sdf.parse(datavo.getEndDay());	
+		
+		ArrayList<String> dates = new ArrayList<String>();
+	   
+		Date currentDate = startDate;
+		
+		while (currentDate.compareTo(endDate) <= 0) {
+			dates.add(sdf.format(currentDate));
+			Calendar c = Calendar.getInstance();
+			c.setTime(currentDate);
+			c.add(Calendar.DAY_OF_MONTH, 1);
+			currentDate = c.getTime();
+		}
+		
+		
+		for (String date : dates) {
+			System.out.println("date:::" + date);
+		}
+		
+	    model.addAttribute("dates" , dates);
+		
+	
 	
 		
 		Calendar cal = Calendar.getInstance();
@@ -39,6 +70,7 @@ public class MainController {
 
 		Map<String, Integer> today_info =  datavo.today_info(datavo);
 		List<DataVO> dateList = new ArrayList<DataVO>();
+		
 		
 		//실질적인 달력 데이터 리스트에 데이터 삽입 시작.
 		//일단 시작 인덱스까지 아무것도 없는 데이터 삽입
@@ -67,25 +99,50 @@ public class MainController {
 				dateList.add(calendarData);
 			}
 		}
-		System.out.println(dateList.get(0));
-		System.out.println(dateList.get(1));
+	
 		
 		
-		//배열에 담음
-		model.addAttribute("dateList", dateList);		//날짜 데이터 배열
-		model.addAttribute("today_info", today_info);
+		
+		/*
+		 * //배열에 담음 model.addAttribute("dateList", dateList); //날짜 데이터 배열
+		 * model.addAttribute("today_info", today_info);
+		 */
 		
 		
 		return "main";
 	}
 	
 	@GetMapping(value="/index2")
-	public String calendar2(HttpServletRequest reqeust, dayVO dayvo) {
+	public String calendar2(Model model, HttpServletRequest reqeust, dayVO dayvo) throws Exception {
 		
 		
-		System.out.println("컨트롤러 진입");
-		 
-		return "main";
+		dayvo.getEndDay();
+        final String DATE_PATTERN = "yyyy-MM-dd";
+		
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+		Date startDate = sdf.parse(dayvo.getStartDay());
+		Date endDate = sdf.parse(dayvo.getEndDay());	
+		
+		ArrayList<String> dates = new ArrayList<String>();
+	   
+		Date currentDate = startDate;
+		
+		while (currentDate.compareTo(endDate) <= 0) {
+			dates.add(sdf.format(currentDate));
+			Calendar c = Calendar.getInstance();
+			c.setTime(currentDate);
+			c.add(Calendar.DAY_OF_MONTH, 1);
+			currentDate = c.getTime();
+		}
+		
+		
+		for (String date : dates) {
+			System.out.println("date:::" + date);
+		}
+		
+	    model.addAttribute("dates" , dates);
+	    
+	    return "main";
 	}
 	
 	
