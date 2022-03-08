@@ -1,6 +1,6 @@
 package com.example.demo.Util;
 
-public class dayVO {
+public class DayDto {
 	
 	String startDay;
 	String endDay;

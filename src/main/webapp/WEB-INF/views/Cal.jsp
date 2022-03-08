@@ -1,11 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Spring Boot Application with JSP</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
 <style>
     #header_box {
         border-bottom: 1px solid lightgray;
@@ -320,79 +324,30 @@
 </style>
 
 <script>
-/* $( function() {
-	
-	
-    $("#datepicker1").datepicker({ 
-                                
-        onSelect: function() { 
-           var date = $.datepicker.formatDate("yymmdd",$("#datepicker1").datepicker("getDate")); 
-                                    
-           date = $("#datepicker1").val();
-                                    
-           alert(date);
-       }
-   });   
-});
 
- */
- 
-/*  $(function() {
-	    
-	   $("#datepicker1").datepicker();
-	   $("#datepicker2").datepicker();
-	  
-	   
-
-	    $("#btndatefilter").click(function() {
-	        var startdate = $('#datepicker1').datepicker('getDate');
-	        var enddate = $('#datepicker2').datepicker('getDate');
-	        
-	       
-	        var dateFilter = 
-	        { StartDate: startdate.toISOString(), EndDate: enddate.toISOString() };
-
-	        $.ajax({
-	            url: "index("FilterByDate", "AuditActivities")", 
-	            type: "GET",
-	            data: dateFilter
-	        })
-	        .done(function(auditActivity) {
-	            $("#res").html(auditActivity);
-	        });
-	    });
-	}); */
- 
-   
-	 $(function() {
+    $(function() {
 		 
 		 $("#datepicker1,#datepicker2").datepicker({
-		        dateFormat: 'yy-mm-dd' //´Ş·Â ³¯Â¥ ÇüÅÂ
-		        ,showOtherMonths: true //ºó °ø°£¿¡ ÇöÀç¿ùÀÇ ¾ÕµÚ¿ùÀÇ ³¯Â¥¸¦ Ç¥½Ã
-		        ,showMonthAfterYear:true // ¿ù- ³â ¼ø¼­°¡¾Æ´Ñ ³âµµ - ¿ù ¼ø¼­
-		        ,changeYear: true //option°ª ³â ¼±ÅÃ °¡´É
-		        ,changeMonth: true //option°ª  ¿ù ¼±ÅÃ °¡´É                
-		        ,showOn: "both" //button:¹öÆ°À» Ç¥½ÃÇÏ°í,¹öÆ°À» ´­·¯¾ß¸¸ ´Ş·Â Ç¥½Ã ^ both:¹öÆ°À» Ç¥½ÃÇÏ°í,¹öÆ°À» ´©¸£°Å³ª inputÀ» Å¬¸¯ÇÏ¸é ´Ş·Â Ç¥½Ã  
-		        ,buttonText: "''" //¹öÆ° È£¹ö ÅØ½ºÆ®              
-		        ,yearSuffix: "³â" //´Ş·ÂÀÇ ³âµµ ºÎºĞ µÚ ÅØ½ºÆ®
-		        ,monthNamesShort: ['1¿ù','2¿ù','3¿ù','4¿ù','5¿ù','6¿ù','7¿ù','8¿ù','9¿ù','10¿ù','11¿ù','12¿ù'] //´Ş·ÂÀÇ ¿ù ºÎºĞ ÅØ½ºÆ®
-		        ,monthNames: ['1¿ù','2¿ù','3¿ù','4¿ù','5¿ù','6¿ù','7¿ù','8¿ù','9¿ù','10¿ù','11¿ù','12¿ù'] //´Ş·ÂÀÇ ¿ù ºÎºĞ Tooltip
-		        ,dayNamesMin: ['ÀÏ','¿ù','È­','¼ö','¸ñ','±İ','Åä'] //´Ş·ÂÀÇ ¿äÀÏ ÅØ½ºÆ®
-		        ,dayNames: ['ÀÏ¿äÀÏ','¿ù¿äÀÏ','È­¿äÀÏ','¼ö¿äÀÏ','¸ñ¿äÀÏ','±İ¿äÀÏ','Åä¿äÀÏ'] //´Ş·ÂÀÇ ¿äÀÏ Tooltip
-		        ,minDate: "-5Y" //ÃÖ¼Ò ¼±ÅÃÀÏÀÚ(-1D:ÇÏ·çÀü, -1M:ÇÑ´ŞÀü, -1Y:ÀÏ³âÀü)
-		        ,maxDate: "+5y" //ÃÖ´ë ¼±ÅÃÀÏÀÚ(+1D:ÇÏ·çÈÄ, -1M:ÇÑ´ŞÈÄ, -1Y:ÀÏ³âÈÄ)  
+		        dateFormat: 'yy-mm-dd' //ë‹¬ë ¥ ë‚ ì§œ í˜•íƒœ
+		        ,showOtherMonths: true //ë¹ˆ ê³µê°„ì— í˜„ì¬ì›”ì˜ ì•ë’¤ì›”ì˜ ë‚ ì§œë¥¼ í‘œì‹œ
+		        ,showMonthAfterYear:true // ì›”- ë…„ ìˆœì„œê°€ì•„ë‹Œ ë…„ë„ - ì›” ìˆœì„œ
+		        ,changeYear: true //optionê°’ ë…„ ì„ íƒ ê°€ëŠ¥
+		        ,changeMonth: true //optionê°’  ì›” ì„ íƒ ê°€ëŠ¥                
+		        ,showOn: "both" //button:ë²„íŠ¼ì„ í‘œì‹œí•˜ê³ ,ë²„íŠ¼ì„ ëˆŒëŸ¬ì•¼ë§Œ ë‹¬ë ¥ í‘œì‹œ ^ both:ë²„íŠ¼ì„ í‘œì‹œí•˜ê³ ,ë²„íŠ¼ì„ ëˆ„ë¥´ê±°ë‚˜ inputì„ í´ë¦­í•˜ë©´ ë‹¬ë ¥ í‘œì‹œ  
+		        ,buttonText: "''" //ë²„íŠ¼ í˜¸ë²„ í…ìŠ¤íŠ¸              
+		        ,yearSuffix: "ë…„" //ë‹¬ë ¥ì˜ ë…„ë„ ë¶€ë¶„ ë’¤ í…ìŠ¤íŠ¸
+		        ,monthNamesShort: ['1ì›”','2ì›”','3ì›”','4ì›”','5ì›”','6ì›”','7ì›”','8ì›”','9ì›”','10ì›”','11ì›”','12ì›”'] //ë‹¬ë ¥ì˜ ì›” ë¶€ë¶„ í…ìŠ¤íŠ¸
+		        ,monthNames: ['1ì›”','2ì›”','3ì›”','4ì›”','5ì›”','6ì›”','7ì›”','8ì›”','9ì›”','10ì›”','11ì›”','12ì›”'] //ë‹¬ë ¥ì˜ ì›” ë¶€ë¶„ Tooltip
+		        ,dayNamesMin: ['ì¼','ì›”','í™”','ìˆ˜','ëª©','ê¸ˆ','í† '] //ë‹¬ë ¥ì˜ ìš”ì¼ í…ìŠ¤íŠ¸
+		        ,dayNames: ['ì¼ìš”ì¼','ì›”ìš”ì¼','í™”ìš”ì¼','ìˆ˜ìš”ì¼','ëª©ìš”ì¼','ê¸ˆìš”ì¼','í† ìš”ì¼'] //ë‹¬ë ¥ì˜ ìš”ì¼ Tooltip
+		        ,minDate: "-5Y" //ìµœì†Œ ì„ íƒì¼ì(-1D:í•˜ë£¨ì „, -1M:í•œë‹¬ì „, -1Y:ì¼ë…„ì „)
+		        ,maxDate: "+5y" //ìµœëŒ€ ì„ íƒì¼ì(+1D:í•˜ë£¨í›„, -1M:í•œë‹¬í›„, -1Y:ì¼ë…„í›„)  
 		    });                    
 		    
-		    //ÃÊ±â°ªÀ» ¿À´Ã ³¯Â¥·Î ¼³Á¤ÇØÁà¾ß ÇÕ´Ï´Ù.
-		   /*  $('#datepicker1').datepicker('setDate', 'today'); //(-1D:ÇÏ·çÀü, -1M:ÇÑ´ŞÀü, -1Y:ÀÏ³âÀü), (+1D:ÇÏ·çÈÄ, -1M:ÇÑ´ŞÈÄ, -1Y:ÀÏ³âÈÄ)    */
+		    //ì´ˆê¸°ê°’ì„ ì˜¤ëŠ˜ ë‚ ì§œë¡œ ì„¤ì •í•´ì¤˜ì•¼ í•©ë‹ˆë‹¤.
+		   /*  $('#datepicker1').datepicker('setDate', 'today'); //(-1D:í•˜ë£¨ì „, -1M:í•œë‹¬ì „, -1Y:ì¼ë…„ì „), (+1D:í•˜ë£¨í›„, -1M:í•œë‹¬í›„, -1Y:ì¼ë…„í›„)    */
 		    
 		 
-		 
-		 
-		 /* $("datepicker1, datepicker2").change(function(){
-			#("#myform").submit();
-		 	 
-		 }) */
 		 
 		 
 		 $("#btndatefilter").click(function(){
@@ -409,25 +364,27 @@
 
 <body>
     <div id="header_box">
-        <h1>Calendar ±âº» °úÁ¦</h1>
+        <h1>Calendar ê¸°ë³¸ ê³¼ì œ</h1>
     </div>
     <div id="body_box">
         <span id="calendar_left_area">
            
-           <form id="myform" action="/index" method="get">
-             <div id="date_div">
-                <button id="select_date_btn"><span id="select_date_star">*</span> ±â°£</button>
-                <input id="start_date_box" >
-                
-             </div> <span id="from_til">~</span>
-                
-                <div id="end_date_box"><span class="d_box">D</span></div>
-                
-                <button id="search_btn">Á¶È¸</button>
-            
-             </div>
-            </form>
-            <div id="selected_year_month">2020³â 5¿ù</div>
+           <form id="myform" action="/index2" method="get">
+		
+		<button id="select_date_btn">
+			<span id="select_date_star">*</span> ê¸°ê°„
+		</button>
+		
+		<input type="date" id="datepicker1" name="startDay">
+		
+		<span id="from_til">~</span>
+		
+		<input type="date" id="datepicker2" name="endDay">
+		
+		<input type="submit" id="search_btn" id="btndatefilter" value="ì¡°íšŒ">
+	  
+	       </form>	
+       <div id="selected_year_month">2020ë…„ 5ì›”</div>
             <div id="calendar_table">
                 <table id="calender_table_result">
                     <thead>
@@ -443,31 +400,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="sun">s</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td class="sun"></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td class="sat"></td>
-                        </tr>
-                        <tr>
-                            <td class="sun">s</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="sat">s</td>
-                        </tr>
-                        <tr>
-                            <td class="sun">s</td>
-                            <td></td>
-                            <td>s</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td class="sat">s</td>
                         </tr>
                         <tr>
                             <td class="sun"></td>
@@ -476,7 +415,25 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="sat">s</td>
+                            <td class="sat"></td>
+                        </tr>
+                        <tr>
+                            <td class="sun"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="sat"></td>
+                        </tr>
+                        <tr>
+                            <td class="sun"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="sat"></td>
                         </tr>
                         <tr>
                             <td class="sun"></td>
@@ -502,18 +459,18 @@
             </div>
             <table id="selected_date_table">
                 <tr>
-                    <th>¼±ÅÃµÈ ÀÏÀÚ</th>
-                    <th>(¿äÀÏ)</th>
-                    <th>³â</th>
-                    <th class="month_and_date">¿ù</th>
-                    <th class="month_and_date">ÀÏ</th>
+                    <th>ì„ íƒëœ ì¼ì</th>
+                    <th>(ìš”ì¼)</th>
+                    <th>ë…„</th>
+                    <th class="month_and_date">ì›”</th>
+                    <th class="month_and_date">ì¼</th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </span>
@@ -522,27 +479,29 @@
                 <table id="selected_date_list">
                     <thead>
                         <tr>
-                            <th>ÀÏÀÚ</th>
-                            <th>¿äÀÏ</th>
-                            <th>±¹°æÀÏ</th>
+                            <th>ì¼ì</th>
+                            <th>ìš”ì¼</th>
+                            <th>êµ­ê²½ì¼</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <c:forEach var="dateList" items="${dates}" varStatus="data_status">
                         <tr>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td>${dateList}</td>
+                            <td></td>
+                            <td></td>
                         </tr>
+                        </c:forEach>
                         
                     </tbody>
                 </table>
                 <div id="page_div">
                     <div id="page_div_ch">
-                        <span id="page_left_arrow"><a href="#">¢¸</a></span>
+                        <span id="page_left_arrow"><a href="#">â—€</a></span>
                         <span class="page_number"><a href=#>1</a></span>
                         <span class="page_number"><a href=#>2</a></span>
                         <span class="page_number"><a href=#>3</a></span>
-                        <span id="page_right_arrow"><a href="#">¢º</a></span>
+                        <span id="page_right_arrow"><a href="#">â–¶</a></span>
                     </div>
                 </div>
             </div>
