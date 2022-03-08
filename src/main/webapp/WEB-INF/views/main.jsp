@@ -284,6 +284,221 @@ A:hover {
         width: 80px;
         height: 25px;
     }
+    
+      #calendar_table>table>tbody>tr>td {
+        border: 2px solid;
+        margin: 0;
+        padding: 0 auto;
+        width: 45px;
+        height: 36px;
+        text-align: center;
+    }
+
+    #calendar_table>table>tbody>tr>.sun {
+        color: red;
+        border: 2px solid black;
+    }
+
+    #calendar_table>table>tbody>tr>.sat {
+        color: blue;
+        border: 2px solid black;
+    }
+
+    /* #test{
+        display: flex;
+    } */
+
+    #triangle_div {
+        display: flex;
+    }
+
+    .triangle_left {
+        width: 0;
+        height: 0;
+        position: relative;
+        border-top: 25px solid transparent;
+        border-right: 50px solid rgb(56, 93, 138);
+        border-bottom: 25px solid transparent;
+        border-radius: 2px;
+        top: 20px;
+        left: 110px;
+    }
+
+    .triangle_left:after {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-top: 19px solid transparent;
+        border-right: 36px solid rgb(79, 129, 189);
+        border-bottom: 19px solid transparent;
+        border-radius: 2px;
+        top: -20px;
+        left: 10px;
+    }
+
+    .triangle_right {
+        width: 0;
+        height: 0;
+        border-top: 25px solid transparent;
+        border-left: 50px solid rgb(56, 93, 138);
+        border-bottom: 25px solid transparent;
+        position: relative;
+        border-radius: 2px;
+        top: 20px;
+        left: 160px;
+    }
+
+    .triangle_right:after {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-top: 19px solid transparent;
+        border-left: 36px solid rgb(79, 129, 189);
+        border-bottom: 19px solid transparent;
+        border-radius: 2px;
+        top: -20px;
+        left: -46px;
+    }
+
+    #test2 {
+        display: flex;
+    }
+
+    .pre {
+        margin-left: 100px;
+        padding: 20px;
+        font-size: 25px;
+    }
+
+    .next {
+        margin-left: 15px;
+        padding: 20px;
+        font-size: 25px;
+        padding: 20px;
+    }
+
+    #selected_date_table {
+        margin-top: 15px;
+        margin-left: 20px;
+        text-align: center;
+    }
+
+    #selected_date_table>tr,
+    th {
+        text-align: center;
+        width: 90px;
+        font-size: 13px;
+    }
+
+    #right_area_border {
+        position: absolute;
+        top: 11%;
+        left: 40%;
+        border-right: 1px solid rgb(79, 129, 189);
+    }
+
+    #right_area {
+        margin-top: 50px;
+        margin-right: 10px;
+        /* position: absolute;
+        top: 15%;
+        left: 40%; */
+    }
+
+    #selected_date_table>tr,
+    .month_and_date {
+        width: 50px;
+    }
+
+    #selected_date_list {
+        text-align: center;
+        width: 350px;
+    }
+
+    #selected_date_list>thead>tr>th {
+        background-color: rgb(79, 129, 189);
+        border-bottom: 2px solid;
+        color: white;
+        height: 20px;
+    }
+
+    #selected_date_list>tbody>tr {
+        height: 22px;
+    }
+
+    #selected_date_list>tbody>tr:nth-child(odd) {
+        background-color: rgb(208, 216, 232);
+    }
+
+    #selected_date_list>tbody>tr:nth-child(even) {
+        background-color: rgb(233, 237, 244);
+    }
+
+   
+    #page_div {
+        margin-top: 7px;
+        margin-bottom: 7px;
+        display: flex;
+        justify-content: right;
+    }
+
+    #page_div_ch {
+        display: flex;
+        margin: 0 1px;
+    }
+
+    #page_left_arrow {
+        border: 1px solid black;
+        width: 19px;
+        height: 19px;
+        text-align: center;
+
+        line-height: 19px;
+
+        display: inline-block;
+        position: relative;
+    }
+
+    #page_left_arrow>a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #page_right_arrow {
+        border: 1px solid black;
+        width: 19px;
+        height: 19px;
+        text-align: center;
+        display: inline-block;
+        line-height: 19px;
+        position: relative;
+        margin-left: 2px;
+    }
+
+    #page_right_arrow>a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .page_number {
+        margin: 0;
+        padding: 0;
+        border: 1px solid black;
+        width: 19px;
+        height: 19px;
+        text-align: center;
+        display: inline-block;
+        line-height: 19px;
+        position: relative;
+        font-size: 12px;
+    }
+
+    .page_number>a {
+        text-decoration: none;
+        color: black;
+    }
    
 </style>
 <script>
@@ -504,7 +719,7 @@ A:hover {
         </div>
         
         
-        <div style="float:left; margin-left:30%">
+       <%--  <div style="float:left; margin-left:30%">
         <c:forEach var="dateList" items="${dates}" varStatus="date_status">
 				     
 				     <td>${dateList}</td></br>
@@ -512,7 +727,39 @@ A:hover {
 	    </c:forEach>
 									
         </div>
-       
+        --%>
+        
+         <div id="right_area_border">
+            <div id="right_area">
+                <table id="selected_date_list">
+                    <thead>
+                        <tr>
+                            <th>일자</th>
+                            <th>요일</th>
+                            <th>국경일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <c:forEach var="dateList" items="${dates}" varStatus="data_status">
+                        <tr>
+                            <td>${dateList}</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <div id="page_div">
+                    <div id="page_div_ch">
+                        <span id="page_left_arrow"><a href="#">◀</a></span>
+                        <span class="page_number"><a href=#>1</a></span>
+                        <span class="page_number"><a href=#>2</a></span>
+                        <span class="page_number"><a href=#>3</a></span>
+                        <span id="page_right_arrow"><a href="#">▶</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>
 
