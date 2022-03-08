@@ -24,6 +24,14 @@ import com.example.demo.Util.dayVO;
 public class MainController {
 	
 	
+	@GetMapping(value="/")
+	public String main() {
+	
+		
+		return "main";
+	}
+	   		
+			
 	@GetMapping(value="/index")
 	public String calendar(Model model, HttpServletRequest reqeust, DataVO datavo) throws Exception{ 
 		
