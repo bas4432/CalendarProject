@@ -323,12 +323,12 @@
     }
 </style>
 
-<script>
+<script type="text/javascript">
 
     $(function() {
 		 
-		 $("#datepicker1,#datepicker2").datepicker({
-		        dateFormat: 'yy-mm-dd' //달력 날짜 형태
+		 $("#datepicker1,#datepicker2").datepicker({ //달력 화면 띄워주는 로직
+			     dateFormat: 'yy-mm-dd' //달력 날짜 형태
 		        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 		        ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
 		        ,changeYear: true //option값 년 선택 가능
@@ -344,21 +344,69 @@
 		        ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
 		    });                    
 		    
-		    //초기값을 오늘 날짜로 설정해줘야 합니다.
-		   /*  $('#datepicker1').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)    */
-		    
-		 
-		 
-		 
-		 $("#btndatefilter").click(function(){
-			#("myform").submit();
-			 
-		 })
-		 
-	 }
- 
+		   $('#datepicker1').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후) 
+		      
+		  
+		   $(".btndatefilter").click(function(){
+			    
+			   var datepicker1 = $('#datepicker1').val();
+			   var datepicker2 = $('#datepicker2').val();
+			   
+			   alert(datepicker1);
+			   
+			   $.ajax({
+				   
+				   type:'GET',
+				   data: {
+					   "startDay" : $('#datepicker1').val(),
+			           "endDay"   : $('#datepicker2').val()
+					    },
+				  
+				   url:"/index",
+				   success : function(data){
+					  
+					  console.log(data)
+			
+					   
+					   
+					  
+					   
+					 $.each(data, function(index, item) { // 데이터 =item
+						 
+						 console.log(index+ ":" + item)
+						    
+						 
+						 						 
+						
+							/* $("#data").append(item); // index가 끝날때까지  */
+							
+						$("#data").append(item);	
+							
+					  });
+					     
+				     
+				   
+				   },
+				   error: function(jqXHR, textStatus, errorThrown) {
+				   alert("ERROR : " + textStatus + " : " + errorThrown);
+				   }
+			    });
+
+				  
+			   
+			
+
+			
+		   })
+		   
+    });
+
+		
+		  
 	
-	
+		
+
+  
 
 </script>
 
@@ -369,8 +417,8 @@
     <div id="body_box">
         <span id="calendar_left_area">
            
-           <form id="myform" action="/index2" method="get">
-		
+   <!--   <form id="myform" action="/index2" method="get"> -->
+	
 		<button id="select_date_btn">
 			<span id="select_date_star">*</span> 기간
 		</button>
@@ -381,9 +429,9 @@
 		
 		<input type="date" id="datepicker2" name="endDay">
 		
-		<input type="submit" id="search_btn" id="btndatefilter" value="조회">
+		<input type="button" id="search_btn" class="btndatefilter" value="조회">
 	  
-	       </form>	
+<!-- 	  </form> -->
        <div id="selected_year_month">2020년 5월</div>
             <div id="calendar_table">
                 <table id="calender_table_result">
@@ -485,13 +533,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="dateList" items="${dates}" varStatus="data_status">
+                       
                         <tr>
-                            <td>${dateList}</td>
+                            <td id="data"></td>
                             <td></td>
                             <td></td>
                         </tr>
-                        </c:forEach>
+                        
+                       
                         
                     </tbody>
                 </table>
