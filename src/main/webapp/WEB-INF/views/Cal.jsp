@@ -365,24 +365,37 @@
 				   url:"/index",
 				   success : function(data){
 					  
-					  console.log(data)
-			
+					  var inst = "";
+					   
+					  console.log(data.length)
+					  
+					  console.log(data[1])
+					  for(var i=0 ; i<data.length ; i++){
+						 
+						     inst += "<tr>";
+							 inst += "<td>"+data[i]+"</td>";
+					         inst += "</tr>";
+						     
+					  }
+					  $("#data").html(inst);
+					
+					
 					   
 					   
 					  
 					   
-					 $.each(data, function(index, item) { // 데이터 =item
+					 //$.each(data, function(index, item) { // 데이터 =item
 						 
-						 console.log(index+ ":" + item)
+						 //console.log(index+ ":" + item)
 						    
 						 
 						 						 
 						
 							/* $("#data").append(item); // index가 끝날때까지  */
 							
-						$("#data").append(item);	
+						//$("#data").append(item);	
 							
-					  });
+					  //});//
 					     
 				     
 				   
@@ -532,13 +545,13 @@
                             <th>국경일</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="data">
                        
-                        <tr>
+                       <!--  <tr>
                             <td id="data"></td>
                             <td></td>
                             <td></td>
-                        </tr>
+                        </tr> -->
                         
                        
                         
