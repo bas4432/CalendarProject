@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.net.http.HttpRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,9 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Util.DataVO;
 
 
-@Controller
+@RestController
 public class MainController {
 
 	@GetMapping(value = "/")
