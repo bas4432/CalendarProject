@@ -339,7 +339,7 @@
 					minDate : "-5Y",
 					maxDate : "+5y"
 				});
-        $('#datepicker1').datepicker('setDate', 'today');
+		$('#datepicker1').datepicker('setDate', 'today');
 
 		$(".btndatefilter").click(
 				function() {
@@ -348,7 +348,7 @@
 					var endDay = $('#datepicker2').val();
 
 					$.ajax({
-                        type : 'GET',
+						type : 'GET',
 						data : {
 							"startDay" : $('#datepicker1').val(),
 							"endDay" : $('#datepicker2').val()
@@ -358,9 +358,11 @@
 
 							for (var i = 0; i < data.length; i++) {
 
-								var week = new Date(data[0].split(',')).getDay(); //요일값
-                                var day = new Date(data[0].split(',')).getDate(); //일자
-                            }
+								var week = new Date(data[0].split(','))
+										.getDay(); //요일값
+								var day = new Date(data[0].split(','))
+										.getDate(); //일자
+							}
 
 							var inst = "";
 							var week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
@@ -369,12 +371,13 @@
 
 								inst += "<tr>";
 								inst += "<td>" + data[i] + "</td>";
-								inst += "<td>"+ week[new Date(data[i].split(',')).getDay()] + "</td>"
+								inst += "<td>"
+										+ week[new Date(data[i].split(',')).getDay()] + "</td>"
 								inst += "</tr>";
-                            }
+							}
 							$("#data").html(inst);
 						}, //succes: function
-                        error : function(jqXHR, textStatus, errorThrown) {
+						error : function(jqXHR, textStatus, errorThrown) {
 							alert("지정 날짜를 선택 하세요");
 						}
 					});//ajax 
