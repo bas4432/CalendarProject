@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.example.demo.Util.DataVO;
+import com.example.demo.model.DataVO;
 
 @RestController
 @RequestMapping(value="/api")
@@ -29,13 +28,8 @@ public class ApiController {
     
     @GetMapping(value = "/index")
 	public List<String> calendar(HttpServletRequest reqeust, DataVO datavo) throws Exception {
-        
-    	 datavo.setStartDay("2022-01-20");
-    	 datavo.setEndDay("2022-02-20");
-    	 
-    	 
-    	
-	     final String DATE_PATTERN = "yyyy-MM-dd";
+       
+         final String DATE_PATTERN = "yyyy-MM-dd";
 
 	     SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN);
 		
@@ -60,9 +54,6 @@ public class ApiController {
 			currentDate = calendar.getTime();
 		 }
 		
-	  
-		 return dates;	
+	     return dates;	
 	}
-
-	
-}
+ }

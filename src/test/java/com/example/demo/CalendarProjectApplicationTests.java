@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.demo.Util.DataVO;
+import com.example.demo.model.DataVO;
 import com.example.demo.service.Service;
 
 @SpringBootTest
@@ -25,8 +25,7 @@ class CalendarProjectApplicationTests {
 	@Autowired
 	Service service;
 
-	
-	@Test
+    @Test
 	public void commonGetTest() throws Exception {
        
 	    //given
@@ -36,17 +35,8 @@ class CalendarProjectApplicationTests {
 		final int result =  service.multiply(2,3);
 		final int result2 = service.multiply(4,7);
 
-	    System.out.println("result::" + result);
-		System.out.println("result::" + result2);
-		
 	    //then
 	    assertThat(result).isEqualTo(6);
-	    assertThat(result2).isEqualTo(28);
-
-	}
-	
-	 
-	
-	
-
+	    assertThat(result2).isEqualTo(10);
+     }
 }

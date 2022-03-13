@@ -326,127 +326,70 @@
     $(function() {
 		 
 		 $("#datepicker1,#datepicker2").datepicker({ 
-			    dateFormat: 'yyyy-MM-dd'  
-		        ,showOtherMonths: true 
-		        ,showMonthAfterYear:true
-		        ,changeYear: true 
-		        ,changeMonth: true                
-		       /*  ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-		        ,buttonText: "''" //버튼 호버 텍스트    */           
-		        ,yearSuffix: "year" 
-		        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
-		        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-		        ,dayNamesMin: ['일','월','화','수','목','금','토'] 
-		        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] 
-		        ,minDate: "-5Y" 
-		        ,maxDate: "+5y" 
+			         dateFormat: 'yy-mm-dd' 
+			        ,showOtherMonths: true 
+			        ,showMonthAfterYear:true 
+			        ,changeYear: true 
+			        ,changeMonth: true              
+			        ,showOn: "both"  
+			        ,buttonText: "''"            
+			        ,yearSuffix: "년" 
+			        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
+			        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] 
+			        ,dayNamesMin: ['일','월','화','수','목','금','토'] 
+			        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] 
+			        ,minDate: "-5Y" 
+			        ,maxDate: "+5y" 
 		    });                    
 		    
 		   $('#datepicker1').datepicker('setDate', 'today');  
 		      
-		  
 		   $(".btndatefilter").click(function(){
 			
-                 
-			   
-				 
-				  
-				
-				
-			   
-			   var startDay = $('#datepicker1').val();
+               var startDay = $('#datepicker1').val();
 			   var endDay = $('#datepicker2').val();
 			   
-			   
-			   
-			   $.ajax({
+			    $.ajax({
 				   
 				   type:'GET',
 				   data: {
 					   "startDay" : $('#datepicker1').val(),
 			           "endDay"   : $('#datepicker2').val()
 				   },
-				   
 				   url:"/api/index",
-				   
 				   success : function(data){
 					   
-					   console.log(data[0].split('-'));
-					   console.log(data[0])
-					   
-				
-				     for(i=0; i<data.length; i++){
+				       for(var i=0; i<data.length; i++){
 				      
-				    	 var mydate = new Date(data[i].split(','));
-				    	
-				      }
+				    	 var week = new Date(data[0].split(',')).getDay(); //요일값
+				    	 
+				    	 var day = new Date(data[0].split(',')).getDate(); //일자
+				    	 
+				    	 console.log(week)
+				    	 console.log(day)
+				        } 
 				      
-				     console.log(typeof mydate)
-					 
-					   
-					  
-					 /* console.log(data[0].split("-")[1]);
-					   */
 					  var inst = "";
-					  
-					  
-					  
-					  
-					  
+					  var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
 					  
 					  for(var i=0 ; i<data.length ; i++){
 						 
 						     inst += "<tr>";
 							 inst += "<td>"+data[i]+"</td>";
+							 inst += "<td>"+week[new Date(data[i].split(',')).getDay()] +"</td>"
 					         inst += "</tr>";
 						     
 					  }
 					  $("#data").html(inst);
-					
-					
-					   
-					   
-					  
-					   
-					 //$.each(data, function(index, item) { // 데이터 =item
-						 
-						 //console.log(index+ ":" + item)
-						    
-						 
-						 						 
-						
-							/* $("#data").append(item); // index가 끝날때까지  */
-							
-						//$("#data").append(item);	
-							
-					  //});//
-					     
-				     
-				   
-				   },
+				   }, //succes: function
 				   
 				   error: function(jqXHR, textStatus, errorThrown) {
 				  
-				   alert("ERROR : " + textStatus + " : " + errorThrown);
+				   alert("지정 날짜를 선택 하세요");
 				   }
-			    });
-
-				  
-			   
-			
-
-			
+			    });//ajax 
 		   })
-		   
-    });
-
-		
-		  
-	
-		
-
-  
-
+    });//btndatefilter function
 </script>
 
 <body>
@@ -459,14 +402,12 @@
 		<button id="select_date_btn">
 			<span id="select_date_star">*</span> 기간
 		</button>
-		
 		<input type="date" id="datepicker1" name="startDay">
 		
 		<span id="from_til">~</span>
 		
 		<input type="date" id="datepicker2" name="endDay">
-		
-		<input type="button" id="search_btn" class="btndatefilter" value="조회">
+	    <input type="button" id="search_btn" class="btndatefilter" value="조회">
 	  
 
        <div id="selected_year_month">2020년 5월</div>
@@ -571,13 +512,7 @@
                     </thead>
                     <tbody id="data">
                        
-                       <!--  <tr>
-                            <td id="data"></td>
-                            <td></td>
-                            <td></td>
-                        </tr> -->
-                        
-                       
+                 
                         
                     </tbody>
                 </table>
