@@ -12,15 +12,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
-@Data
 @ToString
 @JsonFormat
 public class DataVO {
 
-	private String startDay;
-	private String endDay;
+    private String startDay;
+    private String endDay;
 
 }
