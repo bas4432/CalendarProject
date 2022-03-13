@@ -27,7 +27,6 @@ public class ApiController {
     public List<String> calendar(HttpServletRequest reqeust, DataVO datavo) throws Exception {
 
         final String DATE_PATTERN = "yyyy-MM-dd";
-
         SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN);
 
         Date startDate = format.parse(datavo.getStartDay());
@@ -37,16 +36,13 @@ public class ApiController {
         calenar.setTime(startDate);
 
         ArrayList<String> dates = new ArrayList<String>();
-
         Date currentDate = startDate;
 
         while (currentDate.compareTo(endDate) <= 0) {
 
             dates.add(format.format(currentDate));
-
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(currentDate);
-
             calendar.add(Calendar.DAY_OF_MONTH, 1);
             currentDate = calendar.getTime();
         }
