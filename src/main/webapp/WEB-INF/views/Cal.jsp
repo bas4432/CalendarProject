@@ -332,13 +332,10 @@
 					showOn : "both",
 					buttonText : "''",
 					yearSuffix : "년",
-					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
-							'7월', '8월', '9월', '10월', '11월', '12월' ],
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ],
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월' ],
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월' ],
 					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-					dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일', '금요일',
-							'토요일' ],
+					dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일', '금요일','토요일' ],
 					minDate : "-5Y",
 					maxDate : "+5y"
 				});
@@ -363,27 +360,22 @@
 
 							for (var i = 0; i < data.length; i++) {
 
-								var week = new Date(data[0].split(','))
-										.getDay(); //요일값
+								var week = new Date(data[0].split(',')).getDay(); //요일값
 
-								var day = new Date(data[0].split(','))
-										.getDate(); //일자
+								var day = new Date(data[0].split(',')).getDate(); //일자
 
 								console.log(week)
 								console.log(day)
 							}
 
 							var inst = "";
-							var week = new Array('일요일', '월요일', '화요일', '수요일',
-									'목요일', '금요일', '토요일');
+							var week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
 
 							for (var i = 0; i < data.length; i++) {
 
 								inst += "<tr>";
 								inst += "<td>" + data[i] + "</td>";
-								inst += "<td>"
-										+ week[new Date(data[i].split(','))
-												.getDay()] + "</td>"
+								inst += "<td>"+ week[new Date(data[i].split(',')).getDay()] + "</td>"
 								inst += "</tr>";
 
 							}
