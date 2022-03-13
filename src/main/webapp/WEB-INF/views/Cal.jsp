@@ -358,10 +358,8 @@
 
 							for (var i = 0; i < data.length; i++) {
 
-								var week = new Date(data[0].split(','))
-										.getDay(); //요일값
-								var day = new Date(data[0].split(','))
-										.getDate(); //일자
+								var week = new Date(data[0].split(',')).getDay(); //요일값
+								var day = new Date(data[0].split(',')).getDate(); //일자
 							}
 
 							var inst = "";
@@ -371,8 +369,7 @@
 
 								inst += "<tr>";
 								inst += "<td>" + data[i] + "</td>";
-								inst += "<td>"
-										+ week[new Date(data[i].split(',')).getDay()] + "</td>"
+								inst += "<td>"+ week[new Date(data[i].split(',')).getDay()] + "</td>"
 								inst += "</tr>";
 							}
 							$("#data").html(inst);
