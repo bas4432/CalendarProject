@@ -2,7 +2,6 @@ import './ResultDateCalendar.css';
 import MoveToOtherCalendarPage from "./MoveToOtherCalendarPage";
 const ResultDateCalendar = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
     return (
         <>
             <div id="selected_year_month">2020년 5월</div>

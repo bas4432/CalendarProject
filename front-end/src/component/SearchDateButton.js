@@ -1,6 +1,6 @@
 import './SearchDateButton.css'
-import {useState} from "react";
 import axios from "axios";
+import React, { useState } from "react";
 
 const SearchDateButton = () => {
     const test2 = [
@@ -11,18 +11,17 @@ const SearchDateButton = () => {
         , {date: '2022-03-05', day: '토요일', isHoliday: '아니오'}
     ]
     const emptyDate = {date: '', day: '', isHoliday: ''};
-    const initalizeSeleectedDates = () => {
+    const initalizeSelectedDates = () => {
         let result = []
         for (let i = 0; i <= 50; i++) {
             result.push(JSON.parse(JSON.stringify(emptyDate)))
         }
-        return result
+        return result;
     }
-    const initSelectedDates = initalizeSeleectedDates();
+    const initSelectedDates = initalizeSelectedDates();
     const [selectedDates, setSelectedDates] = useState(initSelectedDates);
     const onClickTest2 = () => {
-        console.debug("?????");
-        console.debug("onClickTest2")
+        // console.debug("onClickTest2")
         const newDates = selectedDates.map(
             (selectedDate, index) => {
                 if (undefined !== test2[index]) {
@@ -46,9 +45,7 @@ const SearchDateButton = () => {
     }
     return (
         <>
-            <button
-                id="search_btn">조회
-            </button>
+            <button id="search_btn">조회</button>
             <button id="search_btn" onClick={onClickTest2}>테스트</button>
             <button id="search_btn" onClick={axiosTest}>테스트2</button>
         </>
