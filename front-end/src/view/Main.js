@@ -1,96 +1,49 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import './Main.css'
+import axios from 'axios';
 
 const Main = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const dates = ['2022-03-01', '2022-03-02','2022-03-03','2022-03-04','2022-03-05'];
-    const listDays = ['화요일','수요일','목요일','금요일','토요일'];
     const isHoliday = ['아니오'];
-    const test = Array(1)
-        .fill()
-        .map(() => ({
-            datesTwo : ['2022-03-01', '2022-03-02','2022-03-03','2022-03-04','2022-03-05'],
-            listDaysTwo : ['화요일','수요일','목요일','금요일','토요일'],
-        }));
-    const runCallback = (cb) => {
-        return cb();
-    };
-    const initSelectedDates = [
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''},
-        {date: '', day:'', publicHoliday:''}
+    const test2 = [
+        {date: '2022-03-01', day: '화요일', isHoliday: '아니오'}
+        , {date: '2022-03-02', day: '수요일', isHoliday: '아니오'}
+        , {date: '2022-03-03', day: '목요일', isHoliday: '아니오'}
+        , {date: '2022-03-04', day: '금요일', isHoliday: '아니오'}
+        , {date: '2022-03-05', day: '토요일', isHoliday: '아니오'}
     ]
+    const emptyDate = {date: '', day:'', isHoliday:''};
+    const initalizeSeleectedDates = () => {
+        let result = []
+        for(let i = 0; i <= 50; i ++) {
+            result.push(JSON.parse(JSON.stringify(emptyDate)))
+        }
+        return result
+    }
+    const initSelectedDates = initalizeSeleectedDates()
     const [selectedDates, setSelectedDates] = useState(initSelectedDates);
-
-    const onClickTest = () => {
-        const prevSelectedDates = selectedDates;
-        let isUpdated = false
-        const addedSelectedDates = prevSelectedDates.map(
-            selectedDate => {
-                runCallback(() => {
-                    const row = [];
-                    for (let i = 0; i < dates.length; i++) {
-                        {test.map(({ datesTwo, listDaysTwo }) => (
-                            row.push(<tr key={datesTwo[i] + listDaysTwo[i]}>
-                                <td>{datesTwo[i]}</td>
-                                <td>{listDaysTwo[i]}</td>
-                                <td>{isHoliday}</td>
-                            </tr>)
-                        ))}
-                    }
-                    return row;
-                })
+    const onClickTest2 = () => {
+        console.debug("onClickTest2")
+        const newDates = selectedDates.map(
+            (selectedDate, index) => {
+                if(undefined !== test2[index]){
+                    selectedDate.date = test2[index].date
+                    selectedDate.day = test2[index].day
+                } else {
+                    selectedDate.date = emptyDate.date
+                    selectedDate.day = emptyDate.day
+                    selectedDate.publicHoliday = emptyDate.publicHoliday
+                }
                 return selectedDate
             }
         )
-        setSelectedDates(addedSelectedDates);
+        setSelectedDates(newDates)
+    }
+    const axiosTest = () => {
+        axios.get("/home")
+            .then(response =>{
+                console.debug('res', response)
+            })
     }
 
     return (
@@ -104,7 +57,8 @@ const Main = () => {
                 <button id="select_date_btn"><span id="select_date_star">*</span> 기간</button>
                 <div id="start_date_box"><span class="d_box">D</span></div> <span id="from_til">~</span>
                 <div id="end_date_box"><span class="d_box">D</span></div><button id="search_btn">조회</button>
-                <button id="search_btn" onClick={onClickTest}>테스트</button>
+                <button id="search_btn" onClick={onClickTest2}>테스트</button>
+                <button id="search_btn" onClick={axiosTest}>테스트2</button>
             </div>
             <div id="selected_year_month">2020년 5월</div>
             <div id="calendar_table">
