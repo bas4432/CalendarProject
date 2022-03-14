@@ -1,0 +1,11 @@
+#selected_date_table {
+    margin-top: 15px;
+    margin-left: 20px;
+    text-align: center;
+}
+#selected_date_table>tr,
+th {
+    text-align: center;
+    width: 90px;
+    font-size: 13px;
+}
