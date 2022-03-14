@@ -1,4 +1,4 @@
-import './ResultDate.css'
+import './css/ResultDate.css'
 import React from "react";
 const ResultDate = () => {
     return (

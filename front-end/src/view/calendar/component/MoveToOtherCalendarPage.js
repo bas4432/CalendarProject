@@ -1,4 +1,4 @@
-import './MoveToOtherCalendarPage.css'
+import './css/MoveToOtherCalendarPage.css'
 const MoveToOtherCalendarPage = () => {
     return (
         <>

@@ -1,17 +1,8 @@
 import React, {useState} from "react";
-import './ResultDateList.css'
+import './css/ResultDateList.css'
 import ResultDateListPagebar from "./ResultDateListPagebar";
-const ResultDateList = () => {
-    const emptyDate = {date: '', day: '', isHoliday: ''};
-    const initalizeSelectedDates = () => {
-        let result = []
-        for (let i = 0; i <= 50; i++) {
-            result.push(JSON.parse(JSON.stringify(emptyDate)))
-        }
-        return result
-    }
-    const initSelectedDates = initalizeSelectedDates()
-    const [selectedDates, setSelectedDates] = useState(initSelectedDates);
+const ResultDateList = ({selectedDates}) => {
+
     return (
         <div id="right_area_border">
             <div id="right_area">

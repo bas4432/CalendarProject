@@ -1,4 +1,4 @@
-import './ResultDateListpagebar.css'
+import './css/ResultDateListpagebar.css'
 import React from "react";
 const ResultDateListPagebar = () => {
     return (

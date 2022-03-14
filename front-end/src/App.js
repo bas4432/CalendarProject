@@ -1,20 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
-import CalendarTemplate from "./component/CalendarTemplate";
-import SelectDate from "./component/SelectDate";
-import ResultDateCalendar from "./component/ResultDateCalendar";
-import ResultDate from "./component/ResultDate";
-import ResultDateList from "./component/ResultDateList";
+import Calendar from "./view/calendar/Calendar";
 
 const App = () => {
-    return (
-        <>
-            <CalendarTemplate/>
-            <SelectDate/>
-            <ResultDateCalendar/>
-            <ResultDate/>
-            <ResultDateList/>
-        </>
-    )
+    return <Calendar />
 }
 export default App;
