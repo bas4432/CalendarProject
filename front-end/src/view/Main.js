@@ -40,7 +40,7 @@ const Main = () => {
         setSelectedDates(newDates)
     }
     const axiosTest = () => {
-        axios.get("/home")
+        axios.post("/home")
             .then(response =>{
                 console.debug('res', response)
             })
@@ -55,8 +55,8 @@ const Main = () => {
         <span id="calendar_left_area">
             <div id="date_div">
                 <button id="select_date_btn"><span id="select_date_star">*</span> 기간</button>
-                <div id="start_date_box"><span class="d_box">D</span></div> <span id="from_til">~</span>
-                <div id="end_date_box"><span class="d_box">D</span></div><button id="search_btn">조회</button>
+                <div id="start_date_box"><input class="input_date"/><span class="d_box">D</span></div><span id="from_til">~</span>
+                <div id="end_date_box"><input className="input_date"/><span class="d_box">D</span></div><button id="search_btn">조회</button>
                 <button id="search_btn" onClick={onClickTest2}>테스트</button>
                 <button id="search_btn" onClick={axiosTest}>테스트2</button>
             </div>

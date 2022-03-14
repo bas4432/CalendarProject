@@ -10,15 +10,34 @@ import java.time.LocalDate;
 public class CalendarController {
 
     @GetMapping("/home")
-    public String getHome(){
+    public String getHome() {
         return "Hello World!";
     }
 
     @GetMapping("/date")
-    public String getDate(String inputFromDate, String inputUntilDate) {
-        LocalDate fromDate = LocalDate.parse("");
-        LocalDate untilDate = LocalDate.parse("");
+    public List<String> calendar(HttpServletRequest reqeust, DataVO datavo) throws Exception {
 
-        return "";
+        final String DATE_PATTERN = "yyyy-MM-dd";
+        SimpleDateFormat format = new SimpleDateFormat(DATE_PATTERN);
+
+        Date startDate = format.parse(datavo.getStartDay());
+        Date endDate = format.parse(datavo.getEndDay());
+
+        Calendar calenar = Calendar.getInstance();
+        calenar.setTime(startDate);
+
+        ArrayList<String> dates = new ArrayList<String>();
+        Date currentDate = startDate;
+
+        while (currentDate.compareTo(endDate) <= 0) {
+
+            dates.add(format.format(currentDate));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(currentDate);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            currentDate = calendar.getTime();
+        }
+
+        return dates;
     }
 }

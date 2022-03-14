@@ -28,6 +28,15 @@
     align-items: center;
 }
 
+.input_date {
+    margin-top: 2px;
+    width: 55px;
+    border: none;
+}
+.input_date:focus {
+    outline: none;
+}
+
 #start_date_box {
     border: 1px solid rgb(117, 142, 173);
     display: inline-block;
