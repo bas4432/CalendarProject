@@ -10,11 +10,11 @@ const SelectDate = ({selectedDates, setSelectedDates}) => {
 
     const onChangeStartDate = (e) => {
         setInputs({...inputs, ...{startDate: e.target.value}})
-        console.log('inputs', inputs)
+        return inputs;
     }
     const onChangeEndDate = (e) => {
         setInputs({...inputs, ...{endDate: e.target.value}})
-        console.log('inputs', inputs)
+        return inputs;
     }
     return (
         <div id="body_box">

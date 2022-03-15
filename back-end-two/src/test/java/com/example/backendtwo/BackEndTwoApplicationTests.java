@@ -24,7 +24,6 @@ class BackEndTwoApplicationTests {
         mvc.perform(get("/home"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(helloWorld));
-                ;
     }
 
     @Test
