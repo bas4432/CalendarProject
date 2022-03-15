@@ -12,7 +12,7 @@ const SearchDateButton = ({fromToInputs, selectedDates, setSelectedDates}) => {
         , {date: '2022-03-05', day: '토요일', isHoliday: '아니오'}
     ]
     let resultDate = [];
-    let resultDay = [];
+    // let resultDay = [];
     const days = new Array ('일요일','월요일','화요일','수요일','목요일','금요일','토요일');
     const setEmptyDate = (index, selectedDate) => {
         if (undefined === resultDate[index]) {
@@ -24,13 +24,14 @@ const SearchDateButton = ({fromToInputs, selectedDates, setSelectedDates}) => {
 
     const setDate = (index, selectedDate) => {
         if (undefined !== resultDate[index]) {
-            selectedDate.date = resultDate[index]
-            selectedDate.day = days[resultDay[index].getDay()]
+            selectedDate.date = resultDate[index].date
+            selectedDate.day = resultDate[index].day
         }
     }
 
     const onClickTest2 = () => {
         console.debug("onClickTest2")
+        console.debug("resultDate", resultDate)
         const newDates = selectedDates.map(
             (selectedDate, index) => {
                 setDate(index, selectedDate);
@@ -41,12 +42,23 @@ const SearchDateButton = ({fromToInputs, selectedDates, setSelectedDates}) => {
         setSelectedDates(newDates)
     }
 
-    const changedDate = () => {
-        for (let i = 0; i < resultDate.length; i++) {
-            resultDate[i] = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
-            resultDay[i] = new Date();
+    const formatDate = (param) => {
+        let result = []
+        for (let i = 0; i < param.length; i++) {
+            const date = new Date(param[i]);
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            month = month >= 10 ? month : '0' + month;
+            day = day >= 10 ? day : '0' + day;
+
+            result.push({
+                date:date.getFullYear() + '-' + month + '-' + day,
+                day:days[date.getDay()],
+                isHoliday:'아니오'})
         }
+        return result
     }
+
     // const axiosTest = () => {
     //     axios.get("/home",fromToInputs)
     //         .then(response => {
@@ -56,20 +68,21 @@ const SearchDateButton = ({fromToInputs, selectedDates, setSelectedDates}) => {
     const inputTest = (selectedDate) => {
         axios.get("/date", {params: fromToInputs})
             .then(response => {
-                resultDate = response.data;
-                console.log(resultDate);
-                changedDate();
+                console.log('res', response)
+                // resultDate = response.data;
+                // resultDay = response.data;
+                resultDate = formatDate(response.data);
             })
         // const axios = require('axios');
         // const res = axios.get("/date", new URLSearchParams(fromToInputs));
         // console.log(res.args.data);
     }
-        return (
-            <>
-                <button id="search_btn" onClick={inputTest}>조회</button>
-                <button id="search_btn" onClick={onClickTest2}>테스트</button>
-                {/*<button id="search_btn" onClick={axiosTest}>테스트2</button>*/}
-            </>
-        )
+    return (
+        <>
+            <button id="search_btn" onClick={inputTest}>조회</button>
+            <button id="search_btn" onClick={onClickTest2}>테스트</button>
+            {/*<button id="search_btn" onClick={axiosTest}>테스트2</button>*/}
+        </>
+    )
 }
 export default SearchDateButton;

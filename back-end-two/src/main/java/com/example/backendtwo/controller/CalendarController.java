@@ -31,7 +31,7 @@ public class CalendarController {
         LocalDate startDate = LocalDate.parse(date.getStartDate(), formatter);
         LocalDate endDate = LocalDate.parse(date.getEndDate(), formatter);
 
-        int numOfDaysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate);
+        int numOfDaysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate.plusDays(1L));
 
         return IntStream.iterate(0, i -> i + 1)
                 .limit(numOfDaysBetween)
