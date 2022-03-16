@@ -1,17 +1,15 @@
-package com.example.backendtwo.DateDto;
+package com.example.backendtwo.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DateDto {
+public class Date {
     private String startDate;
     private String endDate;
 }
