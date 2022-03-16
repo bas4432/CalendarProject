@@ -17,9 +17,9 @@
 }
 .input_date {
     margin-top: 2px;
-    width: 55px;
     border: none;
-    font-size: 8px;
+    font-size: 12px;
+    width: 110px;
 }
 .input_date:focus {
     outline: none;
@@ -28,8 +28,8 @@
     border: 1px solid rgb(117, 142, 173);
     display: inline-block;
     font-size: 7px;
-    width: 85px;
-    height: 20px;
+    width: 135px;
+    height: 21px;
     margin-left: 2px;
     margin-right: 10px;
 }
@@ -50,8 +50,8 @@
     border: 1px solid rgb(117, 142, 173);
     display: inline-block;
     font-size: 7px;
-    width: 85px;
-    height: 20px;
+    width: 135px;
+    height: 21px;
     margin-left: 10px;
     margin-right: 10px;
 }

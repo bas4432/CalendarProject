@@ -24,7 +24,7 @@ public class CalendarController {
         return "Hello World!";
     }
 
-    @GetMapping(value = "/date")
+    @GetMapping( "/date")
     @ResponseBody
     public List<LocalDate> calendar(DateDto date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
