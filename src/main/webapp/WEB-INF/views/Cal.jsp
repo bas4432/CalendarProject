@@ -353,8 +353,6 @@
 
 		$(".btndatefilter").click(
 				 
-				
-				
 				function() {
 
 				    var startDay = $('#datepicker1').val();
@@ -368,9 +366,6 @@
 						},
 						url : "/api/index",
 						success : function(data) {
-							 
-						  
-							
 							   
 						   for(var i = 0; i < data.length ; i ++){
 							   
@@ -379,23 +374,21 @@
 							   
 							   var firstDate = new Date(year , Month, 0).getDate(); //지난달 마지막날
 							   var firstDay = new Date(year,Month,1).getDay(); //1st의 요일
-							   
-							  
 							   var lastDate = new Date(year,Month+1,0).getDate(); // 지금달 마지막 날
 							     
 							   var ill = new Date(data[i]).getDay(); //요일 값
-							    if(ill==0) {
+							    
+							   if(ill==0) {
 						            $("#calender_table_result tbody:last").append("<tr></tr>")
-						        }
-							    $("#calender_table_result tbody:last").append("<td class='getday'>"+ new Date(data[i]).getDate() +"</td>"); 
+						       }
+							   $("#calender_table_result tbody:last").append("<td class='getday'>"+ new Date(data[i]).getDate() +"</td>"); 
 							     
-							    $("#selected_year_month").text(year + "년" + (Month+1) + "월")
+							   $("#selected_year_month").text(year + "년" + (Month+1) + "월")
 							 
                             }
-						  
-						  
-					
-							var inst = "";
+							 
+							
+						   var inst = "";
 							var week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
 
 							for (var i = 0; i < data.length; i++) {
@@ -406,7 +399,7 @@
 								inst += "</tr>";
 							
 							}
-							$("#data").html(inst);
+						    $("#data").html(inst);
 						}, //succes: function
 						error : function(jqXHR, textStatus, errorThrown) {
 							alert("지정 날짜를 선택 하세요");
