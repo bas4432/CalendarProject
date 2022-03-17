@@ -365,7 +365,7 @@
 						},
 						url : "/api/index",
 						success : function(data) {
-							   
+						   //캘린더   
 						   for(var i = 0; i < data.length ; i ++){
 							   
 							   var year = new Date(data[i]).getFullYear();
@@ -380,12 +380,14 @@
 							   if(ill==0) {
 						            $("#calender_table_result tbody:last").append("<tr></tr>")
 						       }
+							   
 							   $("#calender_table_result tbody:last").append("<td class='getday'>"+ new Date(data[i]).getDate() +"</td>"); 
 							     
 							   $("#selected_year_month").text(year + "년" + (Month+1) + "월")
 						  }
 							 
 							
+						    //우측 화면
 						    var inst = "";
 							var week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
 
