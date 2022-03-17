@@ -1,11 +1,15 @@
 import './css/ResultDateCalendar.css';
 import MoveToOtherCalendarPage from "./MoveToOtherCalendarPage";
+import DrawCalendar from "./DrawCalendar";
 
-const ResultDateCalendar = () => {
+const ResultDateCalendar = ({selectedYearAndMonth, selectedCalendarDates}) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     return (
         <>
-            <div id="selected_year_month">2020년 5월</div>
+            <div id="selected_year_month">
+                {selectedYearAndMonth.year} {selectedYearAndMonth.month}
+            </div>
+
             <div id="calendar_table">
                 <table id="calender_table_result">
                     <thead>
@@ -16,51 +20,20 @@ const ResultDateCalendar = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td className="sun">s</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="sat"></td>
-                    </tr>
-                    <tr>
-                        <td className="sun">s</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="sat">s</td>
-                    </tr>
-                    <tr>
-                        <td className="sun">s</td>
-                        <td></td>
-                        <td>s</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="sat">s</td>
-                    </tr>
-                    <tr>
-                        <td className="sun"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="sat">s</td>
-                    </tr>
-                    <tr>
-                        <td className="sun"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td className="sat"></td>
-                    </tr>
+                        {/*{selectedCalendarDates*/}
+                        {/*    .map((selectedCalendarDates, index) =>*/}
+                        {/*        <tr key={index}>*/}
+                        {/*            {selectedCalendarDates}*/}
+                        {/*            <td className="sun">1{selectedCalendarDates}</td>*/}
+                        {/*            <td>{selectedCalendarDates}</td>*/}
+                        {/*            <td>{selectedCalendarDates}</td>*/}
+                        {/*            <td>{selectedCalendarDates}</td>*/}
+                        {/*            <td>{selectedCalendarDates}</td>*/}
+                        {/*            <td>{selectedCalendarDates}</td>*/}
+                        {/*            <td className="sat">1{selectedCalendarDates}</td>*/}
+                        {/*        </tr>*/}
+                        {/*        )}*/}
+                        <DrawCalendar/>
                     </tbody>
                 </table>
                 <MoveToOtherCalendarPage/>

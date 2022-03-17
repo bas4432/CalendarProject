@@ -2,7 +2,6 @@ package com.example.backendtwo.controller;
 
 import com.example.backendtwo.model.vo.Date;
 import com.example.backendtwo.service.CalendarService;
-import jdk.vm.ci.meta.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +24,6 @@ public class CalendarController {
     private CalendarService service;
 
     @GetMapping( "/date")
-    @ResponseBody
     public List<LocalDate> calendar(Date date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
         LocalDate startDate = LocalDate.parse(date.getStartDate(), formatter);
