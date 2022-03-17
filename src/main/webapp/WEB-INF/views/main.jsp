@@ -629,29 +629,7 @@ A:hover {
 
 <div class="calendar">
 
-<%-- <!--날짜 네비게이션  -->
-	<div class="navigation">
-		<a class="before_after_year" href="/index?year=${today_info.search_year-1}&month=${today_info.search_month-1}">
-			&lt;&lt;
-		<!-- 이전해 -->
-		</a> 
-		<a class="before_after_month" href="/index?year=${today_info.before_year}&month=${today_info.before_month}">
-			&lt;
-		<!-- 이전달 -->
-		</a> 
-		<span class="this_month">
-			&nbsp;${today_info.search_year}. 
-			<c:if test="${today_info.search_month<10}">0</c:if>${today_info.search_month}
-		</span>
-		<a class="before_after_month" href="/index?year=${today_info.after_year}&month=${today_info.after_month}">
-		<!-- 다음달 -->
-			&gt;
-		</a> 
-		<a class="before_after_year" href="/index?year=${today_info.search_year+1}&month=${today_info.search_month-1}">
-			<!-- 다음해 -->
-			&gt;&gt;
-		</a>
-	</div>  --%>
+
 
 	
 	<div class="main">
@@ -670,40 +648,21 @@ A:hover {
 				</tr>
 			</thead>
 
-			<tbody style="backgroundcolor:black; border:1px solid black">
-				 <tr>
-					<c:forEach var="dateList" items="${dateList}" varStatus="date_status">
-						<c:choose>
-							<c:when test="${dateList.value=='today'}">
-								<td class="today">
-									<div class="date">${dateList.date}</div>
-									<div></div>
-								</td>
-							</c:when>
-							<c:when test="${date_status.index%7==6}">
-								<td class="sat_day">
-									<div class="sat">${dateList.date}</div>
-									<div></div>
-								</td>
-							</c:when>
-							<c:when test="${date_status.index%7==0}">
-				</tr>
+			<tbody>
+				 
+				 
 				<tr>
-					<td class="sun_day">
-						<div class="sun">${dateList.date}</div>
-						<div></div>
-					</td>
-					</c:when>
-					<c:otherwise>
-						<td class="normal_day">
-							<div class="date">${dateList.date}</a></div>
-							<div></div>
-						</td>
-					    </c:otherwise>
-					  </c:choose>
-				   </c:forEach>
-				   
 				
+				<td>1</td>
+				<td>2</td>
+				</tr>
+				
+				<tr>
+				 <td>2</td>
+				
+				</tr>
+				
+			
 				   
 				   
 			</tbody>

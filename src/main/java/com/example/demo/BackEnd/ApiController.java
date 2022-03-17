@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.DataVO;
+import com.example.demo.vo.DataVO;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -31,14 +31,21 @@ public class ApiController {
 
         Date startDate = format.parse(datavo.getStartDay());
         Date endDate = format.parse(datavo.getEndDay());
+        
+        System.out.println("endDate::" + endDate);
 
         Calendar calenar = Calendar.getInstance();
         calenar.setTime(startDate);
+        
+        System.out.println("startDate::" + calenar.getTime());
 
         ArrayList<String> dates = new ArrayList<String>();
         Date currentDate = startDate;
+        
+        System.out.println("currenDate:::" + currentDate);
 
-        while (currentDate.compareTo(endDate) <= 0) {
+
+        while (currentDate.compareTo(endDate) <=0) { // 종료날짜가 시작날짜보다 커야한다.
 
             dates.add(format.format(currentDate));
             Calendar calendar = Calendar.getInstance();

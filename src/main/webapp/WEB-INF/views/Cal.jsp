@@ -317,10 +317,20 @@
 	text-decoration: none;
 	color: black;
 }
+
+.getday{
+   text-align: center;
+   border: 2px solid;
+
+}
+
 </style>
 
 <script type="text/javascript">
 	$(function() {
+		
+		
+		
 
 		$("#datepicker1,#datepicker2").datepicker(
 				{
@@ -342,9 +352,12 @@
 		$('#datepicker1').datepicker('setDate', 'today');
 
 		$(".btndatefilter").click(
+				 
+				
+				
 				function() {
 
-					var startDay = $('#datepicker1').val();
+				    var startDay = $('#datepicker1').val();
 					var endDay = $('#datepicker2').val();
 
 					$.ajax({
@@ -355,13 +368,33 @@
 						},
 						url : "/api/index",
 						success : function(data) {
-
-							for (var i = 0; i < data.length; i++) {
-
-								var week = new Date(data[0].split(',')).getDay(); //요일값
-								var day = new Date(data[0].split(',')).getDate(); //일자
-							}
-
+							 
+						  
+							
+							   
+						   for(var i = 0; i < data.length ; i ++){
+							   
+							   var year = new Date(data[i]).getFullYear();
+							   var Month = new Date(data[i]).getMonth();
+							   
+							   var firstDate = new Date(year , Month, 0).getDate(); //지난달 마지막날
+							   var firstDay = new Date(year,Month,1).getDay(); //1st의 요일
+							   
+							  
+							   var lastDate = new Date(year,Month+1,0).getDate(); // 지금달 마지막 날
+							     
+							   var ill = new Date(data[i]).getDay(); //요일 값
+							    if(ill==0) {
+						            $("#calender_table_result tbody:last").append("<tr></tr>")
+						        }
+							    $("#calender_table_result tbody:last").append("<td class='getday'>"+ new Date(data[i]).getDate() +"</td>"); 
+							     
+							    $("#selected_year_month").text(year + "년" + (Month+1) + "월")
+							 
+                            }
+						  
+						  
+					
 							var inst = "";
 							var week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
 
@@ -369,8 +402,9 @@
 
 								inst += "<tr>";
 								inst += "<td>" + data[i] + "</td>";
-								inst += "<td>"+ week[new Date(data[i].split(',')).getDay()] + "</td>"
+								inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
 								inst += "</tr>";
+							
 							}
 							$("#data").html(inst);
 						}, //succes: function
@@ -398,7 +432,7 @@
 			class="btndatefilter" value="조회">
 
 
-		<div id="selected_year_month">2020년 5월</div>
+		<div id="selected_year_month"></div>
 		<div id="calendar_table">
 			<table id="calender_table_result">
 				<thead>
@@ -412,52 +446,8 @@
 						<th>Sat</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="sun"></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td class="sat"></td>
-					</tr>
-					<tr>
-						<td class="sun"></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td class="sat"></td>
-					</tr>
-					<tr>
-						<td class="sun"></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td class="sat"></td>
-					</tr>
-					<tr>
-						<td class="sun"></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td class="sat"></td>
-					</tr>
-					<tr>
-						<td class="sun"></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td class="sat"></td>
-					</tr>
+				<tbody class="day">
+		
 				</tbody>
 			</table>
 			<div id="test">
@@ -499,7 +489,7 @@
 						</tr>
 					</thead>
 					<tbody id="data">
-
+                          
 
 
 					</tbody>
