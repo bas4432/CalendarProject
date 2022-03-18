@@ -11,11 +11,4 @@ public class ViewController {
 
         return "Cal";
     }
-    
-    @GetMapping(value = "/main")
-    public String secondpage() {
-
-        return "main1";
-    }
-    
 }
