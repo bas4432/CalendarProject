@@ -10,6 +10,8 @@ const DrawCalendar = ({weeks}) => {
         if (index === 6){
             style.color = 'blue'
         }
+
+        console.log("td?",result.length)
         return <td><div style={style}>{dateNumber}</div></td>
     }
 

@@ -77,19 +77,23 @@ const SearchDateButton = ({
         const firstDayOfWeek = dates[0].dayOfOrder === 0 ? 7 : dates[0].dayOfOrder
         const firstDate = new Date(dates[0].date)
         const weekNo = Math.ceil((firstDayOfWeek - 1 + firstDate.getDate()) / 7);
-        console.log("weekNo:", weekNo);
-        for (let week = 0; week <= 5; week++) {
+        const dayOfOrder = dates[0].dayOfOrder
+        let currentWeek = 1;
+
+        for (let weekLoop = 0; weekLoop <= 5; weekLoop++) {
             let week = []
             for (let day = 0; day <= 6; day++) {
-                if (0 < dates.length &&
+                if (currentWeek < weekNo) {
+                    week.push(null)
+                } else if (0 < dates.length &&
                     day === dates[0].dayOfOrder) {
                     week.push(dates.shift())
-                } else {
+                } else if (day !== dayOfOrder || 0 == dates.length) {
                     week.push(null)
                 }
             }
-            result.push(week)
-            console.log("week:",week)
+            currentWeek++;
+            result.push(week);
         }
         return result
     }
