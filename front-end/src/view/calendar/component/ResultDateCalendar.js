@@ -20,19 +20,6 @@ const ResultDateCalendar = ({selectedYearAndMonth, selectedCalendarDates}) => {
                     </tr>
                     </thead>
                     <tbody>
-                        {/*{selectedCalendarDates*/}
-                        {/*    .map((selectedCalendarDates, index) =>*/}
-                        {/*        <tr key={index}>*/}
-                        {/*            {selectedCalendarDates}*/}
-                        {/*            <td className="sun">1{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td className="sat">1{selectedCalendarDates}</td>*/}
-                        {/*        </tr>*/}
-                        {/*        )}*/}
                         <DrawCalendar/>
                     </tbody>
                 </table>

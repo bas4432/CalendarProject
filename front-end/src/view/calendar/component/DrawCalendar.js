@@ -16,25 +16,25 @@ const DrawCalendar = () => {
         let result = <td>{day}</td>
         if(index === 0) {
             result = <td style={{color: 'red'}}>{day}</td>
-        } else if (index === 6)
+        }
+        if (index === 6)
             result = <td style={{color: 'blue'}}>{day}</td>
         return result
     }
 
     return (
-        <table>
-            {/*<tr>*/}
-            {/*    {header.map(dayOfWeek => <th>{dayOfWeek}</th>)}*/}
-            {/*</tr>*/}
+        <tbody>
             {weeks.map(week =>
                 <tr>
                     {week.map((day, index) =>
+
                         drawDay(day, index)
+
                     )}
                 </tr>
             )
             }
-        </table>
+        </tbody>
     )
 }
 export default DrawCalendar;
