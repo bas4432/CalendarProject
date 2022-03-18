@@ -2,7 +2,7 @@ import './css/ResultDateCalendar.css';
 import MoveToOtherCalendarPage from "./MoveToOtherCalendarPage";
 import DrawCalendar from "./DrawCalendar";
 
-const ResultDateCalendar = ({selectedYearAndMonth, selectedCalendarDates}) => {
+const ResultDateCalendar = ({selectedYearAndMonth, weeks}) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     return (
         <>
@@ -19,22 +19,7 @@ const ResultDateCalendar = ({selectedYearAndMonth, selectedCalendarDates}) => {
                         })}
                     </tr>
                     </thead>
-                    <tbody>
-                        {/*{selectedCalendarDates*/}
-                        {/*    .map((selectedCalendarDates, index) =>*/}
-                        {/*        <tr key={index}>*/}
-                        {/*            {selectedCalendarDates}*/}
-                        {/*            <td className="sun">1{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td>{selectedCalendarDates}</td>*/}
-                        {/*            <td className="sat">1{selectedCalendarDates}</td>*/}
-                        {/*        </tr>*/}
-                        {/*        )}*/}
-                        <DrawCalendar/>
-                    </tbody>
+                    <DrawCalendar weeks={weeks}/>
                 </table>
                 <MoveToOtherCalendarPage/>
             </div>
