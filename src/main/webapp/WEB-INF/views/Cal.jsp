@@ -365,8 +365,8 @@
 						},
 						url : "/api/index",
 						success : function(data) {
-						   //캘린더   
-						   for(var i = 0; i < data.length ; i ++){
+					       //캘린더   
+					       for(var i = 0; i < data.length ; i ++){
 							   
 							   var year = new Date(data[i]).getFullYear();
 							   var Month = new Date(data[i]).getMonth();
@@ -374,17 +374,17 @@
 							   var firstDate = new Date(year , Month, 0).getDate(); //지난달 마지막날
 							   var firstDay = new Date(year,Month,1).getDay(); //1st의 요일
 							   var lastDate = new Date(year,Month+1,0).getDate(); // 지금달 마지막 날
-							     
-							   var ill = new Date(data[i]).getDay(); //요일 값
-							    
-							   if(ill==0) {
-						            $("#calender_table_result tbody:last").append("<tr></tr>")
-						            }
+							   var dayweek = new Date(data[i]).getDay(); //요일 값
+							   var date = new Date(data[i]).getDate(); //일자
 							   
-							   $("#calender_table_result tbody:last").append("<td class='getday'>"+ new Date(data[i]).getDate() +"</td>"); 
+							   if(dayweek==0) {
+						            $("#calender_table_result tbody:last").append("<tr></tr>")
+						       }
+							   
+							   $("#calender_table_result tbody:last").append("<td class='getday'>"+ date +"</td>"); 
 							     
 							   $("#selected_year_month").text(year + "년" + (Month+1) + "월")
-						  }
+						    }
 							 
 							
 						    //우측 화면

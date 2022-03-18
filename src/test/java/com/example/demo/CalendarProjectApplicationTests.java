@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.demo.domain.DataVO;
 import com.example.demo.service.Service;
-import com.example.demo.vo.DataVO;
 
 @SpringBootTest
 class CalendarProjectApplicationTests {

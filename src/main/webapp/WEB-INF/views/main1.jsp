@@ -92,7 +92,7 @@ $(function(){
         for (i=1; i <=lastDate; i++){ // 날짜 채우기
             plusDate = new Date(nowYear,nowMonth,i).getDay(); //요일
         
-            console.log("plusDate::" + plusDate)
+           
             
             if (plusDate==0) {
                 $("#calendar tbody:last").append("<tr></tr>");
