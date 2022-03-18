@@ -8,7 +8,7 @@ const SearchDateButton = ({
                               selectedDates,
                               setSelectedDates,
                               setSelectedYearAndMonth,
-                              setSelectedCalendarDates
+                              setWeeks
                           }) => {
     const year = new Date().getFullYear();
     const month = new Date().getMonth();
@@ -52,45 +52,6 @@ const SearchDateButton = ({
         setSelectedYearAndMonth(resultYearAndMonth)
     }
 
-    const printCalendar = () => {
-        const firstDay = testDate.getDate();
-        const firstDayName = testDate.getDay();
-        const lastDay = new Date(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            0
-        ).getDate();
-        const prevLastDay = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            0
-        ).getDate();
-
-        let startDayCount = 1;
-        let lastDayCount = 1;
-
-        let result = <td></td>;
-        for (let i = 0; i < 6; i++) {
-            //일요일~토요일을 위해 7번 반복합니다.
-            for (let j = 0; j < 7; j++) {
-                // i == 0: 1주차일 때
-                // resultCalendarDates = <tr>;
-                // j < firstDayName: 이번 달 시작 요일 이전 일 때
-                if (i == 0 && j < firstDayName) {
-                    //일요일일 때, 토요일일 때, 나머지 요일 일 때
-                    if (j == 0) {
-                        resultCalendarDates = (prevLastDay - (firstDayName - 1) + j)
-                    } else if (j == 6) {
-                        resultCalendarDates = (prevLastDay - (firstDayName - 1) + j)
-                    } else {
-                        resultCalendarDates = (prevLastDay - (firstDayName - 1) + j)
-                    }
-                }
-            }
-        }
-        return resultCalendarDates;
-    }
-
     const formatDate = (param) => {
         let resultDatesObject = []
         for (let i = 0; i < param.length; i++) {
@@ -99,22 +60,48 @@ const SearchDateButton = ({
             let day = date.getDate();
             month = month >= 10 ? month : '0' + month;
             day = day >= 10 ? day : '0' + day;
-
             resultDatesObject.push({
                 date: date.getFullYear() + '-' + month + '-' + day,
+                dateNumber: day,
                 day: days[date.getDay()],
+                dayOfOrder: date.getDay(),
                 isHoliday: '아니오'
             })
         }
         return resultDatesObject
     }
+
+    function formatCalendarDate(param) {
+        const result = []
+        const dates = JSON.parse(JSON.stringify(param));
+        const firstDayOfWeek = dates[0].dayOfOrder === 0 ? 7 : dates[0].dayOfOrder
+        const firstDate = new Date(dates[0].date)
+        const weekNo = Math.ceil((firstDayOfWeek - 1 + firstDate.getDate()) / 7);
+        console.log("weekNo:", weekNo);
+        for (let week = 0; week <= 5; week++) {
+            let week = []
+            for (let day = 0; day <= 6; day++) {
+                if (0 < dates.length &&
+                    day === dates[0].dayOfOrder) {
+                    week.push(dates.shift())
+                } else {
+                    week.push(null)
+                }
+            }
+            result.push(week)
+            console.log("week:",week)
+        }
+        return result
+    }
+
     const searchDates = () => {
         axios.get("/date", {params: fromToInputs})
             .then(response => {
                 resultDateArray = formatDate(response.data);
+                setWeeks(formatCalendarDate(resultDateArray))
+
                 printDatesList();
                 printYearAndMonth(resultDateArray, setSelectedYearAndMonth);
-                printCalendar();
             })
     }
     return (
