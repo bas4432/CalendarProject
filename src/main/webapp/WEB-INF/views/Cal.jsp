@@ -1,28 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Spring Boot Application with JSP</title>
-<link rel="stylesheet"
-	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <style>
-#header_box {
+.header_box {
 	border-bottom: 1px solid lightgray;
 	margin: 0;
 	padding: 0;
 }
 
-#body_box {
+.body_box {
 	height: 1310px;
 	border-bottom: 1px solid rgb(79, 129, 189);
 }
 
-#select_date_btn {
+.select_date_btn {
 	border: 1px solid rgb(117, 142, 173);
 	height: 22px;
 	width: 64px;
@@ -30,11 +28,11 @@
 	font-size: 11px;
 }
 
-#select_date_star {
+.select_date_star {
 	color: red;
 }
 
-#date_div {
+.date_div {
 	padding: 10px;
 	margin-top: 25px;
 	margin-left: 20px;
@@ -42,7 +40,7 @@
 	align-items: center;
 }
 
-#start_date_box {
+.start_date_box {
 	border: 1px solid rgb(117, 142, 173);
 	display: inline-block;
 	font-size: 7px;
@@ -52,7 +50,7 @@
 	margin-right: 10px;
 }
 
-#from_til {
+.from_til {
 	font-weight: bold;
 }
 
@@ -67,7 +65,7 @@
 	float: right;
 }
 
-#end_date_box {
+.end_date_box {
 	border: 1px solid rgb(117, 142, 173);
 	display: inline-block;
 	font-size: 7px;
@@ -77,30 +75,30 @@
 	margin-right: 10px;
 }
 
-#search_btn {
+.search_btn {
 	background-color: rgb(79, 129, 189);
 	color: white;
 	width: 80px;
 	height: 25px;
 }
 
-#selected_year_month {
+.selected_year_month {
 	font-weight: bold;
 	margin-left: 45px;
 }
 
-#calendar_table {
+.calendar_table {
 	margin-left: 38px;
 	margin-top: 10px;
 }
 
-#calender_table_result {
+.calender_table_result {
 	border-collapse: collapse;
 	border: 2px solid;
 	font-size: 14px;
 }
 
-#calendar_table>table>thead>tr>th {
+.calendar_table>table>thead>tr>th {
 	border: 2px solid;
 	margin: 0;
 	padding: 0 auto;
@@ -109,7 +107,7 @@
 	background-color: rgb(238, 236, 225);
 }
 
-#calendar_table>table>tbody>tr>td {
+.calendar_table>table>tbody>tr>td {
 	border: 2px solid;
 	margin: 0;
 	padding: 0 auto;
@@ -118,12 +116,12 @@
 	text-align: center;
 }
 
-#calendar_table>table>tbody>tr>.sun {
+.calendar_table>table>tbody>tr>.sun {
 	color: red;
 	border: 2px solid black;
 }
 
-#calendar_table>table>tbody>tr>.sat {
+.calendar_table>table>tbody>tr>.sat {
 	color: blue;
 	border: 2px solid black;
 }
@@ -131,7 +129,7 @@
 /* #test{
         display: flex;
     } */
-#triangle_div {
+.triangle_div {
 	display: flex;
 }
 
@@ -185,7 +183,7 @@
 	left: -46px;
 }
 
-#test2 {
+.test2 {
 	display: flex;
 }
 
@@ -202,26 +200,26 @@
 	padding: 20px;
 }
 
-#selected_date_table {
+.selected_date_table {
 	margin-top: 15px;
 	margin-left: 20px;
 	text-align: center;
 }
 
-#selected_date_table>tr, th {
+.selected_date_table>tr, th {
 	text-align: center;
 	width: 90px;
 	font-size: 13px;
 }
 
-#right_area_border {
+.right_area_border {
 	position: absolute;
 	top: 11%;
 	left: 40%;
 	border-right: 1px solid rgb(79, 129, 189);
 }
 
-#right_area {
+.right_area {
 	margin-top: 50px;
 	margin-right: 10px;
 	/* position: absolute;
@@ -229,47 +227,47 @@
         left: 40%; */
 }
 
-#selected_date_table>tr, .month_and_date {
+.selected_date_table>tr, .month_and_date {
 	width: 50px;
 }
 
-#selected_date_list {
+.selected_date_list {
 	text-align: center;
 	width: 350px;
 }
 
-#selected_date_list>thead>tr>th {
+.selected_date_list>thead>tr>th {
 	background-color: rgb(79, 129, 189);
 	border-bottom: 2px solid;
 	color: white;
 	height: 20px;
 }
 
-#selected_date_list>tbody>tr {
+.selected_date_list>tbody>tr {
 	height: 22px;
 }
 
-#selected_date_list>tbody>tr:nth-child(odd) {
+.selected_date_list>tbody>tr:nth-child(odd) {
 	background-color: rgb(208, 216, 232);
 }
 
-#selected_date_list>tbody>tr:nth-child(even) {
+.selected_date_list>tbody>tr:nth-child(even) {
 	background-color: rgb(233, 237, 244);
 }
 
-#page_div {
+.page_div {
 	margin-top: 7px;
 	margin-bottom: 7px;
 	display: flex;
 	justify-content: right;
 }
 
-#page_div_ch {
+.page_div_ch {
 	display: flex;
 	margin: 0 1px;
 }
 
-#page_left_arrow {
+.page_left_arrow {
 	border: 1px solid black;
 	width: 19px;
 	height: 19px;
@@ -279,12 +277,12 @@
 	position: relative;
 }
 
-#page_left_arrow>a {
+.page_left_arrow>a {
 	text-decoration: none;
 	color: black;
 }
 
-#page_right_arrow {
+.page_right_arrow {
 	border: 1px solid black;
 	width: 19px;
 	height: 19px;
@@ -295,7 +293,7 @@
 	margin-left: 2px;
 }
 
-#page_right_arrow>a {
+.page_right_arrow>a {
 	text-decoration: none;
 	color: black;
 }
@@ -323,16 +321,24 @@
    border: 2px solid;
 
 }
-
+.dateSpan{
+   display: none;
+}
 </style>
 
 <script type="text/javascript">
-	$(function() {
-		
-		
-		
-
-		$("#datepicker1,#datepicker2").datepicker(
+$(function() {
+		 //캘린더   
+        let rowNum = 0;
+        for(let i=0; i<6; i++) {
+            $(".calender_table_result tbody").append("<tr class='row"+ rowNum +"' ></tr>")
+             for(let x=0; x<7; x++) {
+                $(".row"+ rowNum).append("<td class='dayofweek"+ x  +"'></td>"); 
+                } 
+            rowNum++;
+            }   
+		 
+         $("#datepicker1,#datepicker2").datepicker(
 				{
 					dateFormat : 'yy-mm-dd',
 					showOtherMonths : true,
@@ -350,14 +356,14 @@
 					maxDate : "+5y"
 				});
 		$('#datepicker1').datepicker('setDate', 'today');
-
-		$(".btndatefilter").click(
-				 
-				function() {
-					var startDay = $('#datepicker1').val();
-					var endDay = $('#datepicker2').val();
-
-					$.ajax({
+		
+		$("#btndatefilter").click(function() {
+			        
+			        $(".calender_table_result tbody span").remove(".dateSpan")
+			        
+			        let startDay = $('#datepicker1').val();
+					let endDay = $('#datepicker2').val();
+                    $.ajax({
 						type : 'GET',
 						data : {
 							"startDay" : $('#datepicker1').val(),
@@ -365,69 +371,68 @@
 						},
 						url : "/api/index",
 						success : function(data) {
-					       //캘린더   
-					       for(var i = 0; i < data.length ; i ++){
-							   
-							   var year = new Date(data[i]).getFullYear();
-							   var Month = new Date(data[i]).getMonth();
-							   
-							   var firstDate = new Date(year , Month, 0).getDate(); //지난달 마지막날
-							   var firstDay = new Date(year,Month,1).getDay(); //1st의 요일
-							   var lastDate = new Date(year,Month+1,0).getDate(); // 지금달 마지막 날
-							   var dayweek = new Date(data[i]).getDay(); //요일 값
-							   var date = new Date(data[i]).getDate(); //일자
-							   
-							   if(dayweek==0) {
-						            $("#calender_table_result tbody:last").append("<tr></tr>")
-						            }
-							   
-							   $("#calender_table_result tbody:last").append("<td class='getday'>"+ date +"</td>"); 
-							     
-							   $("#selected_year_month").text(year + "년" + (Month+1) + "월")
-						    }
-							 
 							
-						    //우측 화면
-						       var inst = "";
-							   var week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
-                            
-							for (var i = 0; i < data.length; i++) {
+						   let year = new Date(data[0]).getFullYear();//올해년도
+						   let month = new Date(data[0]).getMonth()+1;//이번달 
+                           let firstweek = new Date(year, month-1 ,1).getDay(); //이번달 첫째일의 요일
+                           let lastDate = new Date(year,month,0).getDate(); // 지금달 마지막 날
+                          
+                           let dayRow = 0;
+                           for(let x = 1; x <= lastDate; x ++ ) { 
+							   
+                        	   let dayofweek = new Date(year, month-1, x).getDay();//요일값 
+							   $(".row" + dayRow + " .dayofweek" +dayofweek).append("<span class='dateSpan day" + x  + "' >" + x + "</span>")
+							   if(dayofweek==6) {
+								   dayRow++;
+							     }
+						       } 
+                           //선택한 달의 모든 날짜 뿌려주고 숨김처리
+						    
+                           for(let i = 0; i < data.length ; i ++){
+						 		
+						       let date = new Date(data[i]).getDate(); 
+					    	   $(".day" + date).css('display','block'); 
+					    	  }
+						    //선택한 일자만 보이도록 처리
+
+						    //일자 - 요일 - 국경일 
+						    let inst = "";
+                            let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
+                            for (var i = 0; i < data.length; i++) {
 
 								inst += "<tr>";
 								inst += "<td>" + data[i] + "</td>";
 								inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
 								inst += "</tr>";
-							
-							}
+							 }
 						    $("#data").html(inst);
 						}, //succes: function
 						error : function(jqXHR, textStatus, errorThrown) {
-							alert("지정 날짜를 선택 하세요");
+							alert("마지막 날짜를 선택 하세요");
 						}
 					});//ajax 
-				})
-	});//btndatefilter function
+				})//btndatefilter function
+});
 </script>
 
 <body>
-	<div id="header_box">
+	<div class="header_box">
 		<h1>Calendar 기본 과제</h1>
 	</div>
-	<div id="body_box">
-		<span id="calendar_left_area"></span>
+	<div class="body_box">
+		<span class="calendar_left_area"></span>
 
 		<button id="select_date_btn">
-			<span id="select_date_star">*</span> 기간
+			<span class="select_date_star">*</span> 기간
 		</button>
-		<input type="date" id="datepicker1" name="startDay"> <span
-			id="from_til">~</span> <input type="date" id="datepicker2"
-			name="endDay"> <input type="button" id="search_btn"
-			class="btndatefilter" value="조회">
+		<input type="date" id="datepicker1" name="startDay"> 
+		<span id="from_til">~</span> 
+		<input type="date" id="datepicker2" name="endDay"> 
+		<input type="button" class="search_btn" id="btndatefilter" value="조회">
 
-
-		<div id="selected_year_month"></div>
-		<div id="calendar_table">
-			<table id="calender_table_result">
+        <div class="selected_year_month"></div>
+		<div class="calendar_table">
+			<table class="calender_table_result">
 				<thead>
 					<tr>
 						<th>Sun</th>
@@ -439,22 +444,21 @@
 						<th>Sat</th>
 					</tr>
 				</thead>
-				<tbody class="day">
-		
+				<tbody>
 				</tbody>
 			</table>
-			<div id="test">
-				<div id="triangle_div">
+		   <div class="test">
+				<div class="triangle_div">
 					<div class="triangle_left"></div>
 					<div class="triangle_right"></div>
 				</div>
-			</div>
-			<div id="test2">
+		   </div>
+		   <div class="test2">
 				<div class="pre">pre</div>
 				<div class="next">next</div>
-			</div>
+		   </div>
 		</div>
-		<table id="selected_date_table">
+		<table class="selected_date_table">
 			<tr>
 				<th>선택된 일자</th>
 				<th>(요일)</th>
@@ -470,10 +474,10 @@
 				<td></td>
 			</tr>
 		</table>
-		</span>
-		<div id="right_area_border">
-			<div id="right_area">
-				<table id="selected_date_list">
+		
+		<div class="right_area_border">
+			<div class="right_area">
+				<table class="selected_date_list">
 					<thead>
 						<tr>
 							<th>일자</th>
@@ -482,18 +486,15 @@
 						</tr>
 					</thead>
 					<tbody id="data">
-                          
-
-
-					</tbody>
+                    </tbody>
 				</table>
-				<div id="page_div">
-					<div id="page_div_ch">
-						<span id="page_left_arrow"><a href="#">◀</a></span> <span
-							class="page_number"><a href=#>1</a></span> <span
-							class="page_number"><a href=#>2</a></span> <span
-							class="page_number"><a href=#>3</a></span> <span
-							id="page_right_arrow"><a href="#">▶</a></span>
+		        <div class="page_div">
+					<div class="page_div_ch">
+						<span class="page_left_arrow"><a href="#">◀</a></span> 
+						<span class="page_number"><a href=#>1</a></span> 
+						<span class="page_number"><a href=#>2</a></span> 
+						<span class="page_number"><a href=#>3</a></span>
+                        <span class="page_right_arrow"><a href="#">▶</a></span>
 					</div>
 				</div>
 			</div>
