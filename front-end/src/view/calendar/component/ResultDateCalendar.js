@@ -2,7 +2,11 @@ import './css/ResultDateCalendar.css';
 import MoveToOtherCalendarPage from "./MoveToOtherCalendarPage";
 import DrawCalendar from "./DrawCalendar";
 
-const ResultDateCalendar = ({selectedYearAndMonth, weeks}) => {
+const ResultDateCalendar = ({selectedYearAndMonth,
+                                weeks,
+                                currentDate,
+                                setCurrentDate,
+                                selectedDates}) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     return (
         <>
@@ -19,9 +23,11 @@ const ResultDateCalendar = ({selectedYearAndMonth, weeks}) => {
                         })}
                     </tr>
                     </thead>
-                    <DrawCalendar weeks={weeks}/>
+                    <DrawCalendar weeks={weeks} selectedDates={selectedDates}/>
                 </table>
-                <MoveToOtherCalendarPage/>
+                <MoveToOtherCalendarPage
+                    currentDate={currentDate}
+                    setCurrentDate={setCurrentDate}/>
             </div>
         </>
     )

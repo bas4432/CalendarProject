@@ -2,17 +2,12 @@ import './css/SelectDate.css';
 import SearchDateButton from "./SearchDateButton";
 import {useState} from "react";
 
-const SelectDate = ({
-                        selectedDates,
-                        setSelectedDates,
-                        setSelectedYearAndMonth,
-                        setSelectedCalendarDates,
-                        setWeeks}) => {
+const SelectDate = ({setSelectedDates}
+                    ) => {
     const [inputs, setInputs] = useState({
         startDate: '',
         endDate: ''
     });
-
     const onChangeStartDate = (e) => {
         setInputs({...inputs, ...{startDate: e.target.value}})
     }
@@ -42,11 +37,7 @@ const SelectDate = ({
                     </div>
                     <SearchDateButton
                         fromToInputs = {inputs}
-                        selectedDates={selectedDates}
                         setSelectedDates={setSelectedDates}
-                        setSelectedYearAndMonth={setSelectedYearAndMonth}
-                        setSelectedCalendarDates={setSelectedCalendarDates}
-                        setWeeks={setWeeks}
                     />
                 </div>
             </span>
