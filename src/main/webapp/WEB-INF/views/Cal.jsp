@@ -328,38 +328,45 @@
 
 <script type="text/javascript">
 $(function() {
+	       
+	let currentDate = new Date();
+    let currentyear = currentDate.getFullYear();
+    let currentmonth = currentDate.getMonth()+1;
+    
+    $(".selected_year_month").text(currentyear + "년" + currentmonth + "월");
+	 
 		 //캘린더   
-        let rowNum = 0;
-        for(let i=0; i<6; i++) {
-            $(".calender_table_result tbody").append("<tr class='row"+ rowNum +"' ></tr>")
-             for(let x=0; x<7; x++) {
-                $(".row"+ rowNum).append("<td class='dayofweek"+ x  +"'></td>"); 
-                } 
+     let rowNum = 0;
+     for(let i=0; i<6; i++) {
+         $(".calender_table_result tbody").append("<tr class='row"+ rowNum +"' ></tr>")
+          for(let x=0; x<7; x++) {
+              $(".row"+ rowNum).append("<td class='dayofweek"+ x  +"'></td>"); 
+             } 
             rowNum++;
-            }   
+         }   
 		 
-         $("#datepicker1,#datepicker2").datepicker(
-				{
-					dateFormat : 'yy-mm-dd',
-					showOtherMonths : true,
-					showMonthAfterYear : true,
-					changeYear : true,
-					changeMonth : true,
-					showOn : "both",
-					buttonText : "''",
-					yearSuffix : "년",
-					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월' ],
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월' ],
-					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-					dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일', '금요일','토요일' ],
-					minDate : "-5Y",
-					maxDate : "+5y"
-				});
-		$('#datepicker1').datepicker('setDate', 'today');
+    $("#datepicker1,#datepicker2").datepicker(
+	      {
+			dateFormat : 'yy-mm-dd',
+			showOtherMonths : true,
+			showMonthAfterYear : true,
+			changeYear : true,
+			changeMonth : true,
+			showOn : "both",
+			buttonText : "''",
+			yearSuffix : "년",
+			monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월','7월', '8월', '9월', '10월', '11월', '12월' ],
+			monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월','8월', '9월', '10월', '11월', '12월' ],
+			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+			dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일', '금요일','토요일' ],
+			minDate : "-5Y",
+			maxDate : "+5y"
+		  });
+	$('#datepicker1').datepicker('setDate', 'today');
 		
-		$("#btndatefilter").click(function() {
+	$("#btndatefilter").click(function() {
 			        
-			        $(".calender_table_result tbody span").remove(".dateSpan")
+	     $(".calender_table_result tbody span").remove(".dateSpan")
 			        
 			        let startDay = $('#datepicker1').val();
 					let endDay = $('#datepicker2').val();
@@ -376,6 +383,8 @@ $(function() {
 						   let month = new Date(data[0]).getMonth()+1;//이번달 
                            let firstweek = new Date(year, month-1 ,1).getDay(); //이번달 첫째일의 요일
                            let lastDate = new Date(year,month,0).getDate(); // 지금달 마지막 날
+                           
+                           $(".selected_year_month").text(year + "년" + month + "월");
                           
                            let dayRow = 0;
                            for(let x = 1; x <= lastDate; x ++ ) { 
