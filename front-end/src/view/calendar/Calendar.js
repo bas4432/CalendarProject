@@ -20,6 +20,7 @@ const Calendar = () => {
     let resultDateArray = [];
     const [weeks, setWeeks] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date())
+    const [selectedDate, setSelectedDate] = useState({})
 
     useEffect(() => {
         const param = {
@@ -75,11 +76,10 @@ const Calendar = () => {
                 currentDate={currentDate}
                 setCurrentDate={setCurrentDate}
                 selectedDates={selectedDates}
+                setSelectedDate={setSelectedDate}
             />
-            <ResultDate/>
-            <ResultDateList
-                selectedDates={selectedDates}
-            />
+            <ResultDate selectedDate={selectedDate} />
+            <ResultDateList selectedDates={selectedDates} />
         </>
     )
 }

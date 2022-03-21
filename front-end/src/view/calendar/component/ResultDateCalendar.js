@@ -6,7 +6,8 @@ const ResultDateCalendar = ({selectedYearAndMonth,
                                 weeks,
                                 currentDate,
                                 setCurrentDate,
-                                selectedDates}) => {
+                                selectedDates,
+                                setSelectedDate}) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
@@ -24,7 +25,9 @@ const ResultDateCalendar = ({selectedYearAndMonth,
                         })}
                     </tr>
                     </thead>
-                    <DrawCalendar weeks={weeks} selectedDates={selectedDates}/>
+                    <DrawCalendar weeks={weeks}
+                                  selectedDates={selectedDates}
+                                  setSelectedDate={setSelectedDate}/>
                 </table>
                 <MoveToOtherCalendarPage
                     currentDate={currentDate}

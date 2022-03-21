@@ -1,7 +1,10 @@
 import './css/ResultDate.css'
 import React from "react";
+import {getFormatDate, days} from "../utils/DateUtils"
 
-const ResultDate = () => {
+const ResultDate = ({selectedDate}) => {
+    const date = new Date(selectedDate.date)
+
     return (
         <table id="selected_date_table">
             <thead>
@@ -15,11 +18,11 @@ const ResultDate = () => {
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td>{!isNaN(date) && getFormatDate(date)}</td>
+                    <td>{days[date.getDay()]}</td>
+                    <td>{!isNaN(date) && date.getFullYear()}</td>
+                    <td>{!isNaN(date) && date.getMonth() + 1}</td>
+                    <td>{!isNaN(date) && date.getDate()}</td>
                 </tr>
             </tbody>
         </table>

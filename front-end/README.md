@@ -23,3 +23,6 @@ Props / State 차이점
 
 @ResponseBody
 * 서버에서 클라이언트로 응답 데이터를 전송하기 위해 @ResponseBody 어노테이션을 사용하여 자바 객체를 HTTP 응답 본문의 객체로 변환하여 클라이언트로 전송.
+
+유효성 검사
+* https://lodash.com/ -> undefined, null, ''를 한꺼번에 체크 할 수 있는 라이브러리
