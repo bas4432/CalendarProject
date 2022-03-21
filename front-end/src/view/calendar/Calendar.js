@@ -58,7 +58,6 @@ const Calendar = () => {
                 resultDateArray = formatDate(response.data);
                 setWeeks(formatCalendarDate(resultDateArray))
 
-                // printDatesList();
                 printYearAndMonth(resultDateArray, setSelectedYearAndMonth);
             })
     }

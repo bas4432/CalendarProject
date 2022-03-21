@@ -8,6 +8,7 @@ const ResultDateCalendar = ({selectedYearAndMonth,
                                 setCurrentDate,
                                 selectedDates}) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
     return (
         <>
             <div id="selected_year_month">

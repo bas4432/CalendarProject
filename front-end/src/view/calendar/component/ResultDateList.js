@@ -20,7 +20,7 @@ const ResultDateList = ({selectedDates}) => {
                             <tr key={index}>
                                 <td>{selectedDate.date}</td>
                                 <td>{selectedDate.day}</td>
-                                <td>{selectedDate.publicHoliday}</td>
+                                <td>{selectedDate.isHoliday}</td>
                             </tr>
                         )}
                     </tbody>

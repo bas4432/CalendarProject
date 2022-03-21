@@ -59,3 +59,7 @@ export const getFormatDate = (date) => {
     const formatDate = date.getDate() >= 10 ? date.getDate() : '0' + (date.getDate())
     return `${date.getFullYear()}-${formatMonth}-${formatDate}`
 }
+
+export const formatSelectedDate = (date) => {
+    console.log('test',date)
+}

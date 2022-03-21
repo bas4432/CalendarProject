@@ -1,4 +1,11 @@
 import React from "react";
+import '../utils/DateUtils'
+import {formatSelectedDate} from "../utils/DateUtils";
+
+const printSelectedDate = (e) => {
+    const selectedDate = e.target.innerHTML
+    formatSelectedDate(selectedDate)
+}
 
 const DrawCalendar = ({weeks, selectedDates}) => {
     const isCheckSelected = (param) => {
@@ -26,15 +33,15 @@ const DrawCalendar = ({weeks, selectedDates}) => {
         }
 
         if(!isCheckSelected(day)){
-            style = {color: 'gray'}
+            style = {color: 'lightgray'}
             if(index === 0) {
-                style.color = 'orange'
+                style.color = '#FFDAB9'
             }
             if (index === 6){
-                style.color = '#87CEEB'
+                style.color = '#B0E0E6'
             }
         }
-        return <td key={index}><div style={style}>{dateNumber}</div></td>
+        return <td key={index}><div style={style} onClick={printSelectedDate}>{dateNumber}</div></td>
     }
 
     return (

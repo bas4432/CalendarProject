@@ -16,8 +16,6 @@ const MoveToOtherCalendarPage = ({currentDate, setCurrentDate}) => {
                 currentDate.getMonth() + increment,
                 1)
         }
-
-        console.debug('moved to ', result.toISOString())
         setCurrentDate(result)
     }
 
