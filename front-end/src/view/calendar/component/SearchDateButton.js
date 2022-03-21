@@ -1,7 +1,7 @@
 import './css/SearchDateButton.css'
 import React from "react";
 import axios from "axios";
-import {formatDate} from "../utils/DateUtils";
+import {formatDate, formatSelectedDate} from "../utils/DateUtils";
 
 const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
 
@@ -10,6 +10,7 @@ const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
             .then(response => {
                 const resultDateArray = formatDate(response.data);
                 setSelectedDates(resultDateArray)
+                formatSelectedDate(resultDateArray);
             })
     }
     const onClickHandler = () => {
