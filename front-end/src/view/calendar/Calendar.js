@@ -36,9 +36,7 @@ const Calendar = () => {
 
     const initalizeSelectedDates = () => {
         let resultDates = []
-        for (let i = 0; i <= 50; i++) {
-            resultDates.push(JSON.parse(JSON.stringify(emptyDate)))//Deep copy
-        }
+
         return resultDates;
     }
     const initalizeSelectedYearAndMonth = () => {

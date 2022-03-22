@@ -26,14 +26,12 @@ const SelectDate = ({setSelectedDates}
                         <input type="date"
                                className="input_date"
                                onChange={onChangeStartDate}/>
-                        <span className="d_box">D</span>
                     </div>
                     <span id="from_til">~</span>
                     <div id="end_date_box">
                         <input type="date"
                                className="input_date"
                                onChange={onChangeEndDate}/>
-                        <span className="d_box">D</span>
                     </div>
                     <SearchDateButton
                         fromToInputs = {inputs}

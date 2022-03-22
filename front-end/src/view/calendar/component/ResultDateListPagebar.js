@@ -1,6 +1,10 @@
 import './css/ResultDateListpagebar.css'
 import React from "react";
+import { Pagination } from 'antd';
+
+// ReactDOM.render(<Pagination defaultCurrent={1} total={50} />, mountNode);
 const ResultDateListPagebar = () => {
+
     return (
         <>
             <div id="page_div">

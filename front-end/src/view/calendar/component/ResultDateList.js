@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './css/ResultDateList.css'
 import ResultDateListPagebar from "./ResultDateListPagebar";
 import {Table} from 'reactstrap';
+// import {Table} from 'antd';
 const ResultDateList = ({selectedDates}) => {
 
     return (

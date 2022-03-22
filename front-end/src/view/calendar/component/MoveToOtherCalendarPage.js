@@ -1,4 +1,5 @@
 import './css/MoveToOtherCalendarPage.css'
+import {Button} from "reactstrap";
 const MoveToOtherCalendarPage = ({currentDate, setCurrentDate}) => {
 
     const moveCurrentDate =(increment) => {
@@ -21,19 +22,17 @@ const MoveToOtherCalendarPage = ({currentDate, setCurrentDate}) => {
 
     return (
         <>
-            <div>
-                <div id="triangle_div">
-                    <a href="#" onClick={() => {
+            <div className="move_to">
+                <div className="pre">
+                    <Button color="dark" onClick={() => {
                         moveCurrentDate(-1)
-                    }}><div className="triangle_left"></div></a>
-                    <a href="#" onClick={() => {
-                        moveCurrentDate(+1)
-                    }}><div className="triangle_right"></div></a>
+                    }}>pre</Button>
                 </div>
-            </div>
-            <div id="pre_next_div">
-                <div className="pre">pre</div>
-                <div className="next">next</div>
+                <div className="next">
+                    <Button color="dark" onClick={() => {
+                        moveCurrentDate(+1)
+                    }}>next</Button>
+                </div>
             </div>
         </>
     )

@@ -2,6 +2,7 @@ import './css/SearchDateButton.css'
 import React from "react";
 import axios from "axios";
 import {formatDate, formatSelectedDate} from "../utils/DateUtils";
+import {Button} from "reactstrap";
 
 const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
 
@@ -18,7 +19,7 @@ const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
 
     return (
         <>
-            <button id="search_btn" onClick={onClickHandler}>조회</button>
+            <Button color="dark" id="search_btn" onClick={onClickHandler}>조회</Button>
         </>
     )
 }

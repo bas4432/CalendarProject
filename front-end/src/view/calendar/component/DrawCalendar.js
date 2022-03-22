@@ -24,7 +24,7 @@ const DrawCalendar = ({
         return isDayIsNotNull && isSelectedDateIsNotNull && day.date === selectedDate.date
     }
 
-    const getBackGroundStyle = (isSelected) => isSelected ? {backgroundColor:'red'} : {backgroundColor:'(0, 0, 0, 0.5)'}
+    const getBackGroundStyle = (isSelected) => isSelected ? {backgroundColor:'rgb(061,138,153)'} : {backgroundColor:'(0, 0, 0, 0.5)'}
 
     const getRangeSelected = (isCheckSelected, index) => {
         let result = {color: 'black'}
