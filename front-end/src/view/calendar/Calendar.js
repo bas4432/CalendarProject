@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import CalendarTitle from "./component/CalendarTitle";
 import SelectDate from "./component/SelectDate";
 import ResultDateCalendar from "./component/ResultDateCalendar";
@@ -76,6 +76,7 @@ const Calendar = () => {
                 currentDate={currentDate}
                 setCurrentDate={setCurrentDate}
                 selectedDates={selectedDates}
+                selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
             />
             <ResultDate selectedDate={selectedDate} />

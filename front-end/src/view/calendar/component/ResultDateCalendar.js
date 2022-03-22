@@ -7,6 +7,7 @@ const ResultDateCalendar = ({selectedYearAndMonth,
                                 currentDate,
                                 setCurrentDate,
                                 selectedDates,
+                                selectedDate,
                                 setSelectedDate}) => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -27,6 +28,7 @@ const ResultDateCalendar = ({selectedYearAndMonth,
                     </thead>
                     <DrawCalendar weeks={weeks}
                                   selectedDates={selectedDates}
+                                  selectedDate={selectedDate}
                                   setSelectedDate={setSelectedDate}
                     />
                 </table>

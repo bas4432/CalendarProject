@@ -4,52 +4,43 @@ import '../utils/DateUtils'
 const DrawCalendar = ({
                           weeks,
                           selectedDates,
+                          selectedDate,
                           setSelectedDate
-                          }) => {
+                      }) => {
 
     const printSelectedDate = (param) => {
         setSelectedDate(param)
     }
     const isCheckSelected = (param) => {
         let result = false
-        if (undefined === param || null === param || '' === param) {
-            return false
-        }
-        if (selectedDates.find(element => param.date === element.date)) {
-            return true
-        }
+        if (undefined === param || null === param || '' === param) { return false }
+        if (selectedDates.find(element => param.date === element.date)) { return true }
         return result
     }
 
-    const drawDay = (day, index) => {
-        const dateNumber = null === day ? null : day.dateNumber
-        let style = {color: 'black'}
+    const isSelected = (day, selectedDate) => {
+        const isDayIsNotNull = undefined !== day && null !== day && null !== day.date && undefined !== day.date
+        const isSelectedDateIsNotNull = undefined !== selectedDate && null !== selectedDate && undefined !== selectedDate.date && null !== selectedDate.date
+        return isDayIsNotNull && isSelectedDateIsNotNull && day.date === selectedDate.date
+    }
 
-        if (isCheckSelected(day)) {
-            if (index === 0) {
-                style.color = 'red'
-            }
-            if (index === 6) {
-                style.color = 'blue'
-            }
+    const getBackGroundStyle = (isSelected) => isSelected ? {backgroundColor:'red'} : {backgroundColor:'(0, 0, 0, 0.5)'}
+
+    const getRangeSelected = (isCheckSelected, index) => {
+        let result = {color: 'black'}
+
+        if (isCheckSelected) {
+            if (index === 0) { result.color = 'red'}
+            if (index === 6) { result.color = 'blue'}
         }
 
-        if (!isCheckSelected(day)) {
-            style = {color: 'lightgray'}
-            if (index === 0) {
-                style.color = '#FFDAB9'
-            }
-            if (index === 6) {
-                style.color = '#B0E0E6'
-            }
+        if (!isCheckSelected) {
+            result = {color: 'lightgray'}
+            if (index === 0) { result.color = '#FFDAB9'}
+            if (index === 6) { result.color = '#B0E0E6'}
         }
 
-        return <td key={index}>
-                    <div style={style}
-                         onClick={() => printSelectedDate(day)}>
-                        {dateNumber}
-                    </div>
-               </td>
+        return result
     }
 
     return (
@@ -57,7 +48,13 @@ const DrawCalendar = ({
         {weeks.map((week, index) =>
             <tr key={index}>
                 {week.map((day, index) =>
-                    drawDay(day, index)
+                    <td key={`${index}_selected_${isSelected(day, selectedDate)}`}
+                        style={getBackGroundStyle(isSelected(day, selectedDate))}>
+                        <div style={getRangeSelected(isCheckSelected(day), index)}
+                             onClick={() => printSelectedDate(day)}>
+                            {null === day ? null : day.dateNumber}
+                        </div>
+                    </td>
                 )}
             </tr>
         )}
