@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import './css/ResultDateList.css'
 import ResultDateListPagebar from "./ResultDateListPagebar";
+import {Table} from 'reactstrap';
 const ResultDateList = ({selectedDates}) => {
 
     return (
         <div id="right_area_border">
             <div id="right_area">
-                <table id="selected_date_list">
+                <Table striped id="selected_date_list">
                     <thead>
                     <tr>
                         <th>일자</th>
@@ -18,13 +19,21 @@ const ResultDateList = ({selectedDates}) => {
                     {selectedDates
                         .map((selectedDate, index) =>
                             <tr key={index}>
-                                <td>{selectedDate.date}</td>
-                                <td>{selectedDate.day}</td>
-                                <td>{selectedDate.isHoliday}</td>
+                                <td style=
+                                        {{color: selectedDate.day === '일요일' ? 'blue' :
+                                                selectedDate.day === '토요일' ? 'red' : 'black'}}>
+                                    {selectedDate.date}</td>
+                                <td style=
+                                        {{color: selectedDate.day === '일요일' ? 'blue' :
+                                                selectedDate.day === '토요일' ? 'red' : 'black'}}>
+                                    {selectedDate.day}</td>
+                                <td style={{color: selectedDate.day === '일요일' ? 'blue' :
+                                                selectedDate.day === '토요일' ? 'red' : 'black'}}>
+                                    {selectedDate.isHoliday}</td>
                             </tr>
                         )}
                     </tbody>
-                </table>
+                </Table>
                 <ResultDateListPagebar/>
             </div>
         </div>

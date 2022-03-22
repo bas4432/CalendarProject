@@ -1,5 +1,6 @@
+
+
 export const days = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
-const tempArrayOfSelectedDate = [];
 
 export const formatDate = (param) => {
     let resultDatesObject = []
@@ -61,14 +62,6 @@ export const getFormatDate = (date) => {
     return `${date.getFullYear()}-${formatMonth}-${formatDate}`
 }
 
-export const formatSelectedDate = (date) => {
-    tempArrayOfSelectedDate.push(date);
-    const test = formatDate(tempArrayOfSelectedDate);
-    console.log('format test',test)
-
-    for (let i = 0; i < tempArrayOfSelectedDate.length; i++) {
-        console.log('test', tempArrayOfSelectedDate[i].dateNumber)
-    }
-    console.log('test2',tempArrayOfSelectedDate[tempArrayOfSelectedDate.length - 1])
+const changeDateColor = () => {
 
 }

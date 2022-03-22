@@ -10,7 +10,6 @@ const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
             .then(response => {
                 const resultDateArray = formatDate(response.data);
                 setSelectedDates(resultDateArray)
-                formatSelectedDate(resultDateArray);
             })
     }
     const onClickHandler = () => {

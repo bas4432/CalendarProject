@@ -27,7 +27,8 @@ const ResultDateCalendar = ({selectedYearAndMonth,
                     </thead>
                     <DrawCalendar weeks={weeks}
                                   selectedDates={selectedDates}
-                                  setSelectedDate={setSelectedDate}/>
+                                  setSelectedDate={setSelectedDate}
+                    />
                 </table>
                 <MoveToOtherCalendarPage
                     currentDate={currentDate}
