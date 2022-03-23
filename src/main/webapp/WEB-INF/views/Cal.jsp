@@ -326,14 +326,10 @@
    display:none;
 }
 
-.week{
+.week td{
   text-align:center;
+  border: 2px solid black;
 }
-
-.week>td{
-   border:2px soiid
-}
-
 </style>
 
 <script type="text/javascript">
@@ -344,25 +340,22 @@ $(function(){
     $(".pre").click(function() { // 이전달
         $(".calendar_table tbody td").remove();
         $(".calendar_table tbody tr").remove();
-        today = new Date ( today.getFullYear(), today.getMonth()-1, today.getDate());
+        today = new Date (today.getFullYear(), today.getMonth()-1, today.getDate());
         firstscreen();
     })
     
     $(".next").click(function(){ //다음달
         $(".calendar_table tbody td").remove();
         $(".calendar_table tbody tr").remove();
-        today = new Date ( today.getFullYear(), today.getMonth()+1, today.getDate());
+        today = new Date (today.getFullYear(), today.getMonth()+1, today.getDate());
         firstscreen();
     })
-
-
+    
     function firstscreen() {
         
         nowYear = today.getFullYear();
         nowMonth = today.getMonth();
         firstDate = new Date(nowYear,nowMonth,1).getDate();
-       
-        
         firstDay = new Date(nowYear,nowMonth,1).getDay(); //1st의 요일
         lastDate = new Date(nowYear,nowMonth+1,0).getDate();
           
@@ -381,31 +374,22 @@ $(function(){
             if (plusDate==0) {
                 $(".calendar_table tbody").append("<tr></tr>");
             }
-            $(".calendar_table tbody").append("<td id='datetd' class='day" + i  + "' >"+ i +"</td>");
+            $(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  >"+ i +"</td>");
         }
+        
         if($(".calendar_table > tbody > td").length%7!=0) { //마지막 줄 빈칸
             for(i=1; i<= $(".calendar_table > tbody > td").length%7; i++) {
                 $(".calendar_table tbody").append("<td></td>");
             }
         }
-       
-   
     }
     firstscreen();
-   
-   
 });
-
-
-
-
 
 
 $(function() {
 	
-	
-	
-	 $("#datepicker1,#datepicker2").datepicker(
+	$("#datepicker1,#datepicker2").datepicker(
 	      {
 			dateFormat : 'yy-mm-dd',
 			showOtherMonths : true,
@@ -423,8 +407,11 @@ $(function() {
 			maxDate : "+5y"
 		  });
 	$('#datepicker1').datepicker('setDate', 'today');
+	
+	consolo.log("")
+	
 		
-	$("#btndatefilter").click(function() {
+/* 	$("#btndatefilter").click(function() {
 			        
 	     $(".calender_table_result tbody span").remove(".dateSpan")
 			        
@@ -438,51 +425,36 @@ $(function() {
 							"endDay" : $('#datepicker2').val()
 						},
 						url : "/api/index",
-						success : function(data) {	 
-						   
+						success : function(data) {	
 							
 						   
-				           let year = new Date(data[0]).getFullYear();//올해년도
+						   
+						   let year = new Date(data[0]).getFullYear();//올해년도
 						   let month = new Date(data[0]).getMonth()+1;//이번달 
                            let firstweek = new Date(year, month-1 ,1).getDay(); //이번달 첫째일의 요일
                            let lastDate = new Date(year,month,0).getDate(); // 지금달 마지막 날
                            
-                         /*   $(".selected_year_month").text(year + "년" + month + "월");
+                             $(".selected_year_month").text(year + "년" + month + "월");
                           
-                               let dayRow = 0;
-                               for(let x = 1; x <= lastDate; x ++ ) { 
-							   
-                        	   let dayofweek = new Date(year, month-1, x).getDay();//요일값 
-							   $(".row" + dayRow + " .dayofweek" +dayofweek).append("<span class='dateSpan day" + x  + "' >" + x + "</span>")
-							   if(dayofweek==6) {
-								   dayRow++;
-							     }
-						       } 
-                               //선택한 달의 모든 날짜 뿌려주고 숨김처리 */
+                                let count =0;
+                                for(let i=0; i<data.length ; i++){
+                            	  
+                            	   if((new Date(data[0])).getMonth() == (new Date(data[i])).getMonth()){
+                            		   count ++;
+                            	   }
+                                }
                                
-                               let ttoday = new Date(); 
-                               
-						 
-                                for(let i = 0; i < data.length ; i ++){
-                            	  
-                            	 
-                            	  
-                            	  console.log("getMOntH::" + new Date(data[i]).getMonth())
-                            	  
-                            	  
-                            	
+						        for(let i = 0; i < count ; i ++){
+                            	  console.log("getMOntH::" + (new Date(data[i])).getMonth())
                             	  let date = new Date(data[i]).getDate();
 						          $(".day" + date).css('background-color', 'red'); 
-						         
-                            	  
-					    	  }
+						        }
                              
                             //일자 - 요일 - 국경일 
 						    let inst = "";
                             let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
                             for (var i = 0; i < data.length; i++) {
-
-								inst += "<tr>";
+                                inst += "<tr>";
 								inst += "<td>" + data[i] + "</td>";
 								inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
 								inst += "</tr>";
@@ -493,8 +465,20 @@ $(function() {
 							alert("마지막 날짜를 선택 하세요");
 						}
 					});//ajax 
-			})//btndatefilter function
+			})//btndatefilter function */
 });
+
+
+function saveDate(date, nowYear, nowMonth){
+	let day = new Date(nowYear, nowMonth-1, date);
+	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+	let week = WEEKDAY[day.getDay()];
+	$("#selectDate").html(nowYear + "년" + nowMonth+ "월" + date + "일");
+	$("#selectYear").html(nowYear);
+	$("#selectMonth").html(nowMonth);
+	$("#selectDay").html(date);
+	$("#dayWeek").html(week);
+};
 </script>
 
 <body>
@@ -526,8 +510,7 @@ $(function() {
 						<th>Sat</th>
 					</tr>
 				</thead>
-				<tbody class="week" id="ple">
-				
+				<tbody class="week">
 				</tbody>
 			</table>
 		   <div class="test">
@@ -549,13 +532,12 @@ $(function() {
 				<th class="month_and_date">월</th>
 				<th class="month_and_date">일</th>
 			</tr>
-			<tr class="day_click">
-			    
-				<!-- <td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td> -->
+			<tr >
+				<td id="selectDate"></td>
+				<td id="dayWeek"></td>
+				<td id="selectYear"></td>
+				<td id="selectMonth"></td>
+				<td id="selectDay"></td>
 			</tr>
 		</table>
 		

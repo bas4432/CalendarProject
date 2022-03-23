@@ -11,4 +11,16 @@ public class ViewController {
 
         return "Cal";
     }
+    
+    @GetMapping(value = "/Ser")
+    public String SerachScreen() {
+
+        return "SerachScreen";
+    }
+    
+    @GetMapping(value = "/In")
+    public String DBpage() {
+
+        return "InputScreen";
+    }
 }
