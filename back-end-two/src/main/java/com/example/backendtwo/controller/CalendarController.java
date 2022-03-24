@@ -32,13 +32,16 @@ public class CalendarController {
 
     @GetMapping("/date")
     public List<LocalDate> calendar(Date date) throws IOException {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
-//        LocalDate startDate = LocalDate.parse(date.getStartDate(), formatter);
-//        LocalDate endDate = LocalDate.parse(date.getEndDate(), formatter);
-//        int numOfDaysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate.plusDays(1L));
-        isHoliday();
-//        return service.selectedDateList(numOfDaysBetween, date.getStartDate());
-        return null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        LocalDate startDate = LocalDate.parse(date.getStartDate(), formatter);
+        LocalDate endDate = LocalDate.parse(date.getEndDate(), formatter);
+        int numOfDaysBetween = (int) ChronoUnit.DAYS.between(startDate, endDate.plusDays(1L));
+
+        return service.selectedDateList(numOfDaysBetween, date.getStartDate());
+
+//        isHoliday();
+//        return null;
+
     }
 
     private RestTemplate restTemplate = new RestTemplate();
