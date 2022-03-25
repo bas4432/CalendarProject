@@ -3,8 +3,34 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
+<script type="text/javascript">
+  
+
+('#test').on('click',function(){
+	var myurl = 'https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/stores/json'; 
+	  $.ajax({
+			url : myurl,
+			type : 'GET'
+			})
+	.done(function(r) {
+		console.log(r);
+		alert('성공');
+		}).fail(function(r) {
+		alert('실패');
+	});
+});
+
+
+
+</script>
+
+
 <body>
+<div id="test">API 연습용 사이트</div>
+
+
 
 </body>
 </html>

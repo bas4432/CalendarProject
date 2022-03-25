@@ -1,6 +1,10 @@
 package com.example.demo.BackEnd;
 
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -45,4 +49,32 @@ public class ApiController {
 
         return dates;
     }
+    
+    @GetMapping("/apitest")
+    public String callApiWithXml() {
+        StringBuffer result = new StringBuffer();
+        try {
+            String apiUrl = "http://apis.data.go.kr/B552584/EvCharger/getChargerInfo?" +
+                    "serviceKey=[Service Key]" +
+                    "&numOfRows=10" +
+                    "&pageNo=4";
+            URL url = new URL(apiUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("GET");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
+
+            String returnLine;
+            result.append("<xmp>");
+            while((returnLine = bufferedReader.readLine()) != null) {
+                result.append(returnLine + "\n");
+            }
+            urlConnection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result + "</xmp>";
+    }
+    
 }

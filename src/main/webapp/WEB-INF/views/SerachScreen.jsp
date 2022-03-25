@@ -11,12 +11,10 @@
  text-align:right;
  padding: 15px;
 }
-
 .header button{
    outline:0
 }
-
-.input_div{
+.input_box{
     display: flex;
     border: 2px solid rgb(150,167,197);
     padding: 10px;
@@ -27,7 +25,7 @@
     display: flex;
     width:28%;
 }
-.red_star {
+.star{
     color: red;
 }
 .biz {
@@ -39,12 +37,11 @@
     width: 100px;
     margin-right: 10px;
     width:30%;
-
 }
-.workplace {
+.place {
     width: 60%;
 }
-.input_room_type_div {
+.room_type_box {
     display: flex;
     align-items: center;
     margin-left:40px;
@@ -59,11 +56,11 @@
     margin-right: 10px;
     height: 100%;
 }
-.input_box {
+.room_input {
     height: 35px;
     width:300px;
 }
-.radio_div {
+.radio_box {
     
     margin-left: 100px;
     display: flex;
@@ -73,23 +70,14 @@
     margin-top: 5px;
     margin-left: 8px;
 }
-.is_used {
+.select_use {
     border: 1px solid rgb(150,167,197);
     background-color: rgb(242,242,242);
     text-align: right;
     font-size: 14px;
     padding: 7px;
     width: 150px;
-    margin-right: 10px;
-}
-.t {
-    padding: 10px;
-}
-
-.result_div {
-    margin:0 auto;
-    padding: 10px;
-    width: 65%;
+    margin-right: 16px;
 }
 .footer{
    margin-top: 12px;
@@ -118,44 +106,43 @@ tr>td {
 	<div class="Ser_Screen">
 
 		<div class="header">
-			<button type="button" class="btn btn btn-outline-dark">Find</button>
-			<button type="button" class="btn btn btn-outline-dark">clear</button>
-			<button type="button" class="btn btn btn-outline-dark">Print</button>
-			<button type="button" class="btn btn btn-outline-dark">Excel</button>
-			<button type="button" class="btn btn btn-outline-dark">Close</button>
+		    <Container>
+            <Row>
+            <Button type="button" class="btn">Find</button>
+			<Button type="button" class="btn">clear</button>
+			<Button type="button" class="btn">Print</button>
+			<Button type="button" class="btn">Excel</button>
+			<Button type="button" class="btn">Close</button>
+			</Row>
+			</Container>
 		</div>
 
 		<div class="middle">
-            <div class="input_div">
+            <div class="input_box">
                 <div class="toggle_div">
 					<div class="biz">
-						<span class="red_star">* </span>Biz
+						<span class="star">* </span>Biz
 					</div>
-					<select name="workplace" class="workplace">
+					<select class="place">
 						<option value="null">로그인 사업장</option>
-						<option value="test1">test1</option>
-						<option value="test2">test2</option>
-						<option value="test3">test3</option>
 					</select>
 				</div>
 
-				<div class="input_room_type_div">
+				<div class="room_type_box">
 					<div class="input_room_type">Rm Type Code / Name</div>
-					<span> <input type="text" class="input_box" />
-					</span>
+					<span><input type="text" class="room_input"/></span>
 				</div>
 
-				<div class="radio_div">
-					<div class="is_used">사용 여부</div>
+				<div class="radio_box">
+					<div class="select_use">사용 여부</div>
 					<div>
-						<span class="t"> <input type="radio" name="isYesOrNo" value="Yes" checked/> 
+						<span> <input type="radio" value="Yes" checked/> 
 							<label>Yes</label>
 						</span> 
-						
-						<span><input type="radio" name="isYesOrNo" value="No" /> 
+						<span><input type="radio" value="No" /> 
 						    <label >No</label>
 						</span> 
-						<span><input type="radio" name="isYesOrNo" value="All" /> 
+						<span><input type="radio" value="All" /> 
 						    <label >All</label>
 						</span>
 					</div>
@@ -212,227 +199,219 @@ tr>td {
                             <td >No</td>
                         </tr>
                         <tr>
-                            <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
                             <td></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                           <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
                             <td></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
                             <td></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                             <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                          <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                        </tr>
-                        <tr>
-                              <td ></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
-                            <td ></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>
-
-                </div>
-         
-         
-         
-         
+                 </div>
+             </div>
          </div>
-
-
-
-	</div>
 </body>
 </html>

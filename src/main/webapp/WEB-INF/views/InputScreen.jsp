@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style type="text/css">
@@ -11,11 +11,9 @@
  text-align:right;
  padding: 15px;
 }
-
 .header button{
    outline:0
 }
-
 .middle_input{
     display: flex;
     border: 2px solid rgb(150,167,197);
@@ -27,7 +25,7 @@
     display: flex;
     width:28%;
 }
-.red_star {
+.star{
     color: red;
 }
 .biz {
@@ -39,17 +37,16 @@
     width: 100px;
     margin-right: 10px;
     width:30%;
-
 }
-.workplace {
+.place {
     width: 60%;
 }
-.room_type_box{
+.room_box{
     display: flex;
     align-items: center;
     margin-left:40px;
 }
-.input_room_type {
+.room_type {
     border: 1px solid rgb(150,167,197);
     background-color: rgb(242,242,242);
     text-align: right;
@@ -72,7 +69,7 @@
     margin-top: 5px;
     margin-left: 8px;
 }
-.is_used {
+.select_use{
     border: 1px solid rgb(150,167,197);
     background-color: rgb(242,242,242);
     text-align: right;
@@ -81,10 +78,9 @@
     width: 150px;
     margin-right: 10px;
 }
-.t {
+.select_active{
     padding: 10px;
 }
-
 .result_div {
     margin:0 auto;
     padding: 10px;
@@ -121,7 +117,7 @@ tr>td {
 .align_right {
     text-align: right;
 }
-.total_input_div {
+.footer_input {
     margin-left: 1%;
   
 }
@@ -150,8 +146,7 @@ tr>td {
 select {
     background-color: rgb(242,242,242);
     border: 1px solid rgb(150,167,197);
-    margin-bottom: 5px;
-
+    margin-bottom: 3px;
 }
 .workplace {
     width: 53%;
@@ -161,11 +156,11 @@ input {
     border: 1px solid rgb(150,167,197);
     margin-bottom: 5px;
 }
-.rm_view_title {
+.rm_view{
     border-right: 0;
     width: 20%;
 }
-.rm_view_content {	
+.rm_view_second{	
     margin-left: 2px;
     width: 27%;
 }
@@ -178,7 +173,7 @@ input {
     height: 37px;
     width: 30px;
 }
-.text_input_class {
+.text_input {
     width: 53%;
 }
 .select_radio_label {
@@ -187,49 +182,48 @@ input {
 </style>
 </head>
 <body>
-	<div class="Inp_Screen">
-
-		<div class="header">
-			<button type="button" class="btn btn btn-outline-dark">Find</button>
-			<button type="button" class="btn btn btn-outline-dark">clear</button>
-			<button type="button" class="btn btn btn-outline-dark">New</button>
-			<button type="button" class="btn btn btn-outline-dark">Save</button>
-			<button type="button" class="btn btn btn-outline-dark">Delete</button>
-			<button type="button" class="btn btn btn-outline-dark">Print</button>
-			<button type="button" class="btn btn btn-outline-dark">Excel</button>
-			<button type="button" class="btn btn btn-outline-dark">Close</button>
+<div class="Inp_Screen">
+        <div class="header">
+            <Container>
+            <Row>
+            <button type="button" class="btn btn-default">Find</button>
+			<button type="button" class="btn btn-default">clear</button>
+			<button type="button" class="btn btn-default">New</button>
+			<button type="button" class="btn btn-default">Save</button>
+			<button type="button" class="btn btn-default">Delete</button>
+			<button type="button" class="btn btn-default">Print</button>
+			<button type="button" class="btn btn-default">Excel</button>
+			<button type="button" class="btn btn-default">Close</button>
+			</Row>
+			</Container>
 		</div>
 
 		<div class="middle">
             <div class="middle_input">
                 <div class="biz_box">
 					<div class="biz">
-						<span class="red_star">* </span>
+						<span class="star">* </span>
 						Biz
-					</div>
-					<select class="workplace">
+					</div> 
+					<select class="place">
 						<option value="null">로그인 사업장</option>
-						<option value="test1">test1</option>
-						<option value="test2">test2</option>
-						<option value="test3">test3</option>
 					</select>
 				</div>
 
-				<div class="room_type_box">
-					<div class="input_room_type">Rm Type Code / Name</div>
+				<div class="room_box">
+					<div class="room_type">Rm Type Code / Name</div>
 					<span> 
 					<input type="text" class="input_box" />
 					</span>
 				</div>
 
 				<div class="radio_box">
-					<div class="is_used">사용 여부</div>
+					<div class="select_use">사용 여부</div>
 					<div>
 						<span class="t"> 
 						    <input type="radio" value="Yes" checked/> 
 							<label>Yes</label>
 						</span> 
-						
 						<span>
 						    <input type="radio" value="No"/> 
 						    <label >No</label>
@@ -242,9 +236,6 @@ input {
 				</div>
 			</div>
          </div>
-         
-         
-         
          <div class="footer">
             <div class="table_box">
                     <table>
@@ -505,9 +496,7 @@ input {
                     </table>
 
                 </div>
-                
-                
-                <div class="total_input_div">
+                <div class="footer_input">
                     <div class="input_data">
                         <div class="input_title" class="biz"><span class="red_star">* </span>Biz</div>
                         <select name="workplace" class="workplace">
@@ -518,46 +507,52 @@ input {
                         </select>
                     </div>
                     <div class="input_data">
-                        <div class="input_title"><span class="red_star">* </span>Rm Type Code</div>
-                        <input type="text" class="rm_type_code_input" class="text_input_class"/>
+                        <div class="input_title">
+                        <span class="red_star">* </span>Rm Type Code
+                        </div>
+                        <input type="text" class="rm_type_code_input" class="text_input"/>
                     </div>
                     <div class="input_data">
-                        <div class="input_title"><span class="red_star">* </span>Rm Type Name(Kor)</div>
-                        <input type="text" class="text_input_class"/>
+                        <div class="input_title">
+                        <span class="star">* </span>Rm Type Name(Kor)
+                        </div>
+                        <input type="text" class="text_input"/>
                     </div>
                     <div class="input_data">
-                        <div class="input_title"><span class="red_star">* </span>Rm Type Name(Eng)</div>
-                        <input type="text" class="text_input_class"/>
+                        <div class="input_title">
+                        <span class="red_star">* </span>Rm Type Name(Eng
+                        </div>
+                        <input type="text" class="text_input"/>
                     </div>
                     <div class="input_data">
                         <div class="input_title">Rm Type Name(Oth)</div>
-                        <input type="text" class="text_input_class"/>
+                        <input type="text" class="text_input"/>
                     </div>
                     <div class="input_data">
                         <div class="input_title">Rm View</div>
-                        <input type="text" class="rm_view_title"/>
+                        <input type="text" class="rm_view"/>
                         <div class="P">P</div>
-                        <input type="text" class="rm_view_content"/>
+                        <input type="text" class="rm_view_second"/>
                     </div>
                     <div class="input_data">
                         <div class="input_title"><span class="red_star">* </span>Rms</div>
-                        <input type="text" class="text_input_class"/>
+                        <input type="text" class="text_input"/>
                     </div>
                     <div class="input_data">
                         <div class="input_title"><span id="red_star">* </span>Rack Rate</div>
-                        <input type="text" class="text_input_class"/>
+                        <input type="text" class="text_input"/>
                     </div>
                     <div class="input_data">
                         <div class="input_title"><span id="red_star">* </span>Active</div>
-                        <span class="t">
-                               <input type="radio" name="isYesOrNo" value="Yes" Checked class="select_radio"/>
+                        <span class="select_active">
+                               <input type="radio" value="Yes" Checked class="select_radio"/>
                                <label class="select_radio_label">Yes</label>
                         </span>
-                        <span class="t">
-                                 <input type="radio" name="isYesOrNo" value="No"/>
+                        <span class="select_active">
+                                 <input type="radio" value="No"/>
                                 <label class="select_radio_label">No</label>
                         </span>
-                    </div>
+                    </div>  
                 </div>
            </div>
        </div>
