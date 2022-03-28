@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 
 <style>
@@ -448,10 +450,40 @@ $(function() {
                         url : "/api/index",
                          success : function(data) {
                         	  
-                        	 
+                           let totalData = data.length
+                           let page; //현재 목록 페이지 번호
+                           let dataPerPage = 10; // //한 페이지에 나타낼 글 수
+                           let pageCount = 10;//한화면에 출력될 페이지수  //블럭수
+                           let CurrentPage =1; //현재 페이지
+                           
+                           if(totalData>=10){
+                        	   console.log("datasadjaskldjalskd:" + totalData)
+                           
+                        	   displayData(dataPerPage, CurrentPage, data);
+                        	   
+                        	   paging(totalData, dataPerPage, pageCount, 1, data);
+                        	   
+                           }else{
+                        	   console.log("12321313:::::" + totalData)
+                        	   let inst = "";
+                               let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
+                               for (var i = 0; i < data.length; i++) {
+                                   inst += "<tr>";
+                                   inst += "<td>" + data[i] + "</td>";
+                                   inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
+                                   
+                                   if(data.length < 10){
+                                   inst += "<td>"+ "예" + "</td>"
+                                   }else{
+                                   	inst += "<td>"+ "아니오" + "</td>"
+                                   }
+                                   inst += "</tr>";
+                                }
+                               $("#data").html(inst); 
+                        	 }
                   
-                           let year = new Date(data[0]).getFullYear();//올해년도
-                           let month = new Date(data[0]).getMonth()+1;//이번달
+                           let year = new Date(data[0]).getFullYear();
+                           let month = new Date(data[0]).getMonth()+1;
                                 
                                 //조회 누르시 첫달 화면 배경 change
                                 let count =0;
@@ -468,12 +500,12 @@ $(function() {
                                 }
 
                             //일자 - 요일 - 국경일
-                            let inst = "";
-                            let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
-                            for (var i = 0; i < data.length; i++) {
+                       /*      let inst = "";
+                               const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+                             for (var i = 0; i < 10; i++) {
                                 inst += "<tr>";
                                 inst += "<td>" + data[i] + "</td>";
-                                inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
+                                inst += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
                                 
                                 if(data.length < 10){
                                 inst += "<td>"+ "예" + "</td>"
@@ -482,10 +514,10 @@ $(function() {
                                 }
                                 inst += "</tr>";
                              }
-                            $("#data").html(inst); 
+                            $("#data").html(inst); */  
                         }, //succes: function
                         error : function(jqXHR, textStatus, errorThrown) {
-                            alert("마지막 날짜를 선택 하세요");
+                            alert("끝나는 날짜를 선택 하세요");
                         }
                     });//ajax
             })//btndatefilter function
@@ -501,6 +533,101 @@ function saveDate(date, nowYear, nowMonth){
     $("#selectDay").html(date);
     $("#dayWeek").html(week);
 };
+
+  function displayData(dataPerPage, currentPage, data) {
+	  console.log(data);
+	
+	console.log("displaydata::" + data.length)
+	let chartHtml = "";
+	
+	/* currentPage = Number(currentPage);
+	dataPerPage = Number(dataPerPage);
+	 */
+	
+    const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+	
+	for(var i = (2 - 1) * dataPerPage; i<(2 - 1) * dataPerPage + dataPerPage; i++) {
+        
+		chartHtml += "<tr>";
+    	chartHtml += "<td>" + data[i] + "</td>";
+    	chartHtml += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
+    	chartHtml += "</tr>";
+    }
+	 $("#data").html(chartHtml);
+	
+}  
+  
+function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
+	  console.log("paginsakdljasda!!!!!!!!!!!!!!!!!!!" + data.length)
+	  
+	  totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수 ex ) 총데이터 갯수 / 한페이지에 나타낼 갯수  20 / 10 = 2
+	  console.log("totalPage::::" + totalPage)
+	  
+	  if(totalPage<pageCount){
+		    alert("totalpage<pagecount")
+		    pageCount=totalPage;
+	  }
+	  
+	  let pageGroup = Math.ceil(CurrentPage / pageCount); // 페이지 그룹
+	  let last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+	  
+	  console.log("last::" + last)
+	  
+	  if (last > totalPage) {
+		    last = totalPage;
+      }
+	  
+	  let first = last - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
+	  
+	  console.log("first::" + first)
+	  
+	 
+	  
+	  let next = last + 1;
+	  
+	  
+	  
+	  let prev = first - 1;
+	  
+	  let pageHtml = "";
+	  
+	  for (var i = first; i <= last; i++) {
+		    if (CurrentPage == i) {
+		      pageHtml +="<li style='color:red'><a href='#' id='" + i + "'>" + i + "</a></li>";
+		    } else {
+		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+		    }
+	  }
+	  
+	  
+	  $("#pagingul").html(pageHtml);
+	  
+	  $("#pagingul li a").click(function () {
+		  
+		    alert("asdasdad")
+		    let id = $(this).attr("id");
+		    console.log("id:::" + id)
+		    selectedPage = $(this).text();
+		    console.log("select::" + selectedPage)
+
+		    if (id == "next") selectedPage = next;
+		    if (id == "prev") selectedPage = prev;
+		    
+		    
+		    CurrentPage = selectedPage;
+		    console.log("globalCurrentPage" + CurrentPage)
+		    
+		     displayData(selectedPage, dataPerPage, data);
+		    //페이징 표시 재호출
+		    paging(totalData, dataPerPage, pageCount, selectedPage, data);
+		    console.log("pageiansdklasjd::")
+		    //글 목록 표시 재호출
+		   
+		  });
+	  
+	  
+  }
+ 
 </script>
 
 <body>
@@ -576,15 +703,10 @@ function saveDate(date, nowYear, nowMonth){
                     <tbody id="data">
                     </tbody>
                 </table>
-                <div class="page_div">
-                   <!--  <div class="page_div_ch">
-                        <span class="page_left_arrow"><a href="#">◀</a></span>
-                        <span class="page_number"><a href=#>1</a></span>
-                        <span class="page_number"><a href=#>2</a></span>
-                        <span class="page_number"><a href=#>3</a></span>
-                        <span class="page_right_arrow"><a href="#">▶</a></span>
-                    </div> -->
-                </div>
+                <ul id ="pagingul">
+                
+               
+                </ul>                
             </div>
         </div>
     </div>
