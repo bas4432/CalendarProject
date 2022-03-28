@@ -6,333 +6,11 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+
+<link rel="stylesheet" href="resources/css/style.css">
 </head>
 
-<style>
-.header_box {
-    border-bottom: 1px solid lightgray;
-    margin: 0;
-    padding: 0;
-}
-
-.body_box {
-    height: 1310px;
-    border-bottom: 1px solid rgb(79, 129, 189);
-}
-
-.select_date_btn {
-    border: 1px solid rgb(117, 142, 173);
-    height: 22px;
-    width: 64px;
-    text-align: right;
-    font-size: 11px;
-}
-
-.select_date_star {
-    color: red;
-}
-
-.date_div {
-    padding: 10px;
-    margin-top: 25px;
-    margin-left: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.start_date_box {
-    border: 1px solid rgb(117, 142, 173);
-    display: inline-block;
-    font-size: 7px;
-    width: 85px;
-    height: 20px;
-    margin-left: 2px;
-    margin-right: 10px;
-}
-
-.from_til {
-    font-weight: bold;
-}
-
-.d_box {
-    border-left: 1px solid rgb(117, 142, 173);
-    display: inline-block;
-    font-size: 12px;
-    width: 20px;
-    height: 21px;
-    text-align: center;
-    color: gray;
-    float: right;
-}
-
-.end_date_box {
-    border: 1px solid rgb(117, 142, 173);
-    display: inline-block;
-    font-size: 7px;
-    width: 85px;
-    height: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.search_btn {
-    background-color: rgb(79, 129, 189);
-    color: white;
-    width: 80px;
-    height: 25px;
-}
-
-.selected_year_month {
-    font-weight: bold;
-    margin-left: 45px;
-    margin-top:10px;
-}
-
-.calendar_table {
-    margin-left: 38px;
-    margin-top: 10px;
-}
-
-.calender_table_result {
-    border-collapse: collapse;
-    border: 2px solid;
-    font-size: 14px;
-}
-
-.calendar_table>table>thead>tr>th {
-    border: 2px solid;
-    margin: 0;
-    padding: 0 auto;
-    width: 45px;
-    height: 25px;
-    background-color: rgb(238, 236, 225);
-}
-
-.calendar_table>table>tbody>tr>td {
-    border: 2px solid;
-    margin: 0;
-    padding: 0 auto;
-    width: 45px;
-    height: 36px;
-    text-align: center;
-}
-
-.calendar_table>table>tbody>tr>.sun {
-    color: red;
-    border: 2px solid black;
-}
-
-.calendar_table>table>tbody>tr>.sat {
-    color: blue;
-    border: 2px solid black;
-}
-
-/* #test{
-        display: flex;
-    } */
-.triangle_div {
-    display: flex;
-}
-
-.triangle_left {
-    width: 0;
-    height: 0;
-    position: relative;
-    border-top: 25px solid transparent;
-    border-right: 50px solid rgb(56, 93, 138);
-    border-bottom: 25px solid transparent;
-    border-radius: 2px;
-    top: 20px;
-    left: 110px;
-}
-
-.triangle_left:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    border-top: 19px solid transparent;
-    border-right: 36px solid rgb(79, 129, 189);
-    border-bottom: 19px solid transparent;
-    border-radius: 2px;
-    top: -20px;
-    left: 10px;
-}
-
-.triangle_right {
-    width: 0;
-    height: 0;
-    border-top: 25px solid transparent;
-    border-left: 50px solid rgb(56, 93, 138);
-    border-bottom: 25px solid transparent;
-    position: relative;
-    border-radius: 2px;
-    top: 20px;
-    left: 160px;
-}
-
-.triangle_right:after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    border-top: 19px solid transparent;
-    border-left: 36px solid rgb(79, 129, 189);
-    border-bottom: 19px solid transparent;
-    border-radius: 2px;
-    top: -20px;
-    left: -46px;
-}
-
-.test2 {
-    display: flex;
-}
-
-.pre {
-    margin-left: 100px;
-    padding: 20px;
-    font-size: 25px;
-}
-
-.next {
-    margin-left: 15px;
-    padding: 20px;
-    font-size: 25px;
-    padding: 20px;
-}
-
-.selected_date_table {
-    margin-top: 15px;
-    margin-left: 20px;
-    text-align: center;
-}
-
-.selected_date_table>tr, th {
-    text-align: center;
-    width: 120px;
-    font-size: 10px;
-}
-
-.right_area_border {
-    position: absolute;
-    top: 11%;
-    left: 40%;
-    border-right: 1px solid rgb(79, 129, 189);
-}
-
-.right_area {
-    margin-top: 50px;
-    margin-right: 10px;
-    /* position: absolute;
-        top: 15%;
-        left: 40%; */
-}
-
-.selected_date_table>tr, .month_and_date {
-    width: 50px;
-}
-
-.selected_date_list {
-    text-align: center;
-    width: 350px;
-}
-
-.selected_date_list>thead>tr>th {
-    background-color: rgb(79, 129, 189);
-    border-bottom: 2px solid;
-    color: white;
-    height: 20px;
-}
-
-.selected_date_list>tbody>tr {
-    height: 22px;
-}
-
-.selected_date_list>tbody>tr:nth-child(odd) {
-    background-color: rgb(208, 216, 232);
-}
-
-.selected_date_list>tbody>tr:nth-child(even) {
-    background-color: rgb(233, 237, 244);
-}
-
-.page_div {
-    margin-top: 7px;
-    margin-bottom: 7px;
-    display: flex;
-    justify-content: right;
-}
-
-.page_div_ch {
-    display: flex;
-    margin: 0 1px;
-}
-
-.page_left_arrow {
-    border: 1px solid black;
-    width: 19px;
-    height: 19px;
-    text-align: center;
-    line-height: 19px;
-    display: inline-block;
-    position: relative;
-}
-
-.page_left_arrow>a {
-    text-decoration: none;
-    color: black;
-}
-
-.page_right_arrow {
-    border: 1px solid black;
-    width: 19px;
-    height: 19px;
-    text-align: center;
-    display: inline-block;
-    line-height: 19px;
-    position: relative;
-    margin-left: 2px;
-}
-
-.page_right_arrow>a {
-    text-decoration: none;
-    color: black;
-}
-
-.page_number {
-    margin: 0;
-    padding: 0;
-    border: 1px solid black;
-    width: 19px;
-    height: 19px;
-    text-align: center;
-    display: inline-block;
-    line-height: 19px;
-    position: relative;
-    font-size: 12px;
-}
-
-.page_number>a {
-    text-decoration: none;
-    color: black;
-}
-
-.getday{
-   text-align: center;
-   border: 2px solid;
-
-}
-.dateSpan{
-   display:none;
-}
-
-.week td{
-  text-align:center;
-  border: 2px solid black;
-}
-</style>
+ 
 
 <script type="text/javascript">
 
@@ -449,22 +127,40 @@ $(function() {
                         },
                         url : "/api/index",
                          success : function(data) {
+                        	 
+                        	 
+
+                             let year = new Date(data[0]).getFullYear();
+                             let month = new Date(data[0]).getMonth()+1;
+                                  
+                                  //조회 누르시 첫달 화면 배경 change
+                                  let count =0;
+                                  for(let i=0; i<data.length ; i++){
+                                     searchDate[i] = data[i];
+                                     if((new Date(data[0])).getMonth() == (new Date(data[i])).getMonth()){
+                                         count ++;
+                                     }
+                                  }
+
+                                  for(let i = 0; i < count ; i ++){
+                                      let date = new Date(data[i]).getDate();
+                                      $(".day" + date).css('background-color', 'red');
+                                  }	 
+                        	 
                         	  
-                           let totalData = data.length
+                           let totalData = data.length;
                            let page; //현재 목록 페이지 번호
                            let dataPerPage = 10; // //한 페이지에 나타낼 글 수
                            let pageCount = 10;//한화면에 출력될 페이지수  //블럭수
                            let CurrentPage =1; //현재 페이지
                            
-                           if(totalData>=10){
-                        	   console.log("datasadjaskldjalskd:" + totalData)
-                           
-                        	   displayData(dataPerPage, CurrentPage, data);
-                        	   
+                           if(totalData>10){
+                        	  
+                               displayData(dataPerPage, CurrentPage, data);
                         	   paging(totalData, dataPerPage, pageCount, 1, data);
                         	   
                            }else{
-                        	   console.log("12321313:::::" + totalData)
+                        	   
                         	   let inst = "";
                                let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
                                for (var i = 0; i < data.length; i++) {
@@ -482,22 +178,7 @@ $(function() {
                                $("#data").html(inst); 
                         	 }
                   
-                           let year = new Date(data[0]).getFullYear();
-                           let month = new Date(data[0]).getMonth()+1;
-                                
-                                //조회 누르시 첫달 화면 배경 change
-                                let count =0;
-                                for(let i=0; i<data.length ; i++){
-                                   searchDate[i] = data[i];
-                                   if((new Date(data[0])).getMonth() == (new Date(data[i])).getMonth()){
-                                       count ++;
-                                   }
-                                }
-
-                                for(let i = 0; i < count ; i ++){
-                                    let date = new Date(data[i]).getDate();
-                                    $(".day" + date).css('background-color', 'red');
-                                }
+                 
 
                             //일자 - 요일 - 국경일
                        /*      let inst = "";
@@ -534,23 +215,25 @@ function saveDate(date, nowYear, nowMonth){
     $("#dayWeek").html(week);
 };
 
-  function displayData(dataPerPage, currentPage, data) {
+  function displayData(dataPerPage, currentPage) {
+	  
 	  console.log(data);
 	
-	console.log("displaydata::" + data.length)
+	  alert("displaycurrentPage:::" + currentPage)
+	
 	let chartHtml = "";
 	
-	/* currentPage = Number(currentPage);
+	currentPage = Number(currentPage);
 	dataPerPage = Number(dataPerPage);
-	 */
+	 
 	
     const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 	
-	for(var i = (2 - 1) * dataPerPage; i<(2 - 1) * dataPerPage + dataPerPage; i++) {
+	for(let i = (currentPage - 1) * dataPerPage; i<(currentPage - 1) * dataPerPage + dataPerPage; i++) {
         
 		chartHtml += "<tr>";
-    	chartHtml += "<td>" + data[i] + "</td>";
-    	chartHtml += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
+    	chartHtml += "<td>" + searchDate[i] + "</td>";
+    	chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
     	chartHtml += "</tr>";
     }
 	 $("#data").html(chartHtml);
@@ -585,9 +268,11 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 	  
 	  let next = last + 1;
 	  
-	  
+	  console.log("next::" + next);
 	  
 	  let prev = first - 1;
+	  
+	  console.log("prev::" + prev);
 	  
 	  let pageHtml = "";
 	  
@@ -598,8 +283,6 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
 		    }
 	  }
-	  
-	  
 	  $("#pagingul").html(pageHtml);
 	  
 	  $("#pagingul li a").click(function () {
@@ -610,17 +293,25 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 		    selectedPage = $(this).text();
 		    console.log("select::" + selectedPage)
 
-		    if (id == "next") selectedPage = next;
-		    if (id == "prev") selectedPage = prev;
+		    if (id == "next") {
+		    	console.log("nextid:::" +id);
+		    	selectedPage = next;
+		    }
+		    if (id == "prev") {
+		    	selectedPage = prev;
+		    }
 		    
 		    
-		    CurrentPage = selectedPage;
+		    
 		    console.log("globalCurrentPage" + CurrentPage)
 		    
-		     displayData(selectedPage, dataPerPage, data);
+		     
 		    //페이징 표시 재호출
 		    paging(totalData, dataPerPage, pageCount, selectedPage, data);
-		    console.log("pageiansdklasjd::")
+		    
+		    
+		    displayData(dataPerPage, selectedPage, data)
+		   
 		    //글 목록 표시 재호출
 		   
 		  });
