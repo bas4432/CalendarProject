@@ -469,11 +469,11 @@ $(function() {
 
                             //일자 - 요일 - 국경일
                             let inst = "";
-                            let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
+                            let WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
                             for (var i = 0; i < data.length; i++) {
                                 inst += "<tr>";
                                 inst += "<td>" + data[i] + "</td>";
-                                inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
+                                inst += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
                                 
                                 if(data.length < 10){
                                 inst += "<td>"+ "예" + "</td>"
