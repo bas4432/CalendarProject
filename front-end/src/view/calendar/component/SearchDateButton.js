@@ -12,6 +12,7 @@ const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
                 const resultDateArray = formatDate(response.data);
                 setSelectedDates(resultDateArray)
                 axios.get("/isHoliday", {params: response.data})
+                // test
             })
     }
     const onClickHandler = () => {
