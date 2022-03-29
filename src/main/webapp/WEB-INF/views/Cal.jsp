@@ -94,6 +94,14 @@ function selectRed(){
 
 
 
+let totalData
+let dataPerPage=10; //한 페이지에 나타낼 글 수
+let pageCount=10;//한화면에 출력될 페이지수  //블럭수
+let globalCurrentPage=1; //현재 페이지
+
+console.log("globalCurrentPage:::" + globalCurrentPage)
+
+
 $(function() {
 	
     $("#datepicker1,#datepicker2").datepicker(
@@ -127,9 +135,8 @@ $(function() {
                         },
                         url : "/api/index",
                          success : function(data) {
+                        	 totalData = data.length;	  
                         	 
-                        	 
-
                              let year = new Date(data[0]).getFullYear();
                              let month = new Date(data[0]).getMonth()+1;
                                   
@@ -147,17 +154,14 @@ $(function() {
                                       $(".day" + date).css('background-color', 'red');
                                   }	 
                         	 
-                        	  
-                           let totalData = data.length;
-                           let page; //현재 목록 페이지 번호
-                           let dataPerPage = 10; // //한 페이지에 나타낼 글 수
-                           let pageCount = 10;//한화면에 출력될 페이지수  //블럭수
-                           let CurrentPage =1; //현재 페이지
+                                 
+                                
                            
                            if(totalData>10){
-                        	  
-                               displayData(dataPerPage, CurrentPage, data);
-                        	   paging(totalData, dataPerPage, pageCount, 1, data);
+                        	   
+                               displayData(10, dataPerPage);
+                        	   
+                               paging(totalData, dataPerPage, pageCount, 10, data); 
                         	   
                            }else{
                         	   
@@ -215,104 +219,105 @@ function saveDate(date, nowYear, nowMonth){
     $("#dayWeek").html(week);
 };
 
-  function displayData(dataPerPage, currentPage) {
-	  
-	  console.log(data);
-	
-	  alert("displaycurrentPage:::" + currentPage)
-	
-	let chartHtml = "";
-	
-	currentPage = Number(currentPage);
-	dataPerPage = Number(dataPerPage);
+function displayData(currentPage, dataPerPage) {
+	 console.log("currentPage:" + currentPage)
+	 
 	 
 	
-    const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+	 let chartHtml = ""; 
 	
-	for(let i = (currentPage - 1) * dataPerPage; i<(currentPage - 1) * dataPerPage + dataPerPage; i++) {
-        
-		chartHtml += "<tr>";
-    	chartHtml += "<td>" + searchDate[i] + "</td>";
-    	chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
-    	chartHtml += "</tr>";
-    }
+	 currentPage = Number(currentPage);
+	 dataPerPage = Number(dataPerPage);
+	 
+	 
+     const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+	 for(i = (currentPage - 1) * dataPerPage; i<(currentPage - 1) * dataPerPage + dataPerPage; i++) {
+           
+		   chartHtml += "<tr>";
+		   chartHtml += "<td>" + searchDate[i] + "</td>";
+		   chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
+    	   chartHtml += "</tr>";
+     }
 	 $("#data").html(chartHtml);
 	
 }  
   
-function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
-	  console.log("paginsakdljasda!!!!!!!!!!!!!!!!!!!" + data.length)
-	  
-	  totalPage = Math.ceil(totalData / dataPerPage); //총 페이지 수 ex ) 총데이터 갯수 / 한페이지에 나타낼 갯수  20 / 10 = 2
-	  console.log("totalPage::::" + totalPage)
+function paging(totalData, dataPerPage, pageCount, CurrentPage){
+	  console.log("CurrentPage::" + CurrentPage)
+	
+	  totalPage = Math.ceil(totalData / dataPerPage);
+	  console.log("totalPage::" + totalPage);
 	  
 	  if(totalPage<pageCount){
-		    alert("totalpage<pagecount")
-		    pageCount=totalPage;
+		  pageCount=totalPage;
 	  }
 	  
 	  let pageGroup = Math.ceil(CurrentPage / pageCount); // 페이지 그룹
-	  let last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+	  let lastPage = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
 	  
-	  console.log("last::" + last)
 	  
-	  if (last > totalPage) {
-		    last = totalPage;
+	  if (lastPage > totalPage) {
+		  lastPage = totalPage;
       }
 	  
-	  let first = last - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
+	  let firstpage = lastPage - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
 	  
-	  console.log("first::" + first)
-	  
-	 
-	  
-	  let next = last + 1;
-	  
-	  console.log("next::" + next);
-	  
-	  let prev = first - 1;
-	  
+	  let next = lastPage + 1;
+	  let prev = firstpage- 1;
+	  console.log("next::" + next)
 	  console.log("prev::" + prev);
+	  
+	  
+	  
+	  console.log("firstpage::" + firstpage)
+	  console.log("Lastpage::" + lastPage)
+	  
+	  console.log("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
 	  
 	  let pageHtml = "";
 	  
-	  for (var i = first; i <= last; i++) {
+	  if (prev > 0) {
+		    pageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
+	  }
+	  
+	  for (let i = firstpage; i <= lastPage; i++) {
 		    if (CurrentPage == i) {
 		      pageHtml +="<li style='color:red'><a href='#' id='" + i + "'>" + i + "</a></li>";
 		    } else {
 		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
 		    }
 	  }
+	  
+	  if (lastPage < totalPage) {
+		    pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+	  }
+	  
 	  $("#pagingul").html(pageHtml);
 	  
-	  $("#pagingul li a").click(function () {
+      $("#pagingul li a").click(function () {
 		  
-		    alert("asdasdad")
 		    let id = $(this).attr("id");
-		    console.log("id:::" + id)
+		    console.log("id++++:::::" + id)
 		    selectedPage = $(this).text();
-		    console.log("select::" + selectedPage)
-
-		    if (id == "next") {
-		    	console.log("nextid:::" +id);
-		    	selectedPage = next;
+		    
+		    console.log("selectedPage::" + selectedPage);
+		    
+		    if(id == "next") {
+		        selectedPage = next;
+		        
+		        
+		        console.log("nextselectedPage::" + selectedPage);
 		    }
-		    if (id == "prev") {
+		    if(id == "prev") {
 		    	selectedPage = prev;
-		    }
+		    	console.log("prevselectedPage::" + selectedPage);
+		    }  
 		    
+		    globalCurrentPage = selectedPage;
 		    
-		    
-		    console.log("globalCurrentPage" + CurrentPage)
-		    
-		     
-		    //페이징 표시 재호출
 		    paging(totalData, dataPerPage, pageCount, selectedPage, data);
 		    
-		    
-		    displayData(dataPerPage, selectedPage, data)
-		   
-		    //글 목록 표시 재호출
+		    displayData(selectedPage, dataPerPage, data)
 		   
 		  });
 	  
