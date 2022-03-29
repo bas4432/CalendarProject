@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
@@ -135,7 +138,45 @@ $(function() {
                         },
                         url : "/api/index",
                          success : function(data) {
-                        	 totalData = data.length;	  
+                        	 totalData = data.length;	
+                        	 
+                        	 
+                        	 let container = $('#pagination');
+                        	 container.pagination({
+                        		
+                        		 dataSource:[
+                        			 
+                        			 data
+                        			 
+                        		 ],
+                        		 callback : function(data, pagination){
+                        			 var dataHtml  ='<ul>';
+                        			 
+                        			 for (i = 0; i < 10; i++) {
+                        				 dataHtml += "<tr>";
+                        				 dataHtml += "<td>" + data[i] + "</td>";
+                        				 dataHtml += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
+                                         
+                                         if(data.length < 10){
+                                        	 dataHtml += "<td>"+ "예" + "</td>"
+                                         }else{
+                                        	 dataHtml += "<td>"+ "아니오" + "</td>"
+                                         }
+                        				 dataHtml += "</tr>";
+                        			   }
+                        			 dataHtml += '</ul>';
+                                 })
+                                 ("#data-container").html(dataHtml);
+                        	 )};
+                                 
+                        	 
+                        	 
+                        	 
+                        	 
+                        	 
+                        	 
+                        	 
+                        	 
                         	 
                              let year = new Date(data[0]).getFullYear();
                              let month = new Date(data[0]).getMonth()+1;
@@ -156,31 +197,7 @@ $(function() {
                         	 
                                  
                                 
-                           
-                           if(totalData>10){
-                        	   
-                               displayData(10, dataPerPage);
-                        	   
-                               paging(totalData, dataPerPage, pageCount, 10, data); 
-                        	   
-                           }else{
-                        	   
-                        	   let inst = "";
-                               let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
-                               for (var i = 0; i < data.length; i++) {
-                                   inst += "<tr>";
-                                   inst += "<td>" + data[i] + "</td>";
-                                   inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
-                                   
-                                   if(data.length < 10){
-                                   inst += "<td>"+ "예" + "</td>"
-                                   }else{
-                                   	inst += "<td>"+ "아니오" + "</td>"
-                                   }
-                                   inst += "</tr>";
-                                }
-                               $("#data").html(inst); 
-                        	 }
+                        
                   
                  
 
@@ -399,10 +416,12 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
                     <tbody id="data">
                     </tbody>
                 </table>
-                <ul id ="pagingul">
-                
-               
-                </ul>                
+                 <div>
+                    <section>
+                       <div id="data-container"></div>
+                       <div id="pagination"></div>
+                    </section>
+                </div>                
             </div>
         </div>
     </div>
