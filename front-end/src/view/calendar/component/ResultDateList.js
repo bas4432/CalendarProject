@@ -2,6 +2,7 @@ import React from "react";
 import './css/ResultDateList.css'
 import {Table} from 'antd';
 import "antd/dist/antd.css";
+
 const ResultDateList = ({selectedDates}) => {
 
     const columns = [
@@ -23,12 +24,16 @@ const ResultDateList = ({selectedDates}) => {
     return (
         <div id="right_area_border">
             <div id="right_area">
-                <Table rowClassName={(selectedDates,index) =>
-                        selectedDates.day === '일요일' ? 'sun' :
+                <Table rowClassName={(selectedDates, index) =>
+                    selectedDates.day === '일요일' ? 'sun' :
                         selectedDates.day === '토요일' ? 'sat' : ''}
-                       pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['10', '20', '50']}}
+                       pagination={{
+                           defaultPageSize: 50,
+                           showSizeChanger: true,
+                           pageSizeOptions: ['10', '20', '50']
+                       }}
                        columns={columns}
-                       dataSource={selectedDates} />
+                       dataSource={selectedDates}/>
             </div>
         </div>
     )
