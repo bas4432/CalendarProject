@@ -140,34 +140,7 @@ $(function() {
                          success : function(data) {
                         	 totalData = data.length;	
                         	 
-                        	 
-                        	 let container = $('#pagination');
-                        	 container.pagination({
-                        		
-                        		 dataSource:[
-                        			 
-                        			 data
-                        			 
-                        		 ],
-                        		 callback : function(data, pagination){
-                        			 var dataHtml  ='<ul>';
-                        			 
-                        			 for (i = 0; i < 10; i++) {
-                        				 dataHtml += "<tr>";
-                        				 dataHtml += "<td>" + data[i] + "</td>";
-                        				 dataHtml += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
-                                         
-                                         if(data.length < 10){
-                                        	 dataHtml += "<td>"+ "예" + "</td>"
-                                         }else{
-                                        	 dataHtml += "<td>"+ "아니오" + "</td>"
-                                         }
-                        				 dataHtml += "</tr>";
-                        			   }
-                        			 dataHtml += '</ul>';
-                                 })
-                                 ("#data-container").html(dataHtml);
-                        	 )};
+                      
                                  
                         	 
                         	 
