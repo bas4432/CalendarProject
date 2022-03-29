@@ -11,7 +11,10 @@ const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
             .then(response => {
                 const resultDateArray = formatDate(response.data);
                 setSelectedDates(resultDateArray)
-                axios.get("/isHoliday", {params: response.data})
+                axios.get("/isHoliday", {params: resultDateArray})
+                    .then(response => {
+                        console.log("sent")
+                    })
                 // test
             })
     }
