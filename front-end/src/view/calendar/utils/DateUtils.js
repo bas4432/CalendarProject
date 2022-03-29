@@ -11,6 +11,7 @@ export const formatDate = (param) => {
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
         resultDatesObject.push({
+            key:i,
             date: date.getFullYear() + '-' + month + '-' + day,
             dateNumber: day,
             day: days[date.getDay()],
@@ -19,6 +20,21 @@ export const formatDate = (param) => {
         })
     }
     return resultDatesObject
+}
+
+export const isHolidayCheck = (holidayList, resultDateArray) => {
+    const resultHolidayArray = []
+    for (let i = 0; i < holidayList.length; i++) {
+        resultHolidayArray.push([holidayList[i].slice(0, 4), '-', holidayList[i].slice(4,6), '-' ,holidayList[i].slice(6)].join(''))
+    }
+    for (let i = 0; i < resultDateArray.length; i++) {
+        for (let j = 0; j < resultDateArray.length; j++) {
+            if (resultDateArray[i].date === resultHolidayArray[j]) {
+                resultDateArray[i].isHoliday = '예';
+            }
+        }
+    }
+    return resultDateArray
 }
 
 export const formatCalendarDate = (param) => {

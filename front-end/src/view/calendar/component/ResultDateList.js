@@ -1,40 +1,34 @@
-import React, {useState} from "react";import './css/ResultDateList.css'
-import ResultDateListPagebar from "./ResultDateListPagebar";
-import {Table} from 'reactstrap';
-// import {Table} from 'antd';
+import React from "react";
+import './css/ResultDateList.css'
+import {Table} from 'antd';
+import "antd/dist/antd.css";
 const ResultDateList = ({selectedDates}) => {
 
+    const columns = [
+        {
+            title: '일자',
+            dataIndex: 'date',
+            key: 'date',
+        },
+        {
+            title: '요일',
+            dataIndex: 'day',
+            key: 'day',
+        },
+        {
+            title: '국경일',
+            dataIndex: 'isHoliday',
+            key: 'isHoliday',
+        },]
     return (
         <div id="right_area_border">
             <div id="right_area">
-                <Table striped id="selected_date_list">
-                    <thead>
-                    <tr>
-                        <th>일자</th>
-                        <th>요일</th>
-                        <th>국경일</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {selectedDates
-                        .map((selectedDate, index) =>
-                            <tr key={index}>
-                                <td style=
-                                        {{color: selectedDate.day === '일요일' ? 'blue' :
-                                                selectedDate.day === '토요일' ? 'red' : 'black'}}>
-                                    {selectedDate.date}</td>
-                                <td style=
-                                        {{color: selectedDate.day === '일요일' ? 'blue' :
-                                                selectedDate.day === '토요일' ? 'red' : 'black'}}>
-                                    {selectedDate.day}</td>
-                                <td style={{color: selectedDate.day === '일요일' ? 'blue' :
-                                                selectedDate.day === '토요일' ? 'red' : 'black'}}>
-                                    {selectedDate.isHoliday}</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
-                <ResultDateListPagebar/>
+                <Table rowClassName={(selectedDates,index) =>
+                        selectedDates.day === '일요일' ? 'sun' :
+                        selectedDates.day === '토요일' ? 'sat' : ''}
+                       pagination={{ defaultPageSize: 50, showSizeChanger: true, pageSizeOptions: ['10', '20', '50']}}
+                       columns={columns}
+                       dataSource={selectedDates} />
             </div>
         </div>
     )

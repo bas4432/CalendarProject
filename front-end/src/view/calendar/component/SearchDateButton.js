@@ -1,7 +1,7 @@
 import './css/SearchDateButton.css'
 import React from "react";
 import axios from "axios";
-import {formatDate, formatSelectedDate} from "../utils/DateUtils";
+import {formatDate, formatSelectedDate, isHolidayCheck} from "../utils/DateUtils";
 import {Button} from "reactstrap";
 
 const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
@@ -9,13 +9,12 @@ const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
     const searchSelectedDates = (param) => {
         axios.get("/date", {params: param})
             .then(response => {
-                const resultDateArray = formatDate(response.data);
-                setSelectedDates(resultDateArray)
-                axios.get("/isHoliday", {params: resultDateArray})
+                const resultDateArray = formatDate(response.data)
+                axios.get("/isHoliday", {params:response.data})
                     .then(response => {
-                        console.log("sent")
+                        const holidayDateArray = isHolidayCheck(response.data, resultDateArray)
+                        setSelectedDates(holidayDateArray)
                     })
-                // test
             })
     }
     const onClickHandler = () => {
