@@ -9,22 +9,24 @@
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <script type="text/javascript">
-let searchDate = []; 
+const searchDate = []; 
+
+const YearName = "년"
+const MonthName = "월"
+const dayName ="일"
 
 $(function(){
-    var today = new Date();
-    var date = new Date();
+    let today = new Date();
+    let date = new Date();
 
     $(".pre").click(function() { 
-        $(".calendar_table tbody td").remove();
-        $(".calendar_table tbody tr").remove();
+    	DateRemove();
         today = new Date (today.getFullYear(), today.getMonth()-1, today.getDate());
         firstscreen();
     })
 
     $(".next").click(function(){ 
-        $(".calendar_table tbody td").remove();
-        $(".calendar_table tbody tr").remove();
+    	DateRemove();
         today = new Date (today.getFullYear(), today.getMonth()+1, today.getDate());
         firstscreen();
     })
@@ -32,8 +34,7 @@ $(function(){
 
     function firstscreen() {
     	
-        $(".calendar_table tbody td").remove();
-        $(".calendar_table tbody tr").remove();
+    	DateRemove();
     	
         nowYear = today.getFullYear();
         nowMonth = today.getMonth();
@@ -45,13 +46,13 @@ $(function(){
             lastDate[1]=29;
         }
 
-       $(".selected_year_month").text(nowYear+"년 "+(nowMonth+1)+"월"); 
+       $(".selected_year_month").text(nowYear+ YearName +(nowMonth+1)+ MonthName); 
 
         for (i=0; i<firstDay; i++) { //첫번째 줄 빈칸
             $(".calendar_table tbody").append("<td></td>");
         }
         
-        for (i=1; i <=lastDate; i++){ // 날짜 채우기
+        for (i=1; i<=lastDate; i++){ // 날짜 채우기
             plusDate = new Date(nowYear,nowMonth,i).getDay();
             if (plusDate==0) {
                 $(".calendar_table tbody").append("<tr></tr>");
@@ -62,17 +63,17 @@ $(function(){
             calDate = nowYear + "-" + month + "-" +  day;
 
             if(searchDate == null || searchDate == ""){
-                $(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  >"+ i +"</td>");
+            	     nonselect();
             }else{
                      let val = false;
                      searchDate.filter(searchDate => { 
                      if(searchDate === calDate){
                     	val = true;
-                        selectRed();
+                    	selected();
                        }
                      });
                      if(!val){ 
-                	   $(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  >"+ i +"</td>");
+                    	 nonselect();
                  } 
             }
          }
@@ -80,13 +81,20 @@ $(function(){
     firstscreen();
 });
 
-function selectRed(){
+function selected(){
     if(true){
         $(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  style='background-color: red' >"+ i +"</td>");
     }
 };
 
+function nonselect(){
+	$(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  >"+ i +"</td>");
+}
 
+function DateRemove(){
+	$(".calendar_table tbody td").remove();
+    $(".calendar_table tbody tr").remove();
+}
 
 $(function() {
 	
@@ -142,7 +150,7 @@ $(function() {
                             //일자 - 요일 - 국경일
                             let inst = "";
                             let WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-                            for (var i = 0; i < data.length; i++) {
+                            for (let i = 0; i < data.length; i++) {
                                 inst += "<tr>";
                                 inst += "<td>" + data[i] + "</td>";
                                 inst += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
@@ -164,10 +172,14 @@ $(function() {
 });
 
 function saveDate(date, nowYear, nowMonth){
-    let day = new Date(nowYear, nowMonth-1, date);
+	
+	$(".dated").css('background-color', '');
+	
+	let day = new Date(nowYear, nowMonth-1, date);
     let WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
     let week = WEEKDAY[day.getDay()];
-    $("#selectDate").html(nowYear + "년" + nowMonth+ "월" + date + "일");
+    $(".day" + date).css('background-color', 'red');
+    $("#selectDate").html(nowYear + YearName + nowMonth+ MonthName + date + dayName);
     $("#selectYear").html(nowYear);
     $("#selectMonth").html(nowMonth);
     $("#selectDay").html(date);
@@ -249,13 +261,7 @@ function saveDate(date, nowYear, nowMonth){
                     </tbody>
                 </table>
                 <div class="page_div">
-                   <!--  <div class="page_div_ch">
-                        <span class="page_left_arrow"><a href="#">◀</a></span>
-                        <span class="page_number"><a href=#>1</a></span>
-                        <span class="page_number"><a href=#>2</a></span>
-                        <span class="page_number"><a href=#>3</a></span>
-                        <span class="page_right_arrow"><a href="#">▶</a></span>
-                    </div> -->
+                
                 </div>
             </div>
         </div>
