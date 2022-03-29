@@ -39,8 +39,6 @@ public class CalendarController {
 
         return service.selectedDateList(numOfDaysBetween, date.getStartDate());
 
-//        isHoliday();
-//        return null;
 
     }
 
