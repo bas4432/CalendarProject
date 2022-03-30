@@ -6,10 +6,6 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
-
 <link rel="stylesheet" href="resources/css/style.css">
 </head>
 
@@ -97,12 +93,7 @@ function selectRed(){
 
 
 
-let totalData
-let dataPerPage=10; //한 페이지에 나타낼 글 수
-let pageCount=10;//한화면에 출력될 페이지수  //블럭수
-let globalCurrentPage=1; //현재 페이지
 
-console.log("globalCurrentPage:::" + globalCurrentPage)
 
 
 $(function() {
@@ -138,19 +129,33 @@ $(function() {
                         },
                         url : "/api/index",
                          success : function(data) {
-                        	 totalData = data.length;	
+                        	
+
+                        	 let totalData =data.length
+                        	 let dataPerPage=10; //한 페이지에 나타낼 글 수
+                        	 let pageCount=10;//한화면에 출력될 페이지수  //블럭수
+                        	 let globalCurrentPage=1; //현재 페이지
+
                         	 
-                      
-                                 
+                        	 if(totalData <9){
+                        		    let inst = "";
+                                    const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+                                    for (var i = 0; i < data.length; i++) {
+                                    inst += "<tr>";
+                                    inst += "<td>" + data[i] + "</td>";
+                                    inst += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] +"</td>"
+                                    inst += "</tr>";
+                                 }
+                                 $("#data").html(inst);
+                        		 
+                        		 
+                        	    }else{
+                        		 displayData(1, dataPerPage);
+                            	 
+                            	 paging(totalData, dataPerPage, pageCount, 1);
+                        	    }
                         	 
-                        	 
-                        	 
-                        	 
-                        	 
-                        	 
-                        	 
-                        	 
-                        	 
+                        	
                              let year = new Date(data[0]).getFullYear();
                              let month = new Date(data[0]).getMonth()+1;
                                   
@@ -211,11 +216,8 @@ function saveDate(date, nowYear, nowMonth){
 
 function displayData(currentPage, dataPerPage) {
 	 console.log("currentPage:" + currentPage)
-	 
-	 
-	
+	  
 	 let chartHtml = ""; 
-	
 	 currentPage = Number(currentPage);
 	 dataPerPage = Number(dataPerPage);
 	 
@@ -233,10 +235,10 @@ function displayData(currentPage, dataPerPage) {
 }  
   
 function paging(totalData, dataPerPage, pageCount, CurrentPage){
-	  console.log("CurrentPage::" + CurrentPage)
+	  console.log("pagingCurrentPage::" + CurrentPage)
 	
 	  totalPage = Math.ceil(totalData / dataPerPage);
-	  console.log("totalPage::" + totalPage);
+	  console.log("pagingtotalPage::" + totalPage);
 	  
 	  if(totalPage<pageCount){
 		  pageCount=totalPage;
@@ -303,11 +305,11 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 		    	console.log("prevselectedPage::" + selectedPage);
 		    }  
 		    
-		    globalCurrentPage = selectedPage;
+		 
 		    
-		    paging(totalData, dataPerPage, pageCount, selectedPage, data);
+		    paging(totalData, dataPerPage, pageCount, selectedPage);
 		    
-		    displayData(selectedPage, dataPerPage, data)
+		    displayData(selectedPage, dataPerPage)
 		   
 		  });
 	  
@@ -390,10 +392,8 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
                     </tbody>
                 </table>
                  <div>
-                    <section>
-                       <div id="data-container"></div>
-                       <div id="pagination"></div>
-                    </section>
+                    <ul id="pagingul">
+                   </ul>
                 </div>                
             </div>
         </div>
