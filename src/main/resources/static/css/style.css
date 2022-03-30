@@ -322,7 +322,7 @@
   border: 2px solid black;
 }
 
-ul {
+ul{
     text-align: center;
     display: inline-block;
     list-style:none;
@@ -334,7 +334,7 @@ ul {
     float: left;
 }
 
- ul li a {
+ul li a{
     display: block;
     font-size: 14px;
     padding: 9px 12px;

@@ -146,23 +146,33 @@ $(function() {
                                     let date = new Date(data[i]).getDate();
                                     $(".day" + date).css('background-color', 'red');
                                 }
-
-                            //일자 - 요일 - 국경일
-                            let inst = "";
-                            let WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-                            for (let i = 0; i < data.length; i++) {
-                                inst += "<tr>";
-                                inst += "<td>" + data[i] + "</td>";
-                                inst += "<td>"+ WEEKDAY[new Date(data[i]).getDay()] + "</td>"
                                 
-                                if(data.length < 10){
-                                inst += "<td>"+ "예" + "</td>"
+                                
+                                //페이지
+                                let totalData = data.length;
+                                
+                                let dataPerPage = 10; 
+                                let pageCount = 5;
+                                let CurrentPage =1; 
+                                
+                                if(totalData>10){
+                             	  
+                                    displayData(dataPerPage, CurrentPage);
+                             	   
+                                    paging(totalData, dataPerPage, pageCount, 1);
+                             	   
                                 }else{
-                                	inst += "<td>"+ "아니오" + "</td>"
-                                }
-                                inst += "</tr>";
-                             }
-                            $("#data").html(inst); 
+                             	   
+                             	    let inst = "";
+                                    let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
+                                    for (i = 0; i < data.length; i++) {
+                                        inst += "<tr>";
+                                        inst += "<td>" + data[i] + "</td>";
+                                        inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
+                                        inst += "</tr>";
+                                     }
+                                    $("#data").html(inst); 
+                             	 }    
                         }, //succes: function
                         error : function(jqXHR, textStatus, errorThrown) {
                             alert("마지막 날짜를 선택 하세요");
@@ -205,7 +215,7 @@ function displayData(dataPerPage, currentPage) {
 	
 }  
   
-function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
+function paging(totalData, dataPerPage, pageCount, CurrentPage){
 	  
 	  totalPage = Math.ceil(totalData / dataPerPage); 
 	  
@@ -214,12 +224,10 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 	  }
 	  
 	  let pageGroup = Math.ceil(CurrentPage / pageCount);
-	  let last = pageGroup * pageCount;
+	  let lastpage = pageGroup * pageCount;
 	  
-	  console.log("last::" + last)
-	  
-	  if (last > totalPage) {
-		    last = totalPage;
+	  if (lastpage > totalPage) {
+		  lastpage = totalPage;
       }
 	  
 	  let firstpage = lastpage - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
@@ -234,7 +242,7 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 		    pageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
 	  }
 	  
-	  for (var i = first; i <= last; i++) {
+	  for (i = firstpage; i <= lastpage; i++) {
 		    if (CurrentPage == i) {
 		      pageHtml +="<li style='background-color:red'><a href='#' id='" + i + "'>" + i + "</a></li>";
 		    } else {
@@ -242,12 +250,12 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 		    }
 	  }
 	  
-	  if (last < totalPage) {
+	  if (lastpage < totalPage) {
 		    pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
 	  }
 	  $("#pagingul").html(pageHtml);
 	  
-	  $("#pagingul li a").click(function () {
+	  $("#pagingul li a").click(function (){
 		  
 		    let id = $(this).attr("id");
 		    selectedPage = $(this).text();
@@ -260,8 +268,8 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
 		    	selectedPage = prev;
 		    }
 		    
-		    paging(totalData, dataPerPage, pageCount, selectedPage, data);
-		    displayData(dataPerPage, selectedPage, data)
+		    paging(totalData, dataPerPage, pageCount, selectedPage);
+		    displayData(dataPerPage, selectedPage)
 		 });
 	   }
 </script>
@@ -339,9 +347,9 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
                     <tbody id="data">
                     </tbody>
                 </table>
-                <div class="page_div">
+                <ul id="pagingul">
                 
-                </div>
+                </ul>
             </div>
         </div>
     </div>
