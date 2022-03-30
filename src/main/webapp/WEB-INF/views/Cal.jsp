@@ -204,7 +204,7 @@ function displayData(dataPerPage, currentPage) {
 	dataPerPage = Number(dataPerPage);
 	 
 	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-	for(let i = (currentPage - 1) * dataPerPage; i<(currentPage - 1) * dataPerPage + dataPerPage; i++) {
+	for(let i=(currentPage-1) * dataPerPage; i<(currentPage-1) * dataPerPage + dataPerPage; i++) {
         
 		chartHtml += "<tr>";
     	chartHtml += "<td>" + searchDate[i] + "</td>";
