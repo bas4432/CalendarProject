@@ -2,6 +2,14 @@
 
 export const days = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
 
+const getHoliday = (isHoliday) => {
+    if (isHoliday === true) {
+        return '예'
+    }
+    if (isHoliday === false) {
+        return '아니오'
+    }
+}
 export const formatDate = (param) => {
     let resultDatesObject = []
     for (let i = 0; i < param.length; i++) {
@@ -16,13 +24,13 @@ export const formatDate = (param) => {
             dateNumber: day,
             day: days[date.getDay()],
             dayOfOrder: date.getDay(),
-            isHoliday: '아니오'
+            isHoliday: getHoliday(false)
         })
     }
     return resultDatesObject
 }
 
-export const isHolidayCheck = (holidayList, resultDateArray) => {
+export const holidayCheck = (holidayList, resultDateArray) => {
     const resultHolidayArray = []
     for (let i = 0; i < holidayList.length; i++) {
         resultHolidayArray.push([holidayList[i].slice(0, 4), '-', holidayList[i].slice(4,6), '-' ,holidayList[i].slice(6)].join(''))
@@ -30,7 +38,7 @@ export const isHolidayCheck = (holidayList, resultDateArray) => {
     for (let i = 0; i < resultDateArray.length; i++) {
         for (let j = 0; j < resultDateArray.length; j++) {
             if (resultDateArray[i].date === resultHolidayArray[j]) {
-                resultDateArray[i].isHoliday = '예';
+                resultDateArray[i].isHoliday = getHoliday(true);
             }
         }
     }

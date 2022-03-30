@@ -1,21 +1,46 @@
 import React from "react";
 import axios from "axios";
-import {formatDate, isHolidayCheck} from "../utils/DateUtils";
+import {formatDate, holidayCheck} from "../utils/DateUtils";
 import {Button} from "reactstrap";
 
 const SearchDateButton = ({fromToInputs, setSelectedDates}) => {
 
-    const searchSelectedDates = (param) => {
+    const isValidated = (response) => {
+        if (undefined === response
+            || null === response
+            || undefined === response.data
+            || null === response.data
+            || "" === response.data
+        ) {
+            return false
+        }
+
+        return true
+    }
+
+    const getDate = (param, successHandler) => {
         axios.get("/date", {params: param})
             .then(response => {
-                const resultDateArray = formatDate(response.data)
-                axios.get("/isHoliday", {params:response.data})
-                    .then(response => {
-                        const holidayDateArray = isHolidayCheck(response.data, resultDateArray)
-                        setSelectedDates(holidayDateArray)
-                    })
+                if (isValidated(response)) {
+                    successHandler(response.data)
+                }
             })
     }
+
+    const getHoliday = (resultDateArray) => {
+        if (null !== resultDateArray) {
+            axios.get("/isHoliday", {params: resultDateArray})
+                .then(response => {
+                    const holidayDateArray = holidayCheck(response.data, formatDate(resultDateArray))
+                    setSelectedDates(holidayDateArray)
+                })
+        }
+    }
+
+    const searchSelectedDates = (param) => {
+        getDate(param, getHoliday)
+    }
+
     const onClickHandler = () => {
         searchSelectedDates(fromToInputs)
     }

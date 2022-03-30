@@ -3,10 +3,12 @@ package com.example.backendtwo.controller;
 import com.example.backendtwo.model.vo.Date;
 import com.example.backendtwo.service.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -28,6 +30,12 @@ public class CalendarController {
 
     @GetMapping("/date")
     public List<LocalDate> calendar(Date date) {
+        if(null == date
+                || !StringUtils.hasText(date.getStartDate())
+                || !StringUtils.hasText(date.getEndDate()) )
+        {
+            return null;
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
         LocalDate startDate = LocalDate.parse(date.getStartDate(), formatter);
@@ -36,7 +44,6 @@ public class CalendarController {
 
         List<LocalDate> resultList = service.selectedDateList(numOfDaysBetween, date.getStartDate());
         return resultList;
-
     }
 
     @GetMapping("/isHoliday")
