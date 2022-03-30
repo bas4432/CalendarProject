@@ -1,7 +1,6 @@
-import './css/SearchDateButton.css'
 import React from "react";
 import axios from "axios";
-import {formatDate, formatSelectedDate, isHolidayCheck} from "../utils/DateUtils";
+import {formatDate, isHolidayCheck} from "../utils/DateUtils";
 import {Button} from "reactstrap";
 
 const SearchDateButton = ({fromToInputs, setSelectedDates}) => {

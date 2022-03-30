@@ -4,7 +4,6 @@ import SelectDate from "./component/SelectDate";
 import ResultDateCalendar from "./component/ResultDateCalendar";
 import ResultDate from "./component/ResultDate";
 import ResultDateList from "./component/ResultDateList";
-import emptyDate from "./constant/EmptyDate";
 import emptyYearAndMonth from "./constant/EmptyYearAndMonth";
 import axios from "axios";
 import {
