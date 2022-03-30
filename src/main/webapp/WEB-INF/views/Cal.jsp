@@ -186,9 +186,84 @@ function saveDate(date, nowYear, nowMonth){
     $("#dayWeek").html(week);
 };
 
-
-
-
+function displayData(dataPerPage, currentPage) {
+	  
+	let chartHtml = "";
+	
+	currentPage = Number(currentPage);
+	dataPerPage = Number(dataPerPage);
+	 
+	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+	for(let i = (currentPage - 1) * dataPerPage; i<(currentPage - 1) * dataPerPage + dataPerPage; i++) {
+        
+		chartHtml += "<tr>";
+    	chartHtml += "<td>" + searchDate[i] + "</td>";
+    	chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
+    	chartHtml += "</tr>";
+    }
+	$("#data").html(chartHtml);
+	
+}  
+  
+function paging(totalData, dataPerPage, pageCount, CurrentPage, data){
+	  
+	  totalPage = Math.ceil(totalData / dataPerPage); 
+	  
+	  if(totalPage<pageCount){
+		 pageCount=totalPage;
+	  }
+	  
+	  let pageGroup = Math.ceil(CurrentPage / pageCount);
+	  let last = pageGroup * pageCount;
+	  
+	  console.log("last::" + last)
+	  
+	  if (last > totalPage) {
+		    last = totalPage;
+      }
+	  
+	  let firstpage = lastpage - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
+	  
+	  let next = lastpage + 1;
+	  let prev = firstpage - 1;
+	  
+	  
+	  let pageHtml = "";
+	  
+	  if (prev > 0) {
+		    pageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
+	  }
+	  
+	  for (var i = first; i <= last; i++) {
+		    if (CurrentPage == i) {
+		      pageHtml +="<li style='background-color:red'><a href='#' id='" + i + "'>" + i + "</a></li>";
+		    } else {
+		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+		    }
+	  }
+	  
+	  if (last < totalPage) {
+		    pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+	  }
+	  $("#pagingul").html(pageHtml);
+	  
+	  $("#pagingul li a").click(function () {
+		  
+		    let id = $(this).attr("id");
+		    selectedPage = $(this).text();
+		    
+		    if (id == "next") {
+		    	selectedPage = next;
+		    }
+		    
+		    if (id == "prev") {
+		    	selectedPage = prev;
+		    }
+		    
+		    paging(totalData, dataPerPage, pageCount, selectedPage, data);
+		    displayData(dataPerPage, selectedPage, data)
+		 });
+	   }
 </script>
 
 <body>
