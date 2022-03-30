@@ -230,7 +230,7 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 		  lastpage = totalPage;
       }
 	  
-	  let firstpage = lastpage - (pageCount - 1); //화면에 보여질 첫번째 페이지 번호
+	  let firstpage = lastpage - (pageCount - 1);
 	  
 	  let next = lastpage + 1;
 	  let prev = firstpage - 1;
