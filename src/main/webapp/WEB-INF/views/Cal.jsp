@@ -48,13 +48,13 @@ $(function(){
 
        $(".selected_year_month").text(nowYear+ YearName +(nowMonth+1)+ MonthName); 
 
-        for (i=0; i<firstDay; i++) { //첫번째 줄 빈칸
+        for (i=0; i<firstDay; i++) { 
             $(".calendar_table tbody").append("<td></td>");
         }
         
-        for (i=1; i<=lastDate; i++){ // 날짜 채우기
-            plusDate = new Date(nowYear,nowMonth,i).getDay();
-            if (plusDate==0) {
+        for (i=1; i<=lastDate; i++){ 
+            dayweek = new Date(nowYear,nowMonth,i).getDay();
+            if (dayweek==0) {
                 $(".calendar_table tbody").append("<tr></tr>");
             }
           
@@ -130,10 +130,10 @@ $(function() {
                         url : "/api/index",
                          success : function(data) {
                         	  
-                           let year = new Date(data[0]).getFullYear();//올해년도
-                           let month = new Date(data[0]).getMonth()+1;//이번달
+                           let year = new Date(data[0]).getFullYear();
+                           let month = new Date(data[0]).getMonth()+1;
                                 
-                                //조회 누르시 첫달 화면 배경 change
+                                
                                 let count =0;
                                 for(let i=0; i<data.length ; i++){
                                    searchDate[i] = data[i];
@@ -147,10 +147,7 @@ $(function() {
                                     $(".day" + date).css('background-color', 'red');
                                 }
                                 
-                                
-                                //페이지
                                 let totalData = data.length;
-                                
                                 let dataPerPage = 10; 
                                 let pageCount = 5;
                                 let CurrentPage =1; 
@@ -173,12 +170,12 @@ $(function() {
                                      }
                                     $("#data").html(inst); 
                              	 }    
-                        }, //succes: function
+                        }, 
                         error : function(jqXHR, textStatus, errorThrown) {
                             alert("마지막 날짜를 선택 하세요");
                         }
-                    });//ajax
-            })//btndatefilter function
+                    });
+            })
 });
 
 function saveDate(date, nowYear, nowMonth){
@@ -244,7 +241,7 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 	  
 	  for (i = firstpage; i <= lastpage; i++) {
 		    if (CurrentPage == i) {
-		      pageHtml +="<li style='background-color:red'><a href='#' id='" + i + "'>" + i + "</a></li>";
+		      pageHtml +="<li><a class='now' href='#' id='" + i + "'>" + i + "</a></li>";
 		    } else {
 		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
 		    }
@@ -347,10 +344,11 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
                     <tbody id="data">
                     </tbody>
                 </table>
-                <ul id="pagingul">
                 
-                </ul>
             </div>
+            <ul id="pagingul">
+                
+            </ul>
         </div>
     </div>
 </body>

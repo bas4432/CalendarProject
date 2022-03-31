@@ -323,23 +323,37 @@
 }
 
 ul{
-    text-align: center;
-    display: inline-block;
     list-style:none;
-    border-right: 0;
+	float:left;
+	display:inline;
 }
 
  ul li {
-    text-align: center;
-    float: left;
+   float: left;
 }
 
 ul li a{
-    display: block;
-    font-size: 14px;
-    padding: 9px 12px;
-    border-right: solid 1px #ccc;
-    box-sizing: border-box;
+   float:left;
+	padding:4px;
+	margin-right:3px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+    
+}
+
+ul li a.now {
+	color:#fff;
+	background-color:#f40;
+	border:1px solid #f40;
+}
+
+ul li a:hover, ul li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
 }
 
 ul li.on {
