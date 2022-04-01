@@ -116,6 +116,29 @@ $(function() {
             maxDate : "+5y"
           });
     $('#datepicker1').datepicker('setDate', 'today');
+    
+    $("#btndatefilter").click(function() {
+    	
+    	var start = $('#datepicker1').val();
+    	var startDate = start.substring(0,4);	
+    	$.ajax({
+    		type: 'GET',
+    		data: {
+    			"startDate" : startDate
+    		},
+    	    url:"/api/apitest",
+    	    success : function (holdata){
+    	    	for(i=0; i<holdata.length ;i++){
+    	    		console.log(holdata[i])
+    	    	}
+    	    },
+    	    error : function(jqXHR, textStatus, errorThrown) {
+                alert("마지막 날짜를 선택 하세요");
+            }
+    		
+    	})
+      }); //공휴일  
+    
 
     $("#btndatefilter").click(function() {
     	
