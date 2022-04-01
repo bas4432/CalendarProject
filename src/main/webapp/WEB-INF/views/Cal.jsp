@@ -22,17 +22,17 @@ $(function(){
     $(".pre").click(function() { 
     	DateRemove();
         today = new Date (today.getFullYear(), today.getMonth()-1, today.getDate());
-        firstscreen();
+        firstCalendar();
     })
 
     $(".next").click(function(){ 
     	DateRemove();
         today = new Date (today.getFullYear(), today.getMonth()+1, today.getDate());
-        firstscreen();
+        firstCalendar();
     })
 
 
-    function firstscreen() {
+    function firstCalendar() {
     	
     	DateRemove();
     	
@@ -78,17 +78,17 @@ $(function(){
             }
          }
      }
-    firstscreen();
+    firstCalendar();
 });
 
 function selected(){
     if(true){
-        $(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  style='background-color: red' >"+ i +"</td>");
+        $(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='displayDate(" + i  + ", nowYear, (nowMonth+1))'  style='background-color: red' >"+ i +"</td>");
     }
 };
 
 function nonselect(){
-	$(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='saveDate(" + i  + ", nowYear, (nowMonth+1))'  >"+ i +"</td>");
+	$(".calendar_table tbody").append("<td class='dated day" + i  + "' onclick='displayDate(" + i  + ", nowYear, (nowMonth+1))'  >"+ i +"</td>");
 }
 
 function DateRemove(){
@@ -118,9 +118,9 @@ $(function() {
     $('#datepicker1').datepicker('setDate', 'today');
 
     $("#btndatefilter").click(function() {
- 
-         $(".calender_table_result tbody span").remove(".dateSpan")
-
+    	
+            $(".calender_table_result tbody span").remove(".dateSpan")
+   
                 $.ajax({
                         type : 'GET',
                         data : {
@@ -132,7 +132,6 @@ $(function() {
                         	  
                            let year = new Date(data[0]).getFullYear();
                            let month = new Date(data[0]).getMonth()+1;
-                                
                                 
                                 let count =0;
                                 for(let i=0; i<data.length ; i++){
@@ -154,14 +153,14 @@ $(function() {
                                 
                                 if(totalData>10){
                              	  
-                                    displayData(dataPerPage, CurrentPage);
+                                	showData(dataPerPage, CurrentPage);
                              	   
                                     paging(totalData, dataPerPage, pageCount, 1);
                              	   
                                 }else{
                              	   
                              	    let inst = "";
-                                    let week = new Array('일요일', '월요일', '화요일', '수요일','목요일', '금요일', '토요일');
+                             	    const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
                                     for (i = 0; i < data.length; i++) {
                                         inst += "<tr>";
                                         inst += "<td>" + data[i] + "</td>";
@@ -178,12 +177,12 @@ $(function() {
             })
 });
 
-function saveDate(date, nowYear, nowMonth){
+function displayDate(date, nowYear, nowMonth){
 	
 	$(".dated").css('background-color', '');
 	
 	let day = new Date(nowYear, nowMonth-1, date);
-    let WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
     let week = WEEKDAY[day.getDay()];
     $(".day" + date).css('background-color', 'red');
     $("#selectDate").html(nowYear + YearName + nowMonth+ MonthName + date + dayName);
@@ -193,21 +192,20 @@ function saveDate(date, nowYear, nowMonth){
     $("#dayWeek").html(week);
 };
 
-function displayData(dataPerPage, currentPage) {
+function showData(dataPerPage, currentPage) {
 	  
 	let chartHtml = "";
 	
-	currentPage = Number(currentPage);
-	dataPerPage = Number(dataPerPage);
-	 
 	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 	for(let i=(currentPage-1) * dataPerPage; i<(currentPage-1) * dataPerPage + dataPerPage; i++) {
-        
-		chartHtml += "<tr>";
-    	chartHtml += "<td>" + searchDate[i] + "</td>";
-    	chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
-    	chartHtml += "</tr>";
-    }
+         
+		if(searchDate[i] != null){
+			chartHtml += "<tr>";
+	    	chartHtml += "<td>" + searchDate[i] + "</td>";
+	    	chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
+	    	chartHtml += "</tr>";
+		}
+	 }
 	$("#data").html(chartHtml);
 	
 }  
@@ -217,7 +215,7 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 	  totalPage = Math.ceil(totalData / dataPerPage); 
 	  
 	  if(totalPage<pageCount){
-		 pageCount=totalPage;
+		 pageCount = totalPage;
 	  }
 	  
 	  let pageGroup = Math.ceil(CurrentPage / pageCount);
@@ -241,7 +239,7 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 	  
 	  for (i = firstpage; i <= lastpage; i++) {
 		    if (CurrentPage == i) {
-		      pageHtml +="<li><a class='now' href='#' id='" + i + "'>" + i + "</a></li>";
+		      pageHtml += "<li><a class='now' href='#' id='" + i + "'>" + i + "</a></li>";
 		    } else {
 		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
 		    }
@@ -346,9 +344,11 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
                 </table>
                 
             </div>
+            <div class="pageing">
             <ul id="pagingul">
                 
             </ul>
+            </div>
         </div>
     </div>
 </body>
