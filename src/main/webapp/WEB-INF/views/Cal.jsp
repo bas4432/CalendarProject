@@ -197,7 +197,7 @@ function showData(dataPerPage, currentPage) {
 	let chartHtml = "";
 	
 	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-	for(let i=(currentPage-1) * dataPerPage; i<(currentPage-1) * dataPerPage + dataPerPage; i++) {
+	for(i=(currentPage-1) * dataPerPage; i<(currentPage-1) * dataPerPage + dataPerPage; i++) {
          
 		if(searchDate[i] != null){
 			chartHtml += "<tr>";
@@ -264,7 +264,7 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 		    }
 		    
 		    paging(totalData, dataPerPage, pageCount, selectedPage);
-		    displayData(dataPerPage, selectedPage)
+		    showData(dataPerPage, selectedPage)
 		 });
 	   }
 </script>
