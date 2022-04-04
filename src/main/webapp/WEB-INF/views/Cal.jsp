@@ -10,7 +10,7 @@
 </head>
 <script type="text/javascript">
 const searchDate = []; 
-
+const holidayDate = [];
 const YearName = "년"
 const MonthName = "월"
 const dayName ="일"
@@ -117,33 +117,31 @@ $(function() {
           });
     $('#datepicker1').datepicker('setDate', 'today');
     
-    $("#btndatefilter").click(function() {
-    	
-    	var start = $('#datepicker1').val();
-    	var startDate = start.substring(0,4);	
-    	$.ajax({
-    		type: 'GET',
-    		data: {
-    			"startDate" : startDate
-    		},
-    	    url:"/api/apitest",
-    	    success : function (holdata){
-    	    	for(i=0; i<holdata.length ;i++){
-    	    		console.log(holdata[i])
-    	    	}
-    	    },
-    	    error : function(jqXHR, textStatus, errorThrown) {
-                alert("마지막 날짜를 선택 하세요");
-            }
-    		
-    	})
-      }); //공휴일  
-    
+function callHoliday() {
+    	  let start = $('#datepicker1').val(); //2022-04-21
+          let startDate = start.substring(0,4);   
+          $.ajax({
+              type: 'GET',
+              data: {
+                  "startDate" : startDate
+              },
+              url:"/api/apitest",
+              success : function (holdata){
+                  
+                  for(i=0; i<holdata.length ;i++){
+                      holidayDate[i] = holdata[i]
+                  }
+                  
+                  holiday();
+              },
+              error : function(jqXHR, textStatus, errorThrown) {
+                  alert("마지막 날짜를 선택 하세요");
+              }
+          })
+}
 
     $("#btndatefilter").click(function() {
-    	
             $(".calender_table_result tbody span").remove(".dateSpan")
-   
                 $.ajax({
                         type : 'GET',
                         data : {
@@ -152,12 +150,12 @@ $(function() {
                         },
                         url : "/api/index",
                          success : function(data) {
-                        	  
+                       
                            let year = new Date(data[0]).getFullYear();
                            let month = new Date(data[0]).getMonth()+1;
                                 
-                                let count =0;
-                                for(let i=0; i<data.length ; i++){
+                           let count =0;
+                           for(let i=0; i<data.length ; i++){
                                    searchDate[i] = data[i];
                                    if((new Date(data[0])).getMonth() == (new Date(data[i])).getMonth()){
                                        count ++;
@@ -168,30 +166,7 @@ $(function() {
                                     let date = new Date(data[i]).getDate();
                                     $(".day" + date).css('background-color', 'red');
                                 }
-                                
-                                let totalData = data.length;
-                                let dataPerPage = 10; 
-                                let pageCount = 5;
-                                let CurrentPage =1; 
-                                
-                                if(totalData>10){
-                             	  
-                                	showData(dataPerPage, CurrentPage);
-                             	   
-                                    paging(totalData, dataPerPage, pageCount, 1);
-                             	   
-                                }else{
-                             	   
-                             	    let inst = "";
-                             	    const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-                                    for (i = 0; i < data.length; i++) {
-                                        inst += "<tr>";
-                                        inst += "<td>" + data[i] + "</td>";
-                                        inst += "<td>"+ week[new Date(data[i]).getDay()] + "</td>"
-                                        inst += "</tr>";
-                                     }
-                                    $("#data").html(inst); 
-                             	 }    
+                                callHoliday()
                         }, 
                         error : function(jqXHR, textStatus, errorThrown) {
                             alert("마지막 날짜를 선택 하세요");
@@ -199,6 +174,41 @@ $(function() {
                     });
             })
 });
+
+function holiday(){
+    let totalData = searchDate.length;
+    let dataPerPage = 10; 
+    let pageCount = 5;
+    let CurrentPage =1; 
+    
+
+    if(totalData>10){ 
+        showData(dataPerPage, CurrentPage);
+        paging(totalData, dataPerPage, pageCount, 1);
+       
+    }else{
+        
+    	let inst = "";
+        const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+        for (i = 0; i < searchDate.length; i++) {
+        	let eq = false; // 일치하지 않을 때, 공휴일 아닐때
+            inst += "<tr>";
+            inst += "<td>" + searchDate[i] + "</td>";
+            inst += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
+            for(j=0; j< holidayDate.length ;j++){
+            	if(holidayDate[j] == searchDate[i].replace("-","").replace("-","")){
+            		eq = true;
+            		break;
+            	}
+            }
+            inst += "<td>" + (eq ? '예' : '아니오' ) + "</td>";
+            inst += "</tr>";
+         }
+         $("#data").html(inst); 
+     } 
+    
+ }
+
 
 function displayDate(date, nowYear, nowMonth){
 	
@@ -216,17 +226,25 @@ function displayDate(date, nowYear, nowMonth){
 };
 
 function showData(dataPerPage, currentPage) {
-	  
-	let chartHtml = "";
 	
+	let chartHtml = "";
 	const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 	for(i=(currentPage-1) * dataPerPage; i<(currentPage-1) * dataPerPage + dataPerPage; i++) {
          
 		if(searchDate[i] != null){
+			
+			let eq = false;
 			chartHtml += "<tr>";
-	    	chartHtml += "<td>" + searchDate[i] + "</td>";
-	    	chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
-	    	chartHtml += "</tr>";
+			chartHtml += "<td>" + searchDate[i] + "</td>";
+			chartHtml += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
+            for(j=0; j< holidayDate.length ;j++){
+                if(holidayDate[j] == searchDate[i].replace("-","").replace("-","")){
+                    eq = true;
+                    break;
+                }
+            }
+			chartHtml += "<td>" + (eq ? '예' : '아니오' ) + "</td>";
+			chartHtml += "</tr>";
 		}
 	 }
 	$("#data").html(chartHtml);
@@ -257,19 +275,19 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 	  let pageHtml = "";
 	  
 	  if (prev > 0) {
-		    pageHtml += "<li><a href='#' id='prev'> 이전 </a></li>";
+		    pageHtml += "<li><a href='#' id='prev' class='pagnavigation'> 이전 </a></li>";
 	  }
 	  
 	  for (i = firstpage; i <= lastpage; i++) {
 		    if (CurrentPage == i) {
-		      pageHtml += "<li><a class='now' href='#' id='" + i + "'>" + i + "</a></li>";
+		      pageHtml += "<li><a class='now pagnavigation' href='#' id='" + i + "'>" + i + "</a></li>";
 		    } else {
-		      pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+		      pageHtml += "<li><a class='pagnavigation' href='#' id='" + i + "'>" + i + "</a></li>";
 		    }
 	  }
 	  
 	  if (lastpage < totalPage) {
-		    pageHtml += "<li><a href='#' id='next'> 다음 </a></li>";
+		    pageHtml += "<li><a class='pagnavigation' href='#' id='next'> 다음 </a></li>";
 	  }
 	  $("#pagingul").html(pageHtml);
 	  
@@ -289,7 +307,23 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 		    paging(totalData, dataPerPage, pageCount, selectedPage);
 		    showData(dataPerPage, selectedPage)
 		 });
-	   }
+	  
+	  $('.pagnavigation').click(function(){
+		   $("#data td").each(function() {
+			   const temp = $(this)[0];
+			   console.log("temp::" + temp)
+			   const currentDay = $(this)[0].innerText.replace("-","").replace("-","");
+               for(let i = 0; i < holidayDate.length; i++) {
+            	   if(holidayDate[i] === currentDay) {
+            		   $('.'+$(this)[0].innerText).text('예');
+                       return; 
+            	   }else {
+            		   $('.'+$(this)[0].innerText).text('아니오');
+            	   }
+               }
+           });
+	   });
+   }
 </script>
 
 <body>
