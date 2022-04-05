@@ -161,12 +161,11 @@ function callHoliday() {
                                        count ++;
                                    }
                                 }
-
                                 for(let i = 0; i < count ; i ++){
                                     let date = new Date(data[i]).getDate();
                                     $(".day" + date).css('background-color', 'red');
                                 }
-                                callHoliday()
+                                callHoliday();
                         }, 
                         error : function(jqXHR, textStatus, errorThrown) {
                             alert("마지막 날짜를 선택 하세요");
@@ -190,12 +189,12 @@ function holiday(){
         
     	let inst = "";
         const WEEKDAY = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-        for (i = 0; i < searchDate.length; i++) {
+        for (let i = 0; i < searchDate.length; i++) {
         	let eq = false; // 일치하지 않을 때, 공휴일 아닐때
             inst += "<tr>";
             inst += "<td>" + searchDate[i] + "</td>";
             inst += "<td>"+ WEEKDAY[new Date(searchDate[i]).getDay()] + "</td>"
-            for(j=0; j< holidayDate.length ;j++){
+            for(let j=0; j< holidayDate.length ;j++){
             	if(holidayDate[j] == searchDate[i].replace("-","").replace("-","")){
             		eq = true;
             		break;
@@ -248,7 +247,6 @@ function showData(dataPerPage, currentPage) {
 		}
 	 }
 	$("#data").html(chartHtml);
-	
 }  
   
 function paging(totalData, dataPerPage, pageCount, CurrentPage){
@@ -311,7 +309,6 @@ function paging(totalData, dataPerPage, pageCount, CurrentPage){
 	  $('.pagnavigation').click(function(){
 		   $("#data td").each(function() {
 			   const temp = $(this)[0];
-			   console.log("temp::" + temp)
 			   const currentDay = $(this)[0].innerText.replace("-","").replace("-","");
                for(let i = 0; i < holidayDate.length; i++) {
             	   if(holidayDate[i] === currentDay) {

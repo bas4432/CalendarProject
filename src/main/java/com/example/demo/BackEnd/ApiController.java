@@ -64,8 +64,8 @@ public class ApiController {
 
 		List<String> holidaylist = new ArrayList<>();
 
-		HttpURLConnection con = null;
-		String s = null; // 에러 메시지
+		HttpURLConnection httpURLConnection = null;
+		String error = null; // 에러 메시지
 
 		try {
 			URL url = new URL("http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo"
@@ -75,25 +75,25 @@ public class ApiController {
 			 * + "&solMonth=" + (m > 9 ? "" : "0") + m // 월
 			 */ );
 
-			con = (HttpURLConnection) url.openConnection();
-			con.setRequestProperty("Accept-language", "ko");
-			Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(con.getInputStream());
+			httpURLConnection = (HttpURLConnection) url.openConnection();
+			httpURLConnection.setRequestProperty("Accept-language", "ko");
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(httpURLConnection.getInputStream());
 
-			boolean ok = false; // <resultCode>00</resultCode> 획득 여부
+			boolean GetData = false;
 
 			Element element;
-			NodeList ns = doc.getElementsByTagName("header");
+			NodeList ns = document.getElementsByTagName("header");
 
 			if (ns.getLength() > 0) {
 				element = (Element) ns.item(0);
 				if (element.getElementsByTagName("resultCode").item(0).getTextContent().equals("00"))
-					ok = true; 
+					GetData = true; 
 				else 
-					s = element.getElementsByTagName("resultMsg").item(0).getTextContent();
+					error = element.getElementsByTagName("resultMsg").item(0).getTextContent();
 			}
 
-		    if (ok) {
-				ns = doc.getElementsByTagName("item");
+		    if (GetData) {
+				ns = document.getElementsByTagName("item");
 				for (int i = 0; i < ns.getLength(); i++) {
 					element = (Element) ns.item(i);
 					holidaylist.add(element.getElementsByTagName("locdate").item(0).getTextContent()); // 날짜
@@ -102,11 +102,11 @@ public class ApiController {
 
 			}
 		} catch (Exception e) {
-			s = e.getMessage();
+			error = e.getMessage();
 		}
 
-		if (con != null)
-			con.disconnect();
+		if (httpURLConnection != null)
+			httpURLConnection.disconnect();
 
 		return holidaylist;
 	}
